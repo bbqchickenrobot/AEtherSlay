@@ -1,0 +1,13 @@
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\AEtherSlay.exe.config
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\AEtherSlay.exe.manifest
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\AEtherSlay.application
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\AEtherSlay.exe
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\AEtherSlay.pdb
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmMain.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.Properties.Resources.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.csproj.GenerateResource.cache
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.csproj.CoreCompileInputs.cache
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.exe.manifest
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.application
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.exe
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.pdb
