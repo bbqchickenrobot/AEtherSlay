@@ -13,6 +13,7 @@ namespace AEtherSlay
 
     public partial class frmCharacter : Form
     {
+        #region Variable Declarations
         Random rand = new Random();
         TextBox[] coreStatBoxes;
         TextBox[] statModifierBoxes;
@@ -114,6 +115,7 @@ namespace AEtherSlay
                 "Sylvan",
                 "Undercommon"
             };
+        #endregion
 
         private void cbArmor1_Click(object sender, EventArgs e)
         {
@@ -157,7 +159,11 @@ namespace AEtherSlay
 
         private void generateCharacter()
         {
-            #region Core Stats
+            -+#region Core Stats
+-
+            // STR CON DEX INT WIS CHA
+            // 0   1   2   3   4   5
+
             for(short stat = 0; stat < 6; stat++)
             {
                 Int32[] rolls = new Int32[3];
@@ -231,8 +237,6 @@ namespace AEtherSlay
             #region Generate Race
             int raceNum = rand.Next(11);
             String raceName;
-
-            // raceNum = 0;
 
             switch (raceNum)
             {
@@ -346,6 +350,37 @@ namespace AEtherSlay
                     statRolls[1] += 1;
                     player.languages.Add("Gnomish");
                     player.traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Artificer's Lore", "Tinker" });
+                    break;
+
+                case 11:
+                    raceName = "Half-Elf";
+                    statRolls[5] += 2;
+                    int a = 0, b = 0;
+                    while (a == b) {
+                        a = rand.Next(0, 5);
+                        b = rand.Next(0, 5);
+                    }
+                    statRolls[a] += 1;
+                    statRolls[b] += 1;
+                    player.languages.Add("Elvish");
+                    player.traits.AddRange(new List<String>() { "Darkvision", "Fey Ancestry", "Skill Versatility" });
+                    break;
+
+                case 12:
+                    raceName = "Half Orc";
+                    statRolls[0] += 2;
+                    statRolls[1] += 1;
+                    player.languages.Add("Orc");
+                    player.traits.AddRange(new List<String>() { "Darkvision", "Relentless Endurance", "Savage Attacks" });
+                    player.proficiencies.Add("Intimidation");
+                    break;
+
+                case 13:
+                    raceName = "Tiefling";
+                    statRolls[3] += 1;
+                    statRolls[5] += 2;
+                    player.traits.AddRange(new List<String>() { "Darkvision", "Hellish Resistance", "Infernal Legacy" });
+                    player.languages.Add("Infernal");
                     break;
 
                 default:
