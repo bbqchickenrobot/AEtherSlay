@@ -122,7 +122,7 @@ namespace AEtherSlay
             changedByClick = true;
         }
 
-        public frmCharacter()
+        public frmCharacter(String optCategory = "", String optClass = "", String optRace = "")
         {
             InitializeComponent();
 
@@ -159,8 +159,7 @@ namespace AEtherSlay
 
         private void generateCharacter()
         {
-            -+#region Core Stats
--
+            #region Core Stats
             // STR CON DEX INT WIS CHA
             // 0   1   2   3   4   5
 

@@ -204,8 +204,8 @@ namespace AEtherSlay
 
         private void btnCharacter_Click(object sender, EventArgs e)
         {
-            Form charCreation = new frmCharacter();
-            charCreation.Show();
+            Form charDialog = new frmCharacterDialog();
+            charDialog.Show();
         }
     }
 }

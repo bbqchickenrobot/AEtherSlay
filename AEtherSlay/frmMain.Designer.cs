@@ -54,6 +54,9 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.pbCoin = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCoin)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +67,7 @@
             this.btnCharacter.ForeColor = System.Drawing.Color.White;
             this.btnCharacter.Location = new System.Drawing.Point(14, 134);
             this.btnCharacter.Name = "btnCharacter";
-            this.btnCharacter.Size = new System.Drawing.Size(127, 46);
+            this.btnCharacter.Size = new System.Drawing.Size(127, 33);
             this.btnCharacter.TabIndex = 0;
             this.btnCharacter.Text = "Character Creation";
             this.btnCharacter.UseVisualStyleBackColor = false;
@@ -74,9 +77,9 @@
             // 
             this.btnEncounter.BackColor = System.Drawing.Color.Black;
             this.btnEncounter.ForeColor = System.Drawing.Color.White;
-            this.btnEncounter.Location = new System.Drawing.Point(14, 186);
+            this.btnEncounter.Location = new System.Drawing.Point(14, 173);
             this.btnEncounter.Name = "btnEncounter";
-            this.btnEncounter.Size = new System.Drawing.Size(127, 46);
+            this.btnEncounter.Size = new System.Drawing.Size(127, 33);
             this.btnEncounter.TabIndex = 1;
             this.btnEncounter.Text = "Encounter Creation";
             this.btnEncounter.UseVisualStyleBackColor = false;
@@ -85,9 +88,9 @@
             // 
             this.btnCreature.BackColor = System.Drawing.Color.Black;
             this.btnCreature.ForeColor = System.Drawing.Color.White;
-            this.btnCreature.Location = new System.Drawing.Point(14, 238);
+            this.btnCreature.Location = new System.Drawing.Point(14, 212);
             this.btnCreature.Name = "btnCreature";
-            this.btnCreature.Size = new System.Drawing.Size(127, 46);
+            this.btnCreature.Size = new System.Drawing.Size(127, 33);
             this.btnCreature.TabIndex = 2;
             this.btnCreature.Text = "Creature Creation";
             this.btnCreature.UseVisualStyleBackColor = false;
@@ -141,7 +144,7 @@
             this.groupBox1.Controls.Add(this.rbOneByOne);
             this.groupBox1.Controls.Add(this.rbCumulative);
             this.groupBox1.ForeColor = System.Drawing.Color.Silver;
-            this.groupBox1.Location = new System.Drawing.Point(147, 83);
+            this.groupBox1.Location = new System.Drawing.Point(147, 88);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(183, 352);
             this.groupBox1.TabIndex = 5;
@@ -333,9 +336,9 @@
             // 
             this.btnMapGen.BackColor = System.Drawing.Color.Black;
             this.btnMapGen.ForeColor = System.Drawing.Color.White;
-            this.btnMapGen.Location = new System.Drawing.Point(14, 290);
+            this.btnMapGen.Location = new System.Drawing.Point(14, 251);
             this.btnMapGen.Name = "btnMapGen";
-            this.btnMapGen.Size = new System.Drawing.Size(127, 46);
+            this.btnMapGen.Size = new System.Drawing.Size(127, 33);
             this.btnMapGen.TabIndex = 3;
             this.btnMapGen.Text = "Map Generator";
             this.btnMapGen.UseVisualStyleBackColor = false;
@@ -344,9 +347,9 @@
             // 
             this.btnItemGen.BackColor = System.Drawing.Color.Black;
             this.btnItemGen.ForeColor = System.Drawing.Color.White;
-            this.btnItemGen.Location = new System.Drawing.Point(14, 342);
+            this.btnItemGen.Location = new System.Drawing.Point(14, 290);
             this.btnItemGen.Name = "btnItemGen";
-            this.btnItemGen.Size = new System.Drawing.Size(127, 46);
+            this.btnItemGen.Size = new System.Drawing.Size(127, 33);
             this.btnItemGen.TabIndex = 4;
             this.btnItemGen.Text = "Item Generator";
             this.btnItemGen.UseVisualStyleBackColor = false;
@@ -368,7 +371,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVersion.ForeColor = System.Drawing.Color.Gray;
-            this.lblVersion.Location = new System.Drawing.Point(2, 410);
+            this.lblVersion.Location = new System.Drawing.Point(99, 443);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(85, 13);
             this.lblVersion.TabIndex = 9;
@@ -376,7 +379,7 @@
             // 
             // pbCoin
             // 
-            this.pbCoin.Location = new System.Drawing.Point(35, 47);
+            this.pbCoin.Location = new System.Drawing.Point(35, 48);
             this.pbCoin.Name = "pbCoin";
             this.pbCoin.Size = new System.Drawing.Size(80, 80);
             this.pbCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -384,12 +387,48 @@
             this.pbCoin.TabStop = false;
             this.pbCoin.Click += new System.EventHandler(this.pbCoin_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(14, 368);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(127, 33);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Creature Creation";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Black;
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(14, 407);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(127, 33);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Encounter Creation";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Black;
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(14, 329);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(127, 33);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Character Creation";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(346, 450);
+            this.ClientSize = new System.Drawing.Size(341, 461);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.pbCoin);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblTitle);
@@ -437,6 +476,9 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.PictureBox pbCoin;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
