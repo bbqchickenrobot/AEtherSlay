@@ -22,7 +22,6 @@ namespace AEtherSlay
         Int32[] statRolls = new Int32[6];
         Int32 ac, health = 0;
         Int16 speed = 30;
-        String alignment;
         Boolean hasShield = false;
         List<String>
             weapons = new List<string>(),
@@ -524,6 +523,7 @@ namespace AEtherSlay
                 txtAC.Text = ac.ToString();
                 lblAlignment.Text = player.alignment;
                 txtInit.Text = txtDexMod.Text;
+                txtHP.Text = (player.hitDiceSides + ((statRolls[1] - 10) / 2)).ToString();
 
                 foreach (String weapon in weapons) { cbWeapon1.Items.Add(weapon); }
                 foreach (String secondaryWeapon in secondaryWeapons) { cbWeapon2.Items.Add(secondaryWeapon); }

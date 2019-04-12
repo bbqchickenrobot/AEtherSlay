@@ -12,15 +12,16 @@ namespace AEtherSlay
 {
     public partial class frmMain : Form
     {
-        Random rand = new Random();
-        Boolean allAtOnceRollStyle = false;
-        Int16[] diceQuantityArray = new short[7];
+        Random   rand = new Random();
+        Boolean  allAtOnceRollStyle = false;
+        Int16[]  diceQuantityArray = new short[7];
         Object[] btnOuts = new TextBox[7];
-        Boolean coinInUse = false;
-        Image imgHeads = Image.FromFile("../Images/DnDCoinH.png");
-        Image imgTails = Image.FromFile("../Images/DnDCoinT.png");
+        Boolean  coinInUse = false;
+        Image    imgHeads = Image.FromFile("../Images/DnDCoinH.png");
+        Image    imgTails = Image.FromFile("../Images/DnDCoinT.png");
 
-        String versionNum = "0.0.alpha.4";
+        // VERSION NUMBER
+        String   versionNum = "0.0.alpha.4.1";
 
         public frmMain()
         {
@@ -143,11 +144,11 @@ namespace AEtherSlay
         {
             if (allAtOnceRollStyle)
             {
-                String outString = "Your Rolls Were As Follows:\n";
+                String  outString = "Your Rolls Were As Follows:\n";
                 Int16[] diceSides = new short[] { 4, 6, 8, 10, 12, 20, 100 };
-                Int16 rolled = 0;
-                Int16 total = 0;
-                Int16 i = 0;
+                Int16   rolled = 0;
+                Int16   total = 0;
+                Int16   i = 0;
 
                 foreach (TextBox box in btnOuts)
                 {
