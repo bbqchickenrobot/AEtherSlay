@@ -23,6 +23,7 @@ namespace AEtherSlay
         Int32 ac, health = 0;
         Int16 speed = 30;
         Boolean hasShield = false;
+        int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
         List<String>
             weapons = new List<string>(),
             secondaryWeapons = new List<string>(),
@@ -121,7 +122,7 @@ namespace AEtherSlay
             changedByClick = true;
         }
 
-        public frmCharacter(String optCategory = "", String optClass = "", String optRace = "")
+        public frmCharacter(int optCategory = -1, int optClass = -1, int optRace = -1)
         {
             InitializeComponent();
 
@@ -130,6 +131,10 @@ namespace AEtherSlay
             simple = simpleMelee;
             martial = martialMelee;
             armor = lightArmor;
+
+            forcedCategory = optCategory;
+            forcedClass = optClass;
+            forcedRace = optRace;
 
             armor.AddRange(mediumArmor);
             armor.AddRange(heavyArmor);
@@ -186,6 +191,38 @@ namespace AEtherSlay
 
             #region Generate Class
             int classNum = rand.Next(5);
+
+            #region Overwrite ClassNum
+            List<int> classPool = new List<int>() { -1 };
+            if (forcedCategory != -1)
+            {
+                switch (forcedCategory)
+                {
+                    case 0:
+                        classPool = new List<int>() { 7, 9, 10, 11 };
+                        break;
+                    case 1:
+                        classPool = new List<int>() { 0, 2, 3, 4, 5, 6, 8 };
+                        break;
+                    case 2:
+                        classPool = new List<int>() { 9, 10, 11 };
+                        break;
+                    case 3:
+                        classPool = new List<int>() { 1, 2, 6, 7 };
+                        break;
+                    default:
+                        classPool = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+                        break;
+                }
+                classNum = classPool[rand.Next(0, classPool.Count)];
+            }
+            else if (forcedClass != -1)
+            {
+                classNum = forcedClass;
+            }
+
+            #endregion
+
             playerClass player;
 
             switch (classNum)
@@ -234,6 +271,12 @@ namespace AEtherSlay
 
             #region Generate Race
             int raceNum = rand.Next(11);
+
+            if (forcedRace != -1)
+            {
+                raceNum = forcedRace;
+            }
+
             String raceName;
 
             switch (raceNum)
