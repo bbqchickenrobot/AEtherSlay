@@ -126,6 +126,8 @@ namespace AEtherSlay
         {
             InitializeComponent();
 
+            MessageBox.Show("This form was instantiated with the following parameters\nCategory: " + optCategory + "\nClass: " + optClass + "\nRace: " + optRace);
+
             coreStatBoxes     = new TextBox[] { txtStr, txtCon, txtDex, txtInt, txtWis, txtCha };
             statModifierBoxes = new TextBox[] { txtStrMod, txtConMod, txtDexMod, txtIntMod, txtWisMod, txtChaMod };
             simple = simpleMelee;
@@ -489,7 +491,7 @@ namespace AEtherSlay
                     player.equipment.Add("Explorer's Pack");
                     break;
                 default:
-                    raceName = "ERROR";
+                    player.proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
                     break;
 
             }

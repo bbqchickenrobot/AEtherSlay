@@ -23,7 +23,8 @@ namespace AEtherSlay
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            Form charCreation = new frmCharacter(cmbCategory.SelectedIndex - 1, cmbClass.SelectedIndex - 1, cmbRace.SelectedIndex - 1);
+            // MessageBox.Show("Cat: " + cmbCategory.SelectedIndex.ToString() + "Class: " + cmbClass.SelectedIndex.ToString() + "Race: " + cmbRace.SelectedIndex.ToString());
+            Form charCreation = new frmCharacter(cmbCategory.SelectedIndex, cmbClass.SelectedIndex, cmbRace.SelectedIndex);
             charCreation.Show();
             this.Dispose();
         }
@@ -51,7 +52,6 @@ namespace AEtherSlay
         private void FrmCharacterDialog_Load(object sender, EventArgs e)
         {
             List<String> comboSource = new List<String>();
-            comboSource.Add("NO PREFERENCE");
             comboSource.Add("Barbarian");
             comboSource.Add("Bard");
             comboSource.Add("Cleric");
@@ -67,7 +67,6 @@ namespace AEtherSlay
             cmbClass.DataSource = comboSource;
 
             comboSource = new List<String>();
-            comboSource.Add("NO PREFERENCE");
             comboSource.Add("High Elf");
             comboSource.Add("Wood Elf");
             comboSource.Add("Hill Dwarf");
@@ -84,12 +83,15 @@ namespace AEtherSlay
             cmbRace.DataSource = comboSource;
 
             comboSource = new List<String>();
-            comboSource.Add("NO PREFERENCE");
-            comboSource.Add("Ranger");
+            comboSource.Add("Ranged");
             comboSource.Add("Melee");
             comboSource.Add("Spellcaster");
             comboSource.Add("Support");
             cmbCategory.DataSource = comboSource;
+
+            cmbCategory.SelectedIndex = -1;
+            cmbClass.SelectedIndex = -1;
+            cmbRace.SelectedIndex = -1;
         }
     }
 }
