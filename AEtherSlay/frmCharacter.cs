@@ -520,6 +520,11 @@ namespace AEtherSlay
                         cbWeapon2.Location = new Point(cbWeapon2.Location.X + 20, cbWeapon2.Location.Y);
                         pnlMisc.Controls.Add(dualWieldNotifier);
                     }
+                    armors.Add("Scale Mail");
+                    armors.Add("Leather Armor");
+                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Explorer's Pack"); }
+                    else { player.equipment.Add("Dungeoneer's Pack"); }
+                    player.equipment.Add("20x Arrows");
                     break;
                 default:
                     player.proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
