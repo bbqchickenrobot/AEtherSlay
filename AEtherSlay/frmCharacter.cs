@@ -126,7 +126,7 @@ namespace AEtherSlay
         {
             InitializeComponent();
 
-            MessageBox.Show("This form was instantiated with the following parameters\nCategory: " + optCategory + "\nClass: " + optClass + "\nRace: " + optRace);
+            // MessageBox.Show("This form was instantiated with the following parameters\nCategory: " + optCategory + "\nClass: " + optClass + "\nRace: " + optRace);
 
             coreStatBoxes     = new TextBox[] { txtStr, txtCon, txtDex, txtInt, txtWis, txtCha };
             statModifierBoxes = new TextBox[] { txtStrMod, txtConMod, txtDexMod, txtIntMod, txtWisMod, txtChaMod };
@@ -434,7 +434,7 @@ namespace AEtherSlay
 
             #region Add Class Particulars
 
-            // classNum = 1;
+            // classNum = 7;
 
             switch (classNum)
             {
@@ -489,6 +489,37 @@ namespace AEtherSlay
                     if(rand.Next(3) == 2) { player.equipment.Add("Light Crossbow + 20 Bolts"); }
                     else { player.equipment.Add("2 x Handaxe"); }
                     player.equipment.Add("Explorer's Pack");
+                    break;
+                case 5:
+                    weapons.AddRange(simple);
+                    weapons.Add("Shortsword");
+                    secondaryWeapons.Add("10 Darts");
+                    player.equipment.Add("Explorer's Pack");
+                    break;
+                case 6:
+                    weapons.AddRange(martial);
+                    secondaryWeapons.Add("Shield");
+                    secondaryWeapons.AddRange(martial);
+                    armor.Add("Chain Mail");
+                    player.equipment.Add("Priest's Pack");
+                    player.equipment.Add("Holy Symbol");
+                    player.equipment.Add("5x Javelin");
+                    break;
+                case 7:
+                    weapons.Add("Longbow");
+                    if (rand.Next(1, 3) == 2) { secondaryWeapons.Add("2x Shortswords"); }
+                    else
+                    {
+                        secondaryWeapons.AddRange(simpleMelee);
+                        Label dualWieldNotifier = new Label();
+                        dualWieldNotifier.Text = "2x ";
+                        dualWieldNotifier.Location = new Point(0, cbWeapon2.Location.Y);
+                        dualWieldNotifier.ForeColor = Color.White;
+                        dualWieldNotifier.Font = new Font(new FontFamily("Calibri"), 10, FontStyle.Bold);
+                        cbWeapon2.Size = new Size(cbWeapon2.Width - 20, cbWeapon2.Height);
+                        cbWeapon2.Location = new Point(cbWeapon2.Location.X + 20, cbWeapon2.Location.Y);
+                        pnlMisc.Controls.Add(dualWieldNotifier);
+                    }
                     break;
                 default:
                     player.proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
