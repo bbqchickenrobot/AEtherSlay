@@ -513,9 +513,9 @@ namespace AEtherSlay
                     break;
                 case 6:
                     weapons.AddRange(martial);
-                    secondaryWeapons.Add("Shield");
-                    secondaryWeapons.AddRange(martial);
-                    armor.Add("Chain Mail");
+                    if (rand.Next(1, 3) == 2) { hasShield = true; }
+                    else { secondaryWeapons.AddRange(martial); }
+                    armors.Add("Chain Mail");
                     player.equipment.Add("Holy Symbol");
                     player.equipment.Add("5x Javelin");
                     possiblePacks.Add("Priest's Pack");
@@ -669,8 +669,11 @@ namespace AEtherSlay
 
                 foreach (String armour in armors) { cbArmor1.Items.Add(armour); }
                 if (armors.Count == 1) { cbArmor1.SelectedIndex = 0; }
-                if (hasShield) { cbArmor2.Items.Add("Shield"); }
-                cbArmor2.SelectedItem = "Shield";
+                if (hasShield)
+                {
+                    cbArmor2.Items.Add("Shield");
+                    cbArmor2.SelectedItem = "Shield";
+                }
 
                 rtbProficiencies.Text = "PROFICIENCIES\n\n";
                 foreach (String prof in player.proficiencies) { rtbProficiencies.Text += prof + "\n"; }
