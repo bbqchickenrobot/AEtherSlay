@@ -122,6 +122,11 @@ namespace AEtherSlay
             changedByClick = true;
         }
 
+        public String choosePack(List<String> packChoices)
+        {
+            return packChoices[rand.Next(0, packChoices.Count)];
+        }
+
         public frmCharacter(int optCategory = -1, int optClass = -1, int optRace = -1)
         {
             InitializeComponent();
@@ -436,16 +441,21 @@ namespace AEtherSlay
 
             // classNum = 7;
 
+            List<String> possiblePacks = new List<string>();
+
             switch (classNum)
             {
                 case 0:
-                    player.equipment.AddRange(new List<String>() { "Explorer's Pack", "4x Javelin" });
+                    player.equipment.Add("4x Javelin");
+                    possiblePacks.Add("Explorer's Pack");
                     weapons.AddRange(martialMelee);
                     secondaryWeapons.Add("2 x Handaxe");
                     secondaryWeapons.AddRange(simpleMelee);
                     break;
                 case 1:
-                    player.equipment.AddRange(new List<String>() { "Entertainer's Pack", "Lute" });
+                    player.equipment.Add("Lute");
+                    possiblePacks.Add("Diplomat's Pack");
+                    possiblePacks.Add("Entertainer's Pack");
                     weapons.AddRange(simpleMelee);
                     weapons.Add("Longsword");
                     weapons.Add("Rapier");
@@ -453,7 +463,9 @@ namespace AEtherSlay
                     armors.Add("Leather Armor");
                     break;
                 case 2:
-                    player.equipment.AddRange(new List<String>() { "Priest's Pack", "Holy Symbol" });
+                    player.equipment.Add("Holy Symbol");
+                    possiblePacks.Add("Priest's Pack");
+                    possiblePacks.Add("Explorer's Pack");
                     weapons.Add("Mace");
                     if(player.proficiencies.Contains("Warhammer"))
                     {
@@ -470,7 +482,8 @@ namespace AEtherSlay
                     hasShield = true;
                     break;
                 case 3:
-                    player.equipment.AddRange(new List<String>() { "Explorer's Pack", "Druidic Focus" });
+                    player.equipment.Add("Druidic Focus" );
+                    possiblePacks.Add("Explorer's Pack");
                     armors.Add("Leather Armor");
                     weapons.Add("Shield");
                     weapons.AddRange(simple);
@@ -488,22 +501,25 @@ namespace AEtherSlay
                     secondaryWeapons.AddRange(martial);
                     if(rand.Next(3) == 2) { player.equipment.Add("Light Crossbow + 20 Bolts"); }
                     else { player.equipment.Add("2 x Handaxe"); }
-                    player.equipment.Add("Explorer's Pack");
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 5:
                     weapons.AddRange(simple);
                     weapons.Add("Shortsword");
                     secondaryWeapons.Add("10 Darts");
-                    player.equipment.Add("Explorer's Pack");
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 6:
                     weapons.AddRange(martial);
                     secondaryWeapons.Add("Shield");
                     secondaryWeapons.AddRange(martial);
                     armor.Add("Chain Mail");
-                    player.equipment.Add("Priest's Pack");
                     player.equipment.Add("Holy Symbol");
                     player.equipment.Add("5x Javelin");
+                    possiblePacks.Add("Priest's Pack");
+                    possiblePacks.Add("Explorer's Pack");
                     break;
                 case 7:
                     weapons.Add("Longbow");
@@ -522,19 +538,59 @@ namespace AEtherSlay
                     }
                     armors.Add("Scale Mail");
                     armors.Add("Leather Armor");
-                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Explorer's Pack"); }
-                    else { player.equipment.Add("Dungeoneer's Pack"); }
                     player.equipment.Add("20x Arrows");
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
+                    break;
+                case 8:
+                    weapons.Add("Rapier");
+                    weapons.Add("Shortsword");
+                    secondaryWeapons.Add("Shortbow + 20 Arrows");
+                    secondaryWeapons.Add("Shortsword");
+                    int packNum = rand.Next(1, 4);
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
+                    possiblePacks.Add("Burglar's Pack");
+                    armors.Add("Leather Armor");
+                    player.equipment.Add("Thieves' Tools");
+                    break;
+                case 9:
+                    weapons.Add("Light Crossbow + 20 Bolts");
+                    weapons.AddRange(simple);
+                    secondaryWeapons.Add("2x Daggers");
+                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
+                    else { player.equipment.Add("Arcane Focus"); }
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
+                    break;
+                case 10:
+                    weapons.Add("Light Crossbow + 20 Bolts");
+                    weapons.AddRange(simple);
+                    secondaryWeapons.Add("2x Daggers");
+                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
+                    else { player.equipment.Add("Arcane Focus"); }
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Dungeoneer's Pack");
+                    break;
+                case 11:
+                    weapons.Add("Quarterstaff");
+                    weapons.Add("Dagger");
+                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
+                    else { player.equipment.Add("Arcane Focus"); }
+                    possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Scholar's Pack");
+                    player.equipment.Add("Spellbook");
                     break;
                 default:
                     player.proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
                     break;
 
             }
+            player.equipment.Add(choosePack(possiblePacks));
             #endregion
 
             #region Generate Alignment
-            switch(rand.Next(9))
+            switch (rand.Next(9))
             {
                 case 0:
                     player.alignment = "Lawful Good";
