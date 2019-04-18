@@ -83,6 +83,12 @@
     <Compile Include="frmCharacter.Designer.cs">
       <DependentUpon>frmCharacter.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCharacterDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCharacterDialog.Designer.cs">
+      <DependentUpon>frmCharacterDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCharacter.resx">
       <DependentUpon>frmCharacter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCharacterDialog.resx">
+      <DependentUpon>frmCharacterDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

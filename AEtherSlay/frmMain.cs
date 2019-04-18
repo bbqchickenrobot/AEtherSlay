@@ -12,15 +12,16 @@ namespace AEtherSlay
 {
     public partial class frmMain : Form
     {
-        Random rand = new Random();
-        Boolean allAtOnceRollStyle = false;
-        Int16[] diceQuantityArray = new short[7];
+        Random   rand = new Random();
+        Boolean  allAtOnceRollStyle = false;
+        Int16[]  diceQuantityArray = new short[7];
         Object[] btnOuts = new TextBox[7];
-        Boolean coinInUse = false;
-        Image imgHeads = Image.FromFile("../Images/DnDCoinH.png");
-        Image imgTails = Image.FromFile("../Images/DnDCoinT.png");
+        Boolean  coinInUse = false;
+        Image    imgHeads = Image.FromFile("../Images/DnDCoinH.png");
+        Image    imgTails = Image.FromFile("../Images/DnDCoinT.png");
 
-        String versionNum = "0.0.alpha.4";
+        // VERSION NUMBER
+        String   versionNum = "0.0.alpha.4.1";
 
         public frmMain()
         {
@@ -143,11 +144,11 @@ namespace AEtherSlay
         {
             if (allAtOnceRollStyle)
             {
-                String outString = "Your Rolls Were As Follows:\n";
+                String  outString = "Your Rolls Were As Follows:\n";
                 Int16[] diceSides = new short[] { 4, 6, 8, 10, 12, 20, 100 };
-                Int16 rolled = 0;
-                Int16 total = 0;
-                Int16 i = 0;
+                Int16   rolled = 0;
+                Int16   total = 0;
+                Int16   i = 0;
 
                 foreach (TextBox box in btnOuts)
                 {
@@ -165,17 +166,17 @@ namespace AEtherSlay
                 }
                 outString += "\nTotal Rolled: " + total.ToString();
                 MessageBox.Show(outString);
-                foreach (TextBox box in btnOuts)
-                {
-                    box.Text = "0";
-                }
+                // CLEAR TEXT BOXES ON ALL AT ONCE ROLL //
+                //**************************************//
+                //foreach (TextBox box in btnOuts)
+                //{
+                //    box.Text = "0";
+                //}
             }
         }
 
         private void pbCoin_Click(object sender, EventArgs e)
         {
-            // Seems to use a fair bit of memory (2MB a go)?
-
             Cursor.Current = Cursors.WaitCursor;
             String result = "Coin Flip Failed.\nPlease contact the developer at glenniumhs@gmail.com";
             if(!coinInUse) {
@@ -194,18 +195,18 @@ namespace AEtherSlay
                         result = "Tails!";
                     }
                     Application.DoEvents();
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(300);
                 }
+                coinInUse = false;
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(result);
-                coinInUse = false;
             }
         }
 
         private void btnCharacter_Click(object sender, EventArgs e)
         {
-            Form charCreation = new frmCharacter();
-            charCreation.Show();
+            Form charDialog = new frmCharacterDialog();
+            charDialog.Show();
         }
     }
 }
