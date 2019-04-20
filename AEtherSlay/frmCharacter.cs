@@ -197,7 +197,7 @@ namespace AEtherSlay
             #endregion
 
             #region Generate Class
-            int classNum = rand.Next(5);
+            int classNum = rand.Next(12);
 
             #region Overwrite ClassNum
             List<int> classPool = new List<int>() { -1 };
@@ -277,7 +277,7 @@ namespace AEtherSlay
             #endregion
 
             #region Generate Race
-            int raceNum = rand.Next(11);
+            int raceNum = rand.Next(14);
 
             if (forcedRace != -1)
             {
@@ -289,6 +289,25 @@ namespace AEtherSlay
             switch (raceNum)
             {
                 case 0:
+                    raceName = "High Elf";
+                    statRolls[2] += 2;
+                    statRolls[3] += 1;
+                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Cantrip", "Additional Language" });
+                    player.proficiencies.AddRange( new List<String>{ "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
+                    player.languages.Add("Elvish");
+                    break;
+
+                case 1:
+                    raceName = "Wood Elf";
+                    statRolls[2] += 2;
+                    statRolls[4] += 1;
+                    speed = 35;
+                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Mask Of The Wild" });
+                    player.proficiencies.AddRange(new List<String> { "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
+                    player.languages.Add("Elvish");
+                    break;
+
+                case 2:
                     raceName = "Hill Dwarf";
                     statRolls[1] += 2;
                     statRolls[4] += 1;
@@ -299,7 +318,7 @@ namespace AEtherSlay
                     player.languages.Add("Dwarvish");
                     break;
 
-                case 1:
+                case 3:
                     raceName = "Mountain Dwarf";
                     statRolls[1] += 2;
                     statRolls[0] += 2;
@@ -309,25 +328,6 @@ namespace AEtherSlay
                     if (!player.proficiencies.Contains("Light Armor")) { player.proficiencies.AddRange(new List<String>() { "Light Armor" }); }
                     if (!player.proficiencies.Contains("Medium Armor")) { player.proficiencies.AddRange(new List<String>() { "Medium Armor" }); }
                     player.languages.Add("Dwarvish");
-                    break;
-
-                case 2:
-                    raceName = "High Elf";
-                    statRolls[2] += 2;
-                    statRolls[3] += 1;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Cantrip", "Additional Language" });
-                    player.proficiencies.AddRange( new List<String>{ "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
-                    player.languages.Add("Elvish");
-                    break;
-
-                case 3:
-                    raceName = "Wood Elf";
-                    statRolls[2] += 2;
-                    statRolls[4] += 1;
-                    speed = 35;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Mask Of The Wild" });
-                    player.proficiencies.AddRange(new List<String> { "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
-                    player.languages.Add("Elvish");
                     break;
 
                 case 4:
