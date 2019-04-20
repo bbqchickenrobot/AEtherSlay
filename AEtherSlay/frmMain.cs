@@ -21,7 +21,7 @@ namespace AEtherSlay
         Image    imgTails = Image.FromFile("../Images/DnDCoinT.png");
 
         // VERSION NUMBER
-        String   versionNum = "0.0.alpha.4.1";
+        String   versionNum = "0.0.alpha.5.0";
 
         public frmMain()
         {
@@ -32,7 +32,7 @@ namespace AEtherSlay
                 box.Enabled = false;
                 box.Text = "0";
             }
-            lblVersion.Text = "Version Number:\n" + versionNum;
+            lblVersion.Text = "Version Number: " + versionNum;
             pbCoin.Image = Image.FromFile("../Images/DnDCoinH.png");
         }
 
@@ -207,6 +207,12 @@ namespace AEtherSlay
         {
             Form charDialog = new frmCharacterDialog();
             charDialog.Show();
+        }
+
+        private void BtnCreature_Click(object sender, EventArgs e)
+        {
+            Form creatureFrm = new frmCreatureCreation();
+            creatureFrm.Show();
         }
     }
 }
