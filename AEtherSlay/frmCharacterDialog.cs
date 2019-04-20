@@ -70,9 +70,10 @@ namespace AEtherSlay
             comboSource.Add("High Elf");
             comboSource.Add("Wood Elf");
             comboSource.Add("Hill Dwarf");
-            comboSource.Add("Cave Dwarf");
-            comboSource.Add("Stout Halfling");
+            comboSource.Add("Mountain Dwarf");
+            comboSource.Add("Dark Elf");
             comboSource.Add("Lightfoot Halfling");
+            comboSource.Add("Stout Halfling");
             comboSource.Add("Human");
             comboSource.Add("Dragonborn");
             comboSource.Add("Forest Gnome");
