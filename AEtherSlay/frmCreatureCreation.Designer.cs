@@ -50,6 +50,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.lblCha = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.lblAC = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
             this.grpDiff.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,9 +114,9 @@
             // 
             // rtbCreatureStats
             // 
-            this.rtbCreatureStats.Location = new System.Drawing.Point(22, 310);
+            this.rtbCreatureStats.Location = new System.Drawing.Point(119, 310);
             this.rtbCreatureStats.Name = "rtbCreatureStats";
-            this.rtbCreatureStats.Size = new System.Drawing.Size(498, 183);
+            this.rtbCreatureStats.Size = new System.Drawing.Size(401, 183);
             this.rtbCreatureStats.TabIndex = 2;
             this.rtbCreatureStats.Text = "";
             // 
@@ -264,12 +268,54 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "CHA";
             // 
+            // lblAC
+            // 
+            this.lblAC.AutoSize = true;
+            this.lblAC.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.lblAC.Location = new System.Drawing.Point(71, 355);
+            this.lblAC.Name = "lblAC";
+            this.lblAC.Size = new System.Drawing.Size(29, 31);
+            this.lblAC.TabIndex = 20;
+            this.lblAC.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(39, 368);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(26, 17);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "AC";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 444);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 17);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Speed";
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.lblSpeed.Location = new System.Drawing.Point(71, 431);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(29, 31);
+            this.lblSpeed.TabIndex = 22;
+            this.lblSpeed.Text = "0";
+            // 
             // frmCreatureCreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(545, 505);
+            this.Controls.Add(this.lblSpeed);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblAC);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblCha);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lblWis);
@@ -323,5 +369,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblCha;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblAC;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblSpeed;
     }
 }
