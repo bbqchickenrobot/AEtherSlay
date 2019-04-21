@@ -17,7 +17,7 @@ namespace AEtherSlay
         Random rand = new Random();
         TextBox[] coreStatBoxes;
         TextBox[] statModifierBoxes;
-        Boolean changedByClick = false;
+        Boolean changedByClick = false, useIRA = false;
 
         Int32[] statRolls = new Int32[6];
         Int32 ac, health = 0;
@@ -114,7 +114,8 @@ namespace AEtherSlay
                 "Primordial",
                 "Sylvan",
                 "Undercommon"
-            };
+            },
+            preferredStatsIRA = new List<string>() { };
         #endregion
 
         private void cbArmor1_Click(object sender, EventArgs e)
@@ -127,7 +128,7 @@ namespace AEtherSlay
             return packChoices[rand.Next(0, packChoices.Count)];
         }
 
-        public frmCharacter(int optCategory = -1, int optClass = -1, int optRace = -1)
+        public frmCharacter(int optCategory = -1, int optClass = -1, int optRace = -1, bool optIRA = false)
         {
             InitializeComponent();
 
@@ -142,6 +143,7 @@ namespace AEtherSlay
             forcedCategory = optCategory;
             forcedClass = optClass;
             forcedRace = optRace;
+            useIRA = optIRA;
 
             armor.AddRange(mediumArmor);
             armor.AddRange(heavyArmor);
@@ -170,32 +172,6 @@ namespace AEtherSlay
 
         private void generateCharacter()
         {
-            #region Core Stats
-            // STR CON DEX INT WIS CHA
-            // 0   1   2   3   4   5
-
-            for(short stat = 0; stat < 6; stat++)
-            {
-                Int32[] rolls = new Int32[3];
-                for (short roll = 0; roll < 4; roll++)
-                {
-                    Int32 rolled = rand.Next(1, 7);
-                    if ((roll == 3) && (rolled > rolls.Min()))
-                    {
-                        rolls[Array.IndexOf(rolls, rolls.Min())] = rolled;
-                    } else
-                    {
-                        if(roll != 3)
-                        {
-                            rolls[roll] = rolled;
-                        }
-                    }
-                }
-                statRolls[stat] = rolls.Sum();
-            }
-            ac = 10 + ((statRolls[2] - 10) / 2);
-            #endregion
-
             #region Generate Class
             int classNum = rand.Next(12);
 
@@ -236,44 +212,115 @@ namespace AEtherSlay
             {
                 case 0:
                     player = new playerClass("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
+                    preferredStatsIRA = new List<string>() { "STR", "CON", "DEX" };
                     break;
                 case 1:
                     player = new playerClass("Bard", "Charisma", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" }, new string[] { "Dexterity", "Charisma" }, 8);
+                    preferredStatsIRA = new List<string>() { "CHA", "WIS" };
                     break;
                 case 2:
                     player = new playerClass("Cleric", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" }, new string[] { "Charisma", "Wisdom" }, 8);
+                    preferredStatsIRA = new List<string>() { "WIS", "DEX" };
                     break;
                 case 3:
                     player = new playerClass("Druid", "Wisdom", new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" }, new string[] { "Intelligence", "Wisdom" }, 8);
+                    preferredStatsIRA = new List<string>() { "WIS", "CON", "DEX" };
                     break;
                 case 4:
                     player = new playerClass("Fighter", "Intelligence", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 10);
+                    preferredStatsIRA = new List<string>() { "STR", "DEX", "CON" };
                     break;
                 case 5:
                     player = new playerClass("Monk", "Wisdom", new List<string>() { "Simple Weapons", "Shortswords" }, new string[] { "Dexterity", "Strength" }, 8);
+                    preferredStatsIRA = new List<string>() { "WIS", "DEX", "CON" };
                     break;
                 case 6:
                     player = new playerClass("Paladin", "Charisma", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Charisma", "Wisdom" }, 10);
+                    preferredStatsIRA = new List<string>() { "CHA", "STR" };
                     break;
                 case 7:
                     player = new playerClass("Ranger", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Dexterity" }, 10);
+                    preferredStatsIRA = new List<string>() { "DEX", "WIS" };
                     break;
                 case 8:
                     player = new playerClass("Rogue", "Intelligence", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" }, new string[] { "Dexterity", "Intelligence" }, 8);
+                    preferredStatsIRA = new List<string>() { "DEX", "INT" };
                     break;
                 case 9:
                     player = new playerClass("Sorcerer", "Charisma", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" }, new string[] { "Charisma", "Constitution" }, 6);
+                    preferredStatsIRA = new List<string>() { "CHA" };
                     break;
                 case 10:
                     player = new playerClass("Warlock", "Charisma", new List<string>() { "Light Armor", "Simple Weapons" }, new string[] { "Wisdom", "Charisma" }, 8);
+                    preferredStatsIRA = new List<string>() { "CHA" };
                     break;
                 case 11:
                     player = new playerClass("Wizard", "Intelligence", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" }, new string[] { "Wisdom", "Intelligence" }, 8);
+                    preferredStatsIRA = new List<string>() { "INT" };
                     break;
                 default:
                     player = new playerClass("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
+                    preferredStatsIRA = new List<string>() { "STR", "CON", "DEX" };
                     break;
             }
+            #endregion
+
+            #region Core Stats
+            // STR CON DEX INT WIS CHA
+            // 0   1   2   3   4   5
+
+            for (short stat = 0; stat < 6; stat++)
+            {
+                Int32[] rolls = new Int32[3];
+                for (short roll = 0; roll < 4; roll++)
+                {
+                    Int32 rolled = rand.Next(1, 7);
+                    if ((roll == 3) && (rolled > rolls.Min()))
+                    {
+                        rolls[Array.IndexOf(rolls, rolls.Min())] = rolled;
+                    }
+                    else
+                    {
+                        if (roll != 3)
+                        {
+                            rolls[roll] = rolled;
+                        }
+                    }
+                }
+                statRolls[stat] = rolls.Sum();
+            }
+            ac = 10 + ((statRolls[2] - 10) / 2);
+            #region IRA
+            if (useIRA)
+            {
+                int[] sortedRolls = statRolls;
+                statRolls = new int[6] { -1, -1, -1, -1, -1, -1 };
+                Array.Sort(sortedRolls);
+                Array.Reverse(sortedRolls);
+                for(int i = 0; i < preferredStatsIRA.Count; i++)
+                {
+                    switch(preferredStatsIRA[i])
+                    {
+                        case "STR": statRolls[0] = sortedRolls[i]; break;
+                        case "CON": statRolls[1] = sortedRolls[i]; break;
+                        case "DEX": statRolls[2] = sortedRolls[i]; break;
+                        case "INT": statRolls[3] = sortedRolls[i]; break;
+                        case "WIS": statRolls[4] = sortedRolls[i]; break;
+                        case "CHA": statRolls[5] = sortedRolls[i]; break;
+                        default: statRolls[i] = sortedRolls[i]; break;
+                    }
+                    sortedRolls[i] = -1;
+                }
+                for(int i = 0; i < 6; i++)
+                {
+                    if(statRolls[i] < 0)
+                    {
+                        statRolls[i] = sortedRolls.Max();
+                        sortedRolls[Array.IndexOf(sortedRolls, sortedRolls.Max())] = -1;
+                    }
+                }
+            }
+            #endregion
             #endregion
 
             #region Generate Race
