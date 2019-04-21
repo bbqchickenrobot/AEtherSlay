@@ -56,15 +56,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbAttacks = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblAlignment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResistances)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImmunities)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // txtChaMod
@@ -348,14 +352,6 @@
             this.label3.TabIndex = 36;
             this.label3.Text = "Resistances";
             // 
-            // cmbAttacks
-            // 
-            this.cmbAttacks.FormattingEnabled = true;
-            this.cmbAttacks.Location = new System.Drawing.Point(205, 132);
-            this.cmbAttacks.Name = "cmbAttacks";
-            this.cmbAttacks.Size = new System.Drawing.Size(119, 21);
-            this.cmbAttacks.TabIndex = 37;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -383,20 +379,51 @@
             this.label6.TabIndex = 40;
             this.label6.Text = "Attacks";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(455, 132);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(119, 21);
-            this.comboBox1.TabIndex = 41;
-            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(330, 132);
+            this.textBox1.Location = new System.Drawing.Point(330, 137);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(119, 20);
             this.textBox1.TabIndex = 42;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(205, 136);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(119, 82);
+            this.dataGridView1.TabIndex = 43;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(455, 137);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(119, 82);
+            this.dataGridView2.TabIndex = 44;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(351, 164);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 19);
+            this.label7.TabIndex = 45;
+            this.label7.Text = "Alignment";
+            // 
+            // lblAlignment
+            // 
+            this.lblAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAlignment.AutoSize = true;
+            this.lblAlignment.Location = new System.Drawing.Point(352, 192);
+            this.lblAlignment.Name = "lblAlignment";
+            this.lblAlignment.Size = new System.Drawing.Size(78, 13);
+            this.lblAlignment.TabIndex = 46;
+            this.lblAlignment.Text = "Alignment Error";
             // 
             // frmCreatureCreation
             // 
@@ -404,12 +431,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(580, 354);
+            this.Controls.Add(this.lblAlignment);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbAttacks);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -441,10 +470,12 @@
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmCreatureCreation";
-            this.Text = "frmCreatureeCreation";
+            this.Text = "frmCreatureCreation";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResistances)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImmunities)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,11 +511,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbAttacks;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAlignment;
     }
 }
