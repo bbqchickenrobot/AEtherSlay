@@ -18,6 +18,7 @@ namespace AEtherSlay
         Int32[] statRolls = new Int32[6];
         Int32 ac, health = 0;
         Int16 speed = 30;
+        String alignment;
         Boolean hasShield = false;
         int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
         List<Weapon> simpleMelee = new List<Weapon>() {
@@ -36,36 +37,36 @@ namespace AEtherSlay
             simpleRanged = new List<Weapon>() {
                     new Weapon("Crossbow [Light]", 8, 1, new List<string>() { "Ammunition (80/320)", "Loading", "Two-Handed" }, "Piercing"),
                     new Weapon("Dart", 4, 1, new List<string>() { "Thrown (20/60)", "Finesse" }, "Piercing"),
-                    new Weapon("Shortbow", 6, 1, new List<string>() { "Ammunition", "Two-Handed" }, "Piercing"),
+                    new Weapon("Shortbow", 6, 1, new List<string>() { "Ammunition (80/320)", "Two-Handed" }, "Piercing"),
                     new Weapon("Sling", 4, 1, new List<string>() { "Ammunition (30/120)" }, "Bludgeoning")
             },
             martialMelee = new List<Weapon>() {
-                    new Weapon("Battleaxe", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)", "Loading" }, "Bludgeoning"),
-                    new Weapon("Flail", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Glaive", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Greataxe", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Greatsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Halberd", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Lance", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Longsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Maul", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Morningstar", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Pike", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Rapier", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Scimitar", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Shortsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Trident", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("War Pick", 4, 1, new List<string>() { }, "Piercing"),
-                    new Weapon("Warhammer", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Whip", 4, 1, new List<string>() { "Finesse", "Reach" }, "Bludgeoning"),
+                    new Weapon("Battleaxe", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
+                    new Weapon("Flail", 8, 1, new List<string>() { }, "Bludgeoning"),
+                    new Weapon("Glaive", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Slashing"),
+                    new Weapon("Greataxe", 12, 1, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
+                    new Weapon("Greatsword", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
+                    new Weapon("Halberd", 10, 1, new List<string>() { "Heavy", "Two-Handed", "Reach" }, "Slashing"),
+                    new Weapon("Lance", 12, 1, new List<string>() { "Reach", "Special" }, "Bludgeoning"),
+                    new Weapon("Longsword", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
+                    new Weapon("Maul", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Bludgeoning"),
+                    new Weapon("Morningstar", 8, 1, new List<string>() { }, "Piercing"),
+                    new Weapon("Pike", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Piercing"),
+                    new Weapon("Rapier", 8, 1, new List<string>() { "Finesse" }, "Piercing"),
+                    new Weapon("Scimitar", 6, 1, new List<string>() { "Finesse", "Light" }, "Slashing"),
+                    new Weapon("Shortsword", 6, 1, new List<string>() { "Finesse", "Light" }, "Piercing"),
+                    new Weapon("Trident", 6, 1, new List<string>() { "Thrown (20/60)", "Versatile" }, "Piercing"),
+                    new Weapon("War Pick", 8, 1, new List<string>() { }, "Piercing"),
+                    new Weapon("Warhammer", 8, 1, new List<string>() { "Versatile (1d10)" }, "Bludgeoning"),
+                    new Weapon("Whip", 4, 1, new List<string>() { "Finesse", "Reach" }, "Slashing"),
             },
             martialRanged = new List<Weapon>()
             {
-                    "Blowgun",
-                    "Crossbow [hand]",
-                    "Crossbow [heavy]",
-                    "Longbow",
-                    "Net"
+                    new Weapon("Blowgun", 1, 1, new List<string>(){ "Ammunition (25/100)", "Loading" }, "Piercing" ),
+                    new Weapon("Crossbow [Hand]", 6, 1, new List<string>(){ "Ammunition (30/120)", "Loading" }, "Piercing" ),
+                    new Weapon("Crossbow [Heavy]", 10, 1, new List<string>(){ "Ammunition (100/400)", "Loading" }, "Piercing" ),
+                    new Weapon("Longbow", 8, 1, new List<string>(){ "Ammunition (150/600)", "Loading" }, "Piercing" ),
+                    new Weapon("Net", 0, 0, new List<string>(){ "Thrown (5/15)", "Special" }, "" )
             },
             simple,
             martial,
@@ -93,7 +94,7 @@ namespace AEtherSlay
                     "Splint",
                     "Plate"
             },
-            armor
+            armor;
         #endregion
 
         public frmCreatureCreation()
@@ -121,10 +122,15 @@ namespace AEtherSlay
                                 weapons = new List<String>();
             public short hitDiceSides;
 
-            public Enemy(String name, String spellcasting, List<String> proficiencies, String[] savingThrows, short hitDiceSides)
+            public Enemy(string name, string spellcastingStat, string alignment, List<string> proficiencies, List<string> traits, List<string> languages, List<string> weapons, short hitDiceSides)
             {
-                this.spellcasting = spellcasting;
+                this.name = name;
+                this.spellcastingStat = spellcastingStat;
+                this.alignment = alignment;
                 this.proficiencies = proficiencies;
+                this.traits = traits;
+                this.languages = languages;
+                this.weapons = weapons;
                 this.hitDiceSides = hitDiceSides;
             }
         }
@@ -202,34 +208,34 @@ namespace AEtherSlay
             switch (rand.Next(9))
             {
                 case 0:
-                    enemy.alignment = "Lawful Good";
+                    alignment = "Lawful Good";
                     break;
                 case 1:
-                    enemy.alignment = "Neutral Lawful";
+                    alignment = "Neutral Lawful";
                     break;
                 case 2:
-                    enemy.alignment = "Lawful Evil";
+                    alignment = "Lawful Evil";
                     break;
                 case 3:
-                    enemy.alignment = "Neutral Good";
+                    alignment = "Neutral Good";
                     break;
                 case 4:
-                    enemy.alignment = "True Neutral";
+                    alignment = "True Neutral";
                     break;
                 case 5:
-                    enemy.alignment = "Neutral Evil";
+                    alignment = "Neutral Evil";
                     break;
                 case 6:
-                    enemy.alignment = "Chaotic Good";
+                    alignment = "Chaotic Good";
                     break;
                 case 7:
-                    enemy.alignment = "Chaotic Neutral";
+                    alignment = "Chaotic Neutral";
                     break;
                 case 8:
-                    enemy.alignment = "Chaotic Evil";
+                    alignment = "Chaotic Evil";
                     break;
                 default:
-                    enemy.alignment = "True Neutral";
+                    alignment = "True Neutral";
                     break;
             }
             #endregion
@@ -273,6 +279,20 @@ namespace AEtherSlay
                 this.numDamageDice = numDamageDice;
                 this.propertyList = propertyList;
                 this.damageType = damageType;
+            }
+        }
+
+        public class Armor
+        {
+            public String name;
+            public int dexMultiplier;
+            public bool givesStealthDisadvantage;
+
+            public Armor(string name, int dexMultiplier, bool givesStealthDisadvantage)
+            {
+                this.name = name;
+                this.dexMultiplier = dexMultiplier;
+                this.givesStealthDisadvantage = givesStealthDisadvantage;
             }
         }
     }
