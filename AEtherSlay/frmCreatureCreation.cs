@@ -20,49 +20,46 @@ namespace AEtherSlay
         Int16 speed = 30;
         Boolean hasShield = false;
         int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
-        List<String>
-            weapons = new List<string>(),
-            armors = new List<string>(),
-            simpleMelee = new List<Weapon>() {
-                    new Weapon("Club",
-                    "Dagger",
-                    "Greatclub",
-                    "Handaxe",
-                    "Javelin",
-                    "Light Hammer",
-                    "Mace",
-                    "Quarterstaff",
-                    "Sickle",
-                    "Spear",
-                    "Unarmed Strike"
+        List<Weapon> simpleMelee = new List<Weapon>() {
+                    new Weapon("Club", 4, 1, new List<string>() { "Light" }, "Bludgeoning"),
+                    new Weapon("Dagger", 4, 1, new List<string>() { "Light", "Finesse", "Thrown (20/60)" }, "Piercing"),
+                    new Weapon("Greatclub", 8, 1, new List<string>() { "Light", "Two-Handed" }, "Bludgeoning"),
+                    new Weapon("Handaxe", 6, 1, new List<string>() { "Light", "Thrown" }, "Slashing"),
+                    new Weapon("Javelin", 6, 1, new List<string>() { "Thrown (30/120)" }, "Piercing"),
+                    new Weapon("Light Hammer", 4, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Mace", 6, 1, new List<string>() { }, "Bludgeoning"),
+                    new Weapon("Quarterstaff", 6, 1, new List<string>() { "Versatile (1d8)" }, "Bludgeoning"),
+                    new Weapon("Sickle", 4, 1, new List<string>() { "Light" }, "Slashing"),
+                    new Weapon("Spear", 6, 1, new List<string>() { "Versatile (1d8)", "Thrown (20/60)" }, "Piercing"),
+                    new Weapon("Unarmed Strike", 1, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
             },
-            simpleRanged = new List<String>() {
-                    "Crossbow [light]",
-                    "Dart",
-                    "Shortbow",
-                    "Sling"
+            simpleRanged = new List<Weapon>() {
+                    new Weapon("Crossbow [Light]", 8, 1, new List<string>() { "Ammunition (80/320)", "Loading", "Two-Handed" }, "Piercing"),
+                    new Weapon("Dart", 4, 1, new List<string>() { "Thrown (20/60)", "Finesse" }, "Piercing"),
+                    new Weapon("Shortbow", 6, 1, new List<string>() { "Ammunition", "Two-Handed" }, "Piercing"),
+                    new Weapon("Sling", 4, 1, new List<string>() { "Ammunition (30/120)" }, "Bludgeoning")
             },
-            martialMelee = new List<String>() {
-                    "Battleaxe",
-                    "Flail",
-                    "Glaive",
-                    "Greataxe",
-                    "Greatsword",
-                    "Halberd",
-                    "Lance",
-                    "Longsword",
-                    "Maul",
-                    "Morningstar",
-                    "Pike",
-                    "Rapier",
-                    "Scimitar",
-                    "Shortsword",
-                    "Trident",
-                    "War Pick",
-                    "Warhammer",
-                    "Whip"
+            martialMelee = new List<Weapon>() {
+                    new Weapon("Battleaxe", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)", "Loading" }, "Bludgeoning"),
+                    new Weapon("Flail", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Glaive", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Greataxe", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Greatsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Halberd", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Lance", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Longsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Maul", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Morningstar", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Pike", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Rapier", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Scimitar", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Shortsword", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Trident", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("War Pick", 4, 1, new List<string>() { }, "Piercing"),
+                    new Weapon("Warhammer", 4, 1, new List<string>() { "Ammunition", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Weapon("Whip", 4, 1, new List<string>() { "Finesse", "Reach" }, "Bludgeoning"),
             },
-            martialRanged = new List<string>()
+            martialRanged = new List<Weapon>()
             {
                     "Blowgun",
                     "Crossbow [hand]",
@@ -72,6 +69,9 @@ namespace AEtherSlay
             },
             simple,
             martial,
+            weapons = new List<Weapon>();
+        List<String>
+            armors = new List<string>(),
             lightArmor = new List<string>()
             {
                     "Padded",
