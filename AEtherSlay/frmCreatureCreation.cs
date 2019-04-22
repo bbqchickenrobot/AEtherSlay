@@ -14,63 +14,62 @@ namespace AEtherSlay
     {
         #region Variable Declarations
         Random rand = new Random();
-
         Int32[] statRolls = new Int32[6];
         Int32 ac, health = 0;
         Int16 speed = 30;
         String alignment;
         Boolean hasShield = false;
         int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
-        List<Weapon> simpleMelee = new List<Weapon>() {
-                    new Weapon("Club", 4, 1, new List<string>() { "Light" }, "Bludgeoning"),
-                    new Weapon("Dagger", 4, 1, new List<string>() { "Light", "Finesse", "Thrown (20/60)" }, "Piercing"),
-                    new Weapon("Greatclub", 8, 1, new List<string>() { "Light", "Two-Handed" }, "Bludgeoning"),
-                    new Weapon("Handaxe", 6, 1, new List<string>() { "Light", "Thrown" }, "Slashing"),
-                    new Weapon("Javelin", 6, 1, new List<string>() { "Thrown (30/120)" }, "Piercing"),
-                    new Weapon("Light Hammer", 4, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
-                    new Weapon("Mace", 6, 1, new List<string>() { }, "Bludgeoning"),
-                    new Weapon("Quarterstaff", 6, 1, new List<string>() { "Versatile (1d8)" }, "Bludgeoning"),
-                    new Weapon("Sickle", 4, 1, new List<string>() { "Light" }, "Slashing"),
-                    new Weapon("Spear", 6, 1, new List<string>() { "Versatile (1d8)", "Thrown (20/60)" }, "Piercing"),
-                    new Weapon("Unarmed Strike", 1, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
+        List<Catalog.Weapon> simpleMelee = new List<Catalog.Weapon>() {
+                    new Catalog.Weapon("Club", 4, 1, new List<string>() { "Light" }, "Bludgeoning"),
+                    new Catalog.Weapon("Dagger", 4, 1, new List<string>() { "Light", "Finesse", "Thrown (20/60)" }, "Piercing"),
+                    new Catalog.Weapon("Greatclub", 8, 1, new List<string>() { "Light", "Two-Handed" }, "Bludgeoning"),
+                    new Catalog.Weapon("Handaxe", 6, 1, new List<string>() { "Light", "Thrown" }, "Slashing"),
+                    new Catalog.Weapon("Javelin", 6, 1, new List<string>() { "Thrown (30/120)" }, "Piercing"),
+                    new Catalog.Weapon("Light Hammer", 4, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
+                    new Catalog.Weapon("Mace", 6, 1, new List<string>() { }, "Bludgeoning"),
+                    new Catalog.Weapon("Quarterstaff", 6, 1, new List<string>() { "Versatile (1d8)" }, "Bludgeoning"),
+                    new Catalog.Weapon("Sickle", 4, 1, new List<string>() { "Light" }, "Slashing"),
+                    new Catalog.Weapon("Spear", 6, 1, new List<string>() { "Versatile (1d8)", "Thrown (20/60)" }, "Piercing"),
+                    new Catalog.Weapon("Unarmed Strike", 1, 1, new List<string>() { "Light", "Thrown (20/60)" }, "Bludgeoning"),
             },
-            simpleRanged = new List<Weapon>() {
-                    new Weapon("Crossbow [Light]", 8, 1, new List<string>() { "Ammunition (80/320)", "Loading", "Two-Handed" }, "Piercing"),
-                    new Weapon("Dart", 4, 1, new List<string>() { "Thrown (20/60)", "Finesse" }, "Piercing"),
-                    new Weapon("Shortbow", 6, 1, new List<string>() { "Ammunition (80/320)", "Two-Handed" }, "Piercing"),
-                    new Weapon("Sling", 4, 1, new List<string>() { "Ammunition (30/120)" }, "Bludgeoning")
+            simpleRanged = new List<Catalog.Weapon>() {
+                    new Catalog.Weapon("Crossbow [Light]", 8, 1, new List<string>() { "Ammunition (80/320)", "Loading", "Two-Handed" }, "Piercing"),
+                    new Catalog.Weapon("Dart", 4, 1, new List<string>() { "Thrown (20/60)", "Finesse" }, "Piercing"),
+                    new Catalog.Weapon("Shortbow", 6, 1, new List<string>() { "Ammunition (80/320)", "Two-Handed" }, "Piercing"),
+                    new Catalog.Weapon("Sling", 4, 1, new List<string>() { "Ammunition (30/120)" }, "Bludgeoning")
             },
-            martialMelee = new List<Weapon>() {
-                    new Weapon("Battleaxe", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
-                    new Weapon("Flail", 8, 1, new List<string>() { }, "Bludgeoning"),
-                    new Weapon("Glaive", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Slashing"),
-                    new Weapon("Greataxe", 12, 1, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
-                    new Weapon("Greatsword", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
-                    new Weapon("Halberd", 10, 1, new List<string>() { "Heavy", "Two-Handed", "Reach" }, "Slashing"),
-                    new Weapon("Lance", 12, 1, new List<string>() { "Reach", "Special" }, "Bludgeoning"),
-                    new Weapon("Longsword", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
-                    new Weapon("Maul", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Bludgeoning"),
-                    new Weapon("Morningstar", 8, 1, new List<string>() { }, "Piercing"),
-                    new Weapon("Pike", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Piercing"),
-                    new Weapon("Rapier", 8, 1, new List<string>() { "Finesse" }, "Piercing"),
-                    new Weapon("Scimitar", 6, 1, new List<string>() { "Finesse", "Light" }, "Slashing"),
-                    new Weapon("Shortsword", 6, 1, new List<string>() { "Finesse", "Light" }, "Piercing"),
-                    new Weapon("Trident", 6, 1, new List<string>() { "Thrown (20/60)", "Versatile" }, "Piercing"),
-                    new Weapon("War Pick", 8, 1, new List<string>() { }, "Piercing"),
-                    new Weapon("Warhammer", 8, 1, new List<string>() { "Versatile (1d10)" }, "Bludgeoning"),
-                    new Weapon("Whip", 4, 1, new List<string>() { "Finesse", "Reach" }, "Slashing"),
+            martialMelee = new List<Catalog.Weapon>() {
+                    new Catalog.Weapon("Battleaxe", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
+                    new Catalog.Weapon("Flail", 8, 1, new List<string>() { }, "Bludgeoning"),
+                    new Catalog.Weapon("Glaive", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Slashing"),
+                    new Catalog.Weapon("Greataxe", 12, 1, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
+                    new Catalog.Weapon("Greatsword", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Slashing"),
+                    new Catalog.Weapon("Halberd", 10, 1, new List<string>() { "Heavy", "Two-Handed", "Reach" }, "Slashing"),
+                    new Catalog.Weapon("Lance", 12, 1, new List<string>() { "Reach", "Special" }, "Bludgeoning"),
+                    new Catalog.Weapon("Longsword", 8, 1, new List<string>() { "Versatile (1d10)" }, "Slashing"),
+                    new Catalog.Weapon("Maul", 6, 2, new List<string>() { "Heavy", "Two-Handed" }, "Bludgeoning"),
+                    new Catalog.Weapon("Morningstar", 8, 1, new List<string>() { }, "Piercing"),
+                    new Catalog.Weapon("Pike", 10, 1, new List<string>() { "Heavy", "Reach", "Two-Handed" }, "Piercing"),
+                    new Catalog.Weapon("Rapier", 8, 1, new List<string>() { "Finesse" }, "Piercing"),
+                    new Catalog.Weapon("Scimitar", 6, 1, new List<string>() { "Finesse", "Light" }, "Slashing"),
+                    new Catalog.Weapon("Shortsword", 6, 1, new List<string>() { "Finesse", "Light" }, "Piercing"),
+                    new Catalog.Weapon("Trident", 6, 1, new List<string>() { "Thrown (20/60)", "Versatile" }, "Piercing"),
+                    new Catalog.Weapon("War Pick", 8, 1, new List<string>() { }, "Piercing"),
+                    new Catalog.Weapon("Warhammer", 8, 1, new List<string>() { "Versatile (1d10)" }, "Bludgeoning"),
+                    new Catalog.Weapon("Whip", 4, 1, new List<string>() { "Finesse", "Reach" }, "Slashing"),
             },
-            martialRanged = new List<Weapon>()
+            martialRanged = new List<Catalog.Weapon>()
             {
-                    new Weapon("Blowgun", 1, 1, new List<string>(){ "Ammunition (25/100)", "Loading" }, "Piercing" ),
-                    new Weapon("Crossbow [Hand]", 6, 1, new List<string>(){ "Ammunition (30/120)", "Loading" }, "Piercing" ),
-                    new Weapon("Crossbow [Heavy]", 10, 1, new List<string>(){ "Ammunition (100/400)", "Loading" }, "Piercing" ),
-                    new Weapon("Longbow", 8, 1, new List<string>(){ "Ammunition (150/600)", "Loading" }, "Piercing" ),
-                    new Weapon("Net", 0, 0, new List<string>(){ "Thrown (5/15)", "Special" }, "" )
+                    new Catalog.Weapon("Blowgun", 1, 1, new List<string>(){ "Ammunition (25/100)", "Loading" }, "Piercing" ),
+                    new Catalog.Weapon("Crossbow [Hand]", 6, 1, new List<string>(){ "Ammunition (30/120)", "Loading" }, "Piercing" ),
+                    new Catalog.Weapon("Crossbow [Heavy]", 10, 1, new List<string>(){ "Ammunition (100/400)", "Loading" }, "Piercing" ),
+                    new Catalog.Weapon("Longbow", 8, 1, new List<string>(){ "Ammunition (150/600)", "Loading" }, "Piercing" ),
+                    new Catalog.Weapon("Net", 0, 0, new List<string>(){ "Thrown (5/15)", "Special" }, "" )
             },
             simple,
             martial,
-            weapons = new List<Weapon>();
+            weapons = new List<Catalog.Weapon>();
         List<String>
             armors = new List<string>(),
             lightArmor = new List<string>()
@@ -113,28 +112,6 @@ namespace AEtherSlay
             generateCharacter();
         }
 
-        public class Enemy
-        {
-            public String name, spellcastingStat, alignment;
-            public List<String> proficiencies = new List<string>(),
-                                traits = new List<String>(),
-                                languages = new List<String>(),
-                                weapons = new List<String>();
-            public short hitDiceSides;
-
-            public Enemy(string name, string spellcastingStat, string alignment, List<string> proficiencies, List<string> traits, List<string> languages, List<string> weapons, short hitDiceSides)
-            {
-                this.name = name;
-                this.spellcastingStat = spellcastingStat;
-                this.alignment = alignment;
-                this.proficiencies = proficiencies;
-                this.traits = traits;
-                this.languages = languages;
-                this.weapons = weapons;
-                this.hitDiceSides = hitDiceSides;
-            }
-        }
-
         private void generateCharacter()
         {
             #region Set Type Of Enemy
@@ -167,32 +144,32 @@ namespace AEtherSlay
             }
             ac = 10 + ((statRolls[2] - 10) / 2);
             #region IRA
-            int[] sortedRolls = statRolls;
-            statRolls = new int[6] { -1, -1, -1, -1, -1, -1 };
-            Array.Sort(sortedRolls);
-            Array.Reverse(sortedRolls);
-            for (int i = 0; i < preferredStatsIRA.Count; i++)
-            {
-                switch (preferredStatsIRA[i])
-                {
-                    case "STR": statRolls[0] = sortedRolls[i]; break;
-                    case "CON": statRolls[1] = sortedRolls[i]; break;
-                    case "DEX": statRolls[2] = sortedRolls[i]; break;
-                    case "INT": statRolls[3] = sortedRolls[i]; break;
-                    case "WIS": statRolls[4] = sortedRolls[i]; break;
-                    case "CHA": statRolls[5] = sortedRolls[i]; break;
-                    default: statRolls[i] = sortedRolls[i]; break;
-                }
-                sortedRolls[i] = -1;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                if (statRolls[i] < 0)
-                {
-                    statRolls[i] = sortedRolls.Max();
-                    sortedRolls[Array.IndexOf(sortedRolls, sortedRolls.Max())] = -1;
-                }
-            }
+            //int[] sortedRolls = statRolls;
+            //statRolls = new int[6] { -1, -1, -1, -1, -1, -1 };
+            //Array.Sort(sortedRolls);
+            //Array.Reverse(sortedRolls);
+            //for (int i = 0; i < preferredStatsIRA.Count; i++)
+            //{
+            //    switch (preferredStatsIRA[i])
+            //    {
+            //        case "STR": statRolls[0] = sortedRolls[i]; break;
+            //        case "CON": statRolls[1] = sortedRolls[i]; break;
+            //        case "DEX": statRolls[2] = sortedRolls[i]; break;
+            //        case "INT": statRolls[3] = sortedRolls[i]; break;
+            //        case "WIS": statRolls[4] = sortedRolls[i]; break;
+            //        case "CHA": statRolls[5] = sortedRolls[i]; break;
+            //        default: statRolls[i] = sortedRolls[i]; break;
+            //    }
+            //    sortedRolls[i] = -1;
+            //}
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    if (statRolls[i] < 0)
+            //    {
+            //        statRolls[i] = sortedRolls.Max();
+            //        sortedRolls[Array.IndexOf(sortedRolls, sortedRolls.Max())] = -1;
+            //    }
+            //}
             #endregion
             #endregion
 
@@ -263,36 +240,6 @@ namespace AEtherSlay
             public String getDmgString()
             {
                 return $"{damageDice}d{damageDiceSides} {atkType}";
-            }
-        }
-
-        public class Weapon
-        {
-            public int damageDiceSides, numDamageDice;
-            public List<String> propertyList = new List<string>();
-            public String damageType, name;
-
-            public Weapon(String name, int damageDiceSides, int numDamageDice, List<string> propertyList, string damageType)
-            {
-                this.name = name;
-                this.damageDiceSides = damageDiceSides;
-                this.numDamageDice = numDamageDice;
-                this.propertyList = propertyList;
-                this.damageType = damageType;
-            }
-        }
-
-        public class Armor
-        {
-            public String name;
-            public int dexMultiplier;
-            public bool givesStealthDisadvantage;
-
-            public Armor(string name, int dexMultiplier, bool givesStealthDisadvantage)
-            {
-                this.name = name;
-                this.dexMultiplier = dexMultiplier;
-                this.givesStealthDisadvantage = givesStealthDisadvantage;
             }
         }
     }
