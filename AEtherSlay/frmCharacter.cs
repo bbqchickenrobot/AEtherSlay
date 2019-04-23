@@ -14,12 +14,13 @@ namespace AEtherSlay
     public partial class frmCharacter : Form
     {
         #region Variable Declarations
+        Catalog catalog = new Catalog();
         Random rand = new Random();
         TextBox[] coreStatBoxes;
         TextBox[] statModifierBoxes;
         Boolean changedByClick = false;
 
-        Int32[] statRolls = new Int32[6];
+        Int16[] statRolls = new Int16[6];
         Int32 ac, health = 0;
         Int16 speed = 30;
         Boolean hasShield = false;
@@ -133,8 +134,8 @@ namespace AEtherSlay
 
             // MessageBox.Show("This form was instantiated with the following parameters\nCategory: " + optCategory + "\nClass: " + optClass + "\nRace: " + optRace);
 
-            coreStatBoxes     = new TextBox[] { txtStr, txtCon, txtDex, txtInt, txtWis, txtCha };
-            statModifierBoxes = new TextBox[] { txtStrMod, txtConMod, txtDexMod, txtIntMod, txtWisMod, txtChaMod };
+            coreStatBoxes     = new TextBox[] { txtStr, txtDex, txtCon, txtInt, txtWis, txtCha };
+            statModifierBoxes = new TextBox[] { txtStrMod, txtDexMod, txtConMod, txtIntMod, txtWisMod, txtChaMod };
             simple = simpleMelee;
             martial = martialMelee;
             armor = lightArmor;
@@ -171,29 +172,11 @@ namespace AEtherSlay
         private void generateCharacter()
         {
             #region Core Stats
-            // STR CON DEX INT WIS CHA
+            // STR DEX CON INT WIS CHA
             // 0   1   2   3   4   5
 
-            for(short stat = 0; stat < 6; stat++)
-            {
-                Int32[] rolls = new Int32[3];
-                for (short roll = 0; roll < 4; roll++)
-                {
-                    Int32 rolled = rand.Next(1, 7);
-                    if ((roll == 3) && (rolled > rolls.Min()))
-                    {
-                        rolls[Array.IndexOf(rolls, rolls.Min())] = rolled;
-                    } else
-                    {
-                        if(roll != 3)
-                        {
-                            rolls[roll] = rolled;
-                        }
-                    }
-                }
-                statRolls[stat] = rolls.Sum();
-            }
-            ac = 10 + ((statRolls[2] - 10) / 2);
+            statRolls = catalog.rollStats();
+            ac = 10 + ((statRolls[1] - 10) / 2);
             #endregion
 
             #region Generate Class
@@ -290,7 +273,7 @@ namespace AEtherSlay
             {
                 case 0:
                     raceName = "High Elf";
-                    statRolls[2] += 2;
+                    statRolls[1] += 2;
                     statRolls[3] += 1;
                     player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Cantrip", "Additional Language" });
                     player.proficiencies.AddRange( new List<String>{ "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
@@ -299,7 +282,7 @@ namespace AEtherSlay
 
                 case 1:
                     raceName = "Wood Elf";
-                    statRolls[2] += 2;
+                    statRolls[1] += 2;
                     statRolls[4] += 1;
                     speed = 35;
                     player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Mask Of The Wild" });
@@ -309,7 +292,7 @@ namespace AEtherSlay
 
                 case 2:
                     raceName = "Hill Dwarf";
-                    statRolls[1] += 2;
+                    statRolls[2] += 2;
                     statRolls[4] += 1;
                     health += 1;
                     speed = 25;
@@ -320,7 +303,7 @@ namespace AEtherSlay
 
                 case 3:
                     raceName = "Mountain Dwarf";
-                    statRolls[1] += 2;
+                    statRolls[2] += 2;
                     statRolls[0] += 2;
                     speed = 25;
                     player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
@@ -332,7 +315,7 @@ namespace AEtherSlay
 
                 case 4:
                     raceName = "Dark Elf";
-                    statRolls[2] += 2;
+                    statRolls[1] += 2;
                     statRolls[5] += 1;
                     player.traits.AddRange(new List<String>() { "Superior Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Sunlight Sensitivity", "Drow Magic" });
                     player.proficiencies.AddRange(new List<String> { "Perception", "Rapier", "Shortsword", "Hand Crossbow" });
@@ -341,7 +324,7 @@ namespace AEtherSlay
 
                 case 5:
                     raceName = "Lightfoot Halfling";
-                    statRolls[2] += 2;
+                    statRolls[1] += 2;
                     statRolls[5] += 1;
                     speed = 25;
                     player.traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Naturally Stealthy" });
@@ -350,8 +333,8 @@ namespace AEtherSlay
 
                 case 6:
                     raceName = "Stout Halfling";
-                    statRolls[2] += 2;
-                    statRolls[1] += 1;
+                    statRolls[1] += 2;
+                    statRolls[2] += 1;
                     speed = 25;
                     player.traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Poison Resistance", "Advantage Saving Throws Poison" });
                     player.languages.Add("Halfling");
@@ -387,7 +370,7 @@ namespace AEtherSlay
                 case 9:
                     raceName = "Forest Gnome";
                     statRolls[3] += 2;
-                    statRolls[2] += 1;
+                    statRolls[1] += 1;
                     player.languages.Add("Gnomish");
                     player.traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Natural Illusionist", "Speak w/Small Beasts" });
                     break;
@@ -395,7 +378,7 @@ namespace AEtherSlay
                 case 10:
                     raceName = "Rock Gnome";
                     statRolls[3] += 2;
-                    statRolls[1] += 1;
+                    statRolls[2] += 1;
                     player.languages.Add("Gnomish");
                     player.traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Artificer's Lore", "Tinker" });
                     break;
@@ -417,7 +400,7 @@ namespace AEtherSlay
                 case 12:
                     raceName = "Half Orc";
                     statRolls[0] += 2;
-                    statRolls[1] += 1;
+                    statRolls[2] += 1;
                     player.languages.Add("Orc");
                     player.traits.AddRange(new List<String>() { "Darkvision", "Relentless Endurance", "Savage Attacks" });
                     player.proficiencies.Add("Intimidation");
@@ -660,7 +643,7 @@ namespace AEtherSlay
                 txtAC.Text = ac.ToString();
                 lblAlignment.Text = player.alignment;
                 txtInit.Text = txtDexMod.Text;
-                txtHP.Text = (player.hitDiceSides + ((statRolls[1] - 10) / 2)).ToString();
+                txtHP.Text = (player.hitDiceSides + ((statRolls[2] - 10) / 2)).ToString();
 
                 foreach (String weapon in weapons) { cbWeapon1.Items.Add(weapon); }
                 foreach (String secondaryWeapon in secondaryWeapons) { cbWeapon2.Items.Add(secondaryWeapon); }
@@ -701,28 +684,28 @@ namespace AEtherSlay
             switch(cbArmor1.Text)
             {
                 case "Padded Armor":
-                    ac = 11 + (statRolls[2] - 10) / 2;
+                    ac = 11 + (statRolls[1] - 10) / 2;
                     break;
                 case "Leather Armor":
-                    ac = 11 + (statRolls[2] - 10) / 2;
+                    ac = 11 + (statRolls[1] - 10) / 2;
                     break;
                 case "Studded Leather":
-                    ac = 12 + (statRolls[2] - 10) / 2;
+                    ac = 12 + (statRolls[1] - 10) / 2;
                     break;
                 case "Hide Armor":
-                    ac = 12 + Math.Min(((statRolls[2] - 10) / 2), Convert.ToInt16(2));
+                    ac = 12 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Chain Shirt":
-                    ac = 13 + Math.Min(((statRolls[2] - 10) / 2), Convert.ToInt16(2));
+                    ac = 13 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Scale Mail":
-                    ac = 14 + Math.Min(((statRolls[2] - 10) / 2), Convert.ToInt16(2));
+                    ac = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Breastplate":
-                    ac = 14 + Math.Min(((statRolls[2] - 10) / 2), Convert.ToInt16(2));
+                    ac = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Half Plate":
-                    ac = 15 + Math.Min(((statRolls[2] - 10) / 2), Convert.ToInt16(2));
+                    ac = 15 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Ring Mail":
                     ac = 14;
@@ -737,7 +720,7 @@ namespace AEtherSlay
                     ac = 18;
                     break;
                 default:
-                    ac = 10 + (statRolls[2] - 10) / 2;
+                    ac = 10 + (statRolls[1] - 10) / 2;
                     break;
             }
             if(hasShield) { ac += 2; }

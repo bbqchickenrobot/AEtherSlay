@@ -91,7 +91,26 @@ namespace AEtherSlay
                             new Armor("Plate", 0, 18, true)
                     },
                     armor;
-        List<Spell> spellList = new List<Spell>()
+        List<String> languages = new List<String>()
+                    {
+                            "Common",
+                            "Elvish",
+                            "Dwarvish",
+                            "Giant",
+                            "Gnomish",
+                            "Goblin",
+                            "Halfling",
+                            "Orc",
+                            "Abyssal",
+                            "Celestial",
+                            "Draconic",
+                            "Deep Speech",
+                            "Infernal",
+                            "Primordial",
+                            "Sylvan",
+                            "Undercommon"
+                    };
+        public static List<Spell> spellList = new List<Spell>()
         {
             new Spell(1, "Alarm", new List<String>() { "ranger", "wizard"}),
             new Spell(1, "Animal Friendship", new List<String>() { "bard", "druid", "ranger"}),
@@ -432,11 +451,6 @@ namespace AEtherSlay
         };
         #endregion
 
-        public void initialiseCatalog()
-        {
-            
-        }
-
         public abstract class Character
         {
             String       name, alignment;
@@ -488,6 +502,19 @@ namespace AEtherSlay
                                 :  base(name, alignment, proficiencies, languages, weapons, armor, stats, hasShield, health)
             {
                 this.knownSpells = knownSpells;
+            }
+
+            public List<Spell> getValidSpells()
+            {
+                List<Spell> validSpells = new List<Spell>();
+                foreach(Spell currentSpell in spellList)
+                {
+                    if (currentSpell.canUse.Contains(this.className.ToLower()))
+                    {
+                        validSpells.Add(currentSpell);
+                    }
+                }
+                return validSpells;
             }
         }
 
@@ -543,7 +570,7 @@ namespace AEtherSlay
 
         public Int16[] rollStats()
         {
-            // STR CON DEX INT WIS CHA
+            // STR DEX CON INT WIS CHA
             // 0   1   2   3   4   5
             Int16[] statRolls = new Int16[6];
 
