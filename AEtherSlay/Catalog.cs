@@ -449,6 +449,8 @@ namespace AEtherSlay
             new Spell(9, "Weird", new List<String>() { "wizard"}),
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
+
+        public static List<Creature> creatures = new List<Creature>();
         #endregion
 
         public abstract class Character
@@ -515,6 +517,23 @@ namespace AEtherSlay
                     }
                 }
                 return validSpells;
+            }
+        }
+
+        public class CreatureCharacter : Character
+        {
+
+            CreatureCharacter(string name,
+                                string alignment,
+                                List<string> proficiencies,
+                                List<string> languages,
+                                List<Weapon> weapons,
+                                Armor armor,
+                                short[] stats,
+                                bool hasShield,
+                                short health) : base(name, alignment, proficiencies, languages, weapons, armor, stats, hasShield, health)
+            {
+
             }
         }
 
