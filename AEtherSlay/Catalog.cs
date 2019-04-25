@@ -450,7 +450,7 @@ namespace AEtherSlay
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
 
-        public static List<Creature> creatures = new List<Creature>();
+        public static List<CreatureCharacter> creatures = new List<CreatureCharacter>();
         #endregion
 
         public abstract class Character
