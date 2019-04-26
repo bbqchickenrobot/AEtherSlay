@@ -213,12 +213,12 @@ namespace AEtherSlay
 
             #endregion
 
-            playerClass player;
+            Catalog.PlayerCharacter player;
 
             switch (classNum)
             {
                 case 0:
-                    player = new playerClass("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
+                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
                     break;
                 case 1:
                     player = new playerClass("Bard", "Charisma", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" }, new string[] { "Dexterity", "Charisma" }, 8);
