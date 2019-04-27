@@ -152,23 +152,6 @@ namespace AEtherSlay
             generateCharacter();
         }
 
-        public class playerClass
-        {
-            public String name, spellcasting, alignment;
-            public String[] savingThrows = new string[2];
-            public List<String> proficiencies = new List<string>(), traits = new List<String>(), languages = new List<String>(), equipment = new List<String>();
-            public short hitDiceSides;
-
-            public playerClass(String name, String spellcasting, List<String> proficiencies, String[] savingThrows, short hitDiceSides)
-            {
-                this.name = name;
-                this.spellcasting = spellcasting;
-                this.proficiencies = proficiencies;
-                this.savingThrows = savingThrows;
-                this.hitDiceSides = hitDiceSides;
-            }
-        }
-
         private void generateCharacter()
         {
             #region Core Stats
@@ -218,43 +201,43 @@ namespace AEtherSlay
             switch (classNum)
             {
                 case 0:
-                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
+                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 12);
                     break;
                 case 1:
-                    player = new playerClass("Bard", "Charisma", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" }, new string[] { "Dexterity", "Charisma" }, 8);
+                    player = new Catalog.PlayerCharacter("Bard", "Charisma", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" },new List<String>() { "Dexterity", "Charisma" }, 8);
                     break;
                 case 2:
-                    player = new playerClass("Cleric", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" }, new string[] { "Charisma", "Wisdom" }, 8);
+                    player = new Catalog.PlayerCharacter("Cleric", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" },new List<String>() { "Charisma", "Wisdom" }, 8);
                     break;
                 case 3:
-                    player = new playerClass("Druid", "Wisdom", new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" }, new string[] { "Intelligence", "Wisdom" }, 8);
+                    player = new Catalog.PlayerCharacter("Druid", "Wisdom", new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" },new List<String>() { "Intelligence", "Wisdom" }, 8);
                     break;
                 case 4:
-                    player = new playerClass("Fighter", "Intelligence", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 10);
+                    player = new Catalog.PlayerCharacter("Fighter", "Intelligence", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 10);
                     break;
                 case 5:
-                    player = new playerClass("Monk", "Wisdom", new List<string>() { "Simple Weapons", "Shortswords" }, new string[] { "Dexterity", "Strength" }, 8);
+                    player = new Catalog.PlayerCharacter("Monk", "Wisdom", new List<string>() { "Simple Weapons", "Shortswords" },new List<String>() { "Dexterity", "Strength" }, 8);
                     break;
                 case 6:
-                    player = new playerClass("Paladin", "Charisma", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Charisma", "Wisdom" }, 10);
+                    player = new Catalog.PlayerCharacter("Paladin", "Charisma", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Charisma", "Wisdom" }, 10);
                     break;
                 case 7:
-                    player = new playerClass("Ranger", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Dexterity" }, 10);
+                    player = new Catalog.PlayerCharacter("Ranger", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Dexterity" }, 10);
                     break;
                 case 8:
-                    player = new playerClass("Rogue", "Intelligence", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" }, new string[] { "Dexterity", "Intelligence" }, 8);
+                    player = new Catalog.PlayerCharacter("Rogue", "Intelligence", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" },new List<String>() { "Dexterity", "Intelligence" }, 8);
                     break;
                 case 9:
-                    player = new playerClass("Sorcerer", "Charisma", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" }, new string[] { "Charisma", "Constitution" }, 6);
+                    player = new Catalog.PlayerCharacter("Sorcerer", "Charisma", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" },new List<String>() { "Charisma", "Constitution" }, 6);
                     break;
                 case 10:
-                    player = new playerClass("Warlock", "Charisma", new List<string>() { "Light Armor", "Simple Weapons" }, new string[] { "Wisdom", "Charisma" }, 8);
+                    player = new Catalog.PlayerCharacter("Warlock", "Charisma", new List<string>() { "Light Armor", "Simple Weapons" },new List<String>() { "Wisdom", "Charisma" }, 8);
                     break;
                 case 11:
-                    player = new playerClass("Wizard", "Intelligence", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" }, new string[] { "Wisdom", "Intelligence" }, 8);
+                    player = new Catalog.PlayerCharacter("Wizard", "Intelligence", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" },new List<String>() { "Wisdom", "Intelligence" }, 8);
                     break;
                 default:
-                    player = new playerClass("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" }, new string[] { "Strength", "Constitution" }, 12);
+                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 12);
                     break;
             }
             #endregion

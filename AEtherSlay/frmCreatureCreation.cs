@@ -217,30 +217,5 @@ namespace AEtherSlay
             }
             #endregion
         }
-
-        public class Attack
-        {
-            public int damageDiceSides, damageDice, atkModifier;
-            public String atkType;
-
-            public Attack(int damageDiceSides, int damageDice, int atkModifier, string atkType)
-            {
-                this.damageDiceSides = damageDiceSides;
-                this.damageDice = damageDice;
-                this.atkModifier = atkModifier;
-                this.atkType = atkType;
-            }
-
-            public int avgDamage()
-            {
-                int avgRoll = Convert.ToInt32(Math.Floor(Convert.ToDouble(this.damageDiceSides / 2)) + 1);
-                return Convert.ToInt32(avgRoll * this.damageDice + (Math.Floor(Convert.ToDouble(this.damageDice / 2) + 1)));
-            }
-
-            public String getDmgString()
-            {
-                return $"{damageDice}d{damageDiceSides} {atkType}";
-            }
-        }
     }
 }

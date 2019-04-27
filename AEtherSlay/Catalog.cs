@@ -449,30 +449,41 @@ namespace AEtherSlay
             new Spell(9, "Weird", new List<String>() { "wizard"}),
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
-
-        public static List<CreatureCharacter> creatures = new List<CreatureCharacter>();
         #endregion
 
         public abstract class Character
         {
-            String       name, alignment, spellcastingStat;
-            List<String> proficiencies = new List<string>(),
-                         languages = new List<string>();
-            List<Weapon> weapons;
-            Armor        armor;
-            Int16[]      stats, statMods; // STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
-            Boolean      hasShield;
-            Int16        ac, health, hitDiceSides;
+            public String       name, alignment, spellcastingStat;
+            public List<String> proficiencies = new List<string>(),
+                                languages     = new List<string>(),
+                                savingThrows  = new List<string>(),
+                                traits        = new List<string>();
+            public List<Weapon> weapons;
+            public Armor        armor;
+            public Int16[]      stats, statMods; // STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
+            public Boolean      hasShield;
+            public Int16 ac, health, hitDiceSides;
 
             protected Character(string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides)
             {
                 this.spellcastingStat = spellcastingStat;
                 this.proficiencies = proficiencies;
+                this.savingThrows = savingThrows;
+                this.hitDiceSides = hitDiceSides;
             }
 
             private Int16 calcAC()
             {
+                // Check this.armor exists
                 return armor.getAC(stats[1]);
+            }
+
+            private void calcModifiers()
+            {
+                for(Int16 i = 0; i < stats.Count(); i++)
+                {
+                    statMods[i] = Convert.ToInt16((stats[i] - 10) / 2);
+                }
             }
 
             public void setIRA(String[] newIRA)
@@ -508,22 +519,22 @@ namespace AEtherSlay
 
         public class PlayerCharacter : Character
         {
-            List<Spell> knownSpells = new List<Spell>();
+            List<Spell> validSpells, knownSpells = new List<Spell>();
             String className, raceName;
 
-            public PlayerCharacter(String className, string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides) : base(className, spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+            public PlayerCharacter(String className, string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides) : base(spellcastingStat, proficiencies, savingThrows, hitDiceSides)
             {
 
             }
 
             public List<Spell> getValidSpells()
             {
-                List<Spell> validSpells = new List<Spell>();
+                List<Spell> outSpells = new List<Spell>();
                 foreach(Spell currentSpell in spellList)
                 {
                     if (currentSpell.canUse.Contains(this.className.ToLower()))
                     {
-                        validSpells.Add(currentSpell);
+                        outSpells.Add(currentSpell);
                     }
                 }
                 return validSpells;
@@ -540,22 +551,10 @@ namespace AEtherSlay
             }
         }
 
-        public class CreatureCharacter : Character
-        {
+        //public class CreatureCharacter : Character
+        //{
 
-            CreatureCharacter(string name,
-                                string alignment,
-                                List<string> proficiencies,
-                                List<string> languages,
-                                List<Weapon> weapons,
-                                Armor armor,
-                                short[] stats,
-                                bool hasShield,
-                                short health) : base(name, alignment, proficiencies, languages, weapons, armor, stats, hasShield, health)
-            {
-
-            }
-        }
+        //}
 
         public class Weapon
         {
@@ -604,6 +603,31 @@ namespace AEtherSlay
                 this.level = level;
                 this.name = name;
                 this.canUse = canUse;
+            }
+        }
+
+        public class Attack
+        {
+            public int damageDiceSides, damageDice, atkModifier;
+            public String atkType;
+
+            public Attack(int damageDiceSides, int damageDice, int atkModifier, string atkType)
+            {
+                this.damageDiceSides = damageDiceSides;
+                this.damageDice = damageDice;
+                this.atkModifier = atkModifier;
+                this.atkType = atkType;
+            }
+
+            public int avgDamage()
+            {
+                int avgRoll = Convert.ToInt32(Math.Floor(Convert.ToDouble(this.damageDiceSides / 2)) + 1);
+                return Convert.ToInt32(avgRoll * this.damageDice + (Math.Floor(Convert.ToDouble(this.damageDice / 2) + 1)));
+            }
+
+            public String getDmgString()
+            {
+                return $"{damageDice}d{damageDiceSides} {atkType}";
             }
         }
 
