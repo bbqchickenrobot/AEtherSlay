@@ -638,46 +638,47 @@ namespace AEtherSlay
             switch(cbArmor1.Text)
             {
                 case "Padded Armor":
-                    ac = 11 + (statRolls[1] - 10) / 2;
+                    outAC = 11 + (statRolls[1] - 10) / 2;
                     break;
                 case "Leather Armor":
-                    ac = 11 + (statRolls[1] - 10) / 2;
+                    outAC = 11 + (statRolls[1] - 10) / 2;
                     break;
                 case "Studded Leather":
-                    ac = 12 + (statRolls[1] - 10) / 2;
+                    outAC = 12 + (statRolls[1] - 10) / 2;
                     break;
                 case "Hide Armor":
-                    ac = 12 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
+                    outAC = 12 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Chain Shirt":
-                    ac = 13 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
+                    outAC = 13 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Scale Mail":
-                    ac = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
+                    outAC = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Breastplate":
-                    ac = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
+                    outAC = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Half Plate":
-                    ac = 15 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
+                    outAC = 15 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
                     break;
                 case "Ring Mail":
-                    ac = 14;
+                    outAC = 14;
                     break;
                 case "Chain Mail":
-                    ac = 16;
+                    outAC = 16;
                     break;
                 case "Splint":
-                    ac = 17;
+                    outAC = 17;
                     break;
                 case "Plate":
-                    ac = 18;
+                    outAC = 18;
                     break;
                 default:
-                    ac = 10 + (statRolls[1] - 10) / 2;
+                    outAC = 10 + (statRolls[1] - 10) / 2;
                     break;
             }
-            if(hasShield) { ac += 2; }
+            if(hasShield) { outAC += 2; }
+            ac = Convert.ToInt16(outAC);
             txtAC.Text = ac.ToString();
         }
 
