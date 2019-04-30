@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace AEtherSlay
 {
-    class Catalog
+    public class Catalog
     {
         #region Variables
         Random rand = new Random();
 
-        List<Weapon> simpleMelee = new List<Weapon>() {
+        public List<Weapon> simpleMelee = new List<Weapon>() {
                             new Weapon("Club", 4, 1, new List<string>() { "Light" }, "Bludgeoning"),
                             new Weapon("Dagger", 4, 1, new List<string>() { "Light", "Finesse", "Thrown (20/60)" }, "Piercing"),
                             new Weapon("Greatclub", 8, 1, new List<string>() { "Light", "Two-Handed" }, "Bludgeoning"),
@@ -68,8 +68,7 @@ namespace AEtherSlay
                     simple,
                     martial,
                     weapons = new List<Weapon>();
-        List<Armor> armors = new List<Armor>(),
-                    lightArmor = new List<Armor>()
+        List<Armor> lightArmor = new List<Armor>()
                     {
                             new Armor("Padded", 100, 11, true),
                             new Armor("Leather", 100, 11, false),
@@ -90,7 +89,7 @@ namespace AEtherSlay
                             new Armor("Splint", 0, 17, true),
                             new Armor("Plate", 0, 18, true)
                     },
-                    armor;
+                    armorList;
         List<String> languages = new List<String>()
                     {
                             "Common",
@@ -449,20 +448,56 @@ namespace AEtherSlay
             new Spell(9, "Weird", new List<String>() { "wizard"}),
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
+        private object fred;
+
+
+        public Catalog()
+        {
+            catalogInit();
+        }
         #endregion
+
+        //INVOKE THIS METHOD BEFORE USING CATALOG
+
+
+        private void catalogInit()
+        {
+            armorList = lightArmor;
+            armorList.AddRange(mediumArmor);
+            armorList.AddRange(heavyArmor);
+
+            simple = simpleMelee;
+            simple.AddRange(simpleRanged);
+
+            martial = martialMelee;
+            martial.AddRange(martialRanged);
+        }
 
         public abstract class Character
         {
-            public String       name, alignment, spellcastingStat;
-            public List<String> proficiencies = new List<string>(),
-                                languages     = new List<string>(),
-                                savingThrows  = new List<string>(),
-                                traits        = new List<string>();
+            public String       name
+                               ,alignment
+                               ,spellcastingStat;
+            public List<String> proficiencies  
+                               ,languages      
+                               ,savingThrows   
+                               ,traits         
+                               ,immunities     
+                               ,resistances    
+                               ,vulnerabilities
+                               ,misc
+                               ,equipment;
             public List<Weapon> weapons;
             public Armor        armor;
-            public Int16[]      stats, statMods; // STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
+            public Int16[]      stats     // STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
+                               ,statMods  // STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
+                               ,money = new short[5];
             public Boolean      hasShield;
-            public Int16 ac, health, hitDiceSides;
+            public Int16        ac
+                               ,health
+                               ,hitDiceSides
+                               ,hitDice
+                               ,level;
 
             protected Character(string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides)
             {
@@ -470,26 +505,69 @@ namespace AEtherSlay
                 this.proficiencies = proficiencies;
                 this.savingThrows = savingThrows;
                 this.hitDiceSides = hitDiceSides;
+                        level = 1;
+
             }
 
-            private Int16 calcAC()
+            protected Character()
+            {
+                // DANGEROUS INSTANTIATION TRY AND AVOID
+            }
+
+            protected Character(string alignment, string spellcastingStat, List<string> proficiencies, List<String> equipment, List<string> languages, List<string> savingThrows, List<string> traits, List<string> immunities, List<string> resistances, List<string> vulnerabilities, List<Weapon> weapons, Armor armor, short[] stats, short[] statMods, bool hasShield, short hitDiceSides)
+            {
+                this.alignment = alignment;
+                this.spellcastingStat = spellcastingStat;
+                this.proficiencies = proficiencies;
+                this.equipment = equipment;
+                this.languages = languages;
+                this.savingThrows = savingThrows;
+                this.traits = traits;
+                this.immunities = immunities;
+                this.resistances = resistances;
+                this.vulnerabilities = vulnerabilities;
+                this.weapons = weapons;
+                this.armor = armor;
+                this.stats = stats;
+                this.hasShield = hasShield;
+                this.hitDiceSides = hitDiceSides;
+                this.hitDice = 1;
+                this.level = 1;
+
+                calcModifiers();
+                calcHealth();
+                calcAC();
+            }
+
+            private void calcAC()
             {
                 // Check this.armor exists
-                return armor.getAC(stats[1]);
+                if (!(this.armor == null))
+                {
+                    ac = armor.getAC(stats[1]);
+                } else
+                {
+                    ac = Convert.ToInt16(10 + statMods[1]);
+                }
             }
 
             private void calcModifiers()
             {
-                for(Int16 i = 0; i < stats.Count(); i++)
+                for(short i = 0; i < stats.Count(); i++)
                 {
                     statMods[i] = Convert.ToInt16((stats[i] - 10) / 2);
                 }
             }
 
+            private void calcHealth()
+            {
+                health = Convert.ToInt16(hitDiceSides + (((hitDiceSides / 2) + 1) * (level - 1)) + statMods[2]);
+            }
+
             public void setIRA(String[] newIRA)
             {
                 short[] sortedRolls = this.stats;
-                this.stats = new short[6] { -1, -1, -1, -1, -1, -1 };
+                stats = new short[6] { -1, -1, -1, -1, -1, -1 };
                 Array.Sort(sortedRolls);
                 Array.Reverse(sortedRolls);
                 for (int i = 0; i < newIRA.Count(); i++)
@@ -508,23 +586,24 @@ namespace AEtherSlay
                 }
                 for (int i = 0; i < 6; i++)
                 {
-                    if (this.stats[i] < 0)
+                    if (stats[i] < 0)
                     {
-                        this.stats[i] = sortedRolls.Max();
+                        stats[i] = sortedRolls.Max();
                         sortedRolls[Array.IndexOf(sortedRolls, sortedRolls.Max())] = -1;
                     }
                 }
             }
         }
-
+    
         public class PlayerCharacter : Character
         {
             List<Spell> validSpells, knownSpells = new List<Spell>();
             String className, raceName;
 
-            public PlayerCharacter(String className, string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides) : base(spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+            public PlayerCharacter(String className, string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides)
+                             :base(spellcastingStat, proficiencies, savingThrows, hitDiceSides)
             {
-
+                this.className = className;
             }
 
             public List<Spell> getValidSpells()
@@ -558,11 +637,11 @@ namespace AEtherSlay
 
         public class Weapon
         {
-            public int damageDiceSides, numDamageDice;
+            public short damageDiceSides, numDamageDice, quantity;
             public List<String> propertyList = new List<string>();
             public String damageType, name;
 
-            public Weapon(String name, int damageDiceSides, int numDamageDice, List<string> propertyList, string damageType)
+            public Weapon(String name, short damageDiceSides, short numDamageDice, List<string> propertyList, string damageType)
             {
                 this.name = name;
                 this.damageDiceSides = damageDiceSides;
@@ -571,7 +650,7 @@ namespace AEtherSlay
                 this.damageType = damageType;
             }
         }
-
+    
         public class Armor
         {
             public String name;
@@ -591,7 +670,7 @@ namespace AEtherSlay
                 return Convert.ToInt16(baseAC + Math.Min(dex, dexLimit));
             }
         }
-
+    
         public class Spell
         {
             public Int16 level;
@@ -605,7 +684,7 @@ namespace AEtherSlay
                 this.canUse = canUse;
             }
         }
-
+    
         public class Attack
         {
             public int damageDiceSides, damageDice, atkModifier;
@@ -630,7 +709,7 @@ namespace AEtherSlay
                 return $"{damageDice}d{damageDiceSides} {atkType}";
             }
         }
-
+    
         public Int16[] rollStats()
         {
             // STR DEX CON INT WIS CHA
@@ -658,6 +737,24 @@ namespace AEtherSlay
                 statRolls[stat] = Convert.ToInt16(rolls.Sum());
             }
             return statRolls;
+        }
+
+        public Weapon findWeapon(String name)
+        {
+            foreach(Weapon weap in weapons)
+            {
+                if(weap.name == name) { return weap; }
+            }
+            return null;
+        }
+
+        public Armor findArmor(String name)
+        {
+            foreach (Armor arm in armorList)
+            {
+                if (arm.name == name) { return arm; }
+            }
+            return null;
         }
     }
 }

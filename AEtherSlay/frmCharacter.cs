@@ -14,108 +14,32 @@ namespace AEtherSlay
     public partial class frmCharacter : Form
     {
         #region Variable Declarations
-        Catalog catalog = new Catalog();
-        Random rand = new Random();
+        Catalog.PlayerCharacter player;
+
+        int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
+
+        Random    rand = new Random();
         TextBox[] coreStatBoxes;
         TextBox[] statModifierBoxes;
-        Boolean changedByClick = false;
+        Boolean   changedByClick = false;
 
         Int16[] statRolls = new Int16[6];
-        Int32 ac, health = 0;
-        Int16 speed = 30;
+        Int16   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
         Boolean hasShield = false;
-        int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
-        List<String>
-            weapons = new List<string>(),
-            secondaryWeapons = new List<string>(),
-            armors = new List<string>(),
-            simpleMelee = new List<string>() {
-                    "Club",
-                    "Dagger",
-                    "Greatclub",
-                    "Handaxe",
-                    "Javelin",
-                    "Light Hammer",
-                    "Mace",
-                    "Quarterstaff",
-                    "Sickle",
-                    "Spear",
-                    "Unarmed Strike"
-            }, simpleRanged = new List<String>() {
-                    "Crossbow [light]",
-                    "Dart",
-                    "Shortbow",
-                    "Sling"
-            }, martialMelee = new List<String>() {
-                    "Battleaxe",
-                    "Flail",
-                    "Glaive",
-                    "Greataxe",
-                    "Greatsword",
-                    "Halberd",
-                    "Lance",
-                    "Longsword",
-                    "Maul",
-                    "Morningstar",
-                    "Pike",
-                    "Rapier",
-                    "Scimitar",
-                    "Shortsword",
-                    "Trident",
-                    "War Pick",
-                    "Warhammer",
-                    "Whip"
-            }, martialRanged = new List<string>()
-            {
-                    "Blowgun",
-                    "Crossbow [hand]",
-                    "Crossbow [heavy]",
-                    "Longbow",
-                    "Net"
-            },
-            simple,
-            martial,
-            lightArmor = new List<string>()
-            {
-                    "Padded",
-                    "Leather",
-                    "Studded Leather"
-            },
-            mediumArmor = new List<string>()
-            {
-                    "Hide",
-                    "Chain Shirt",
-                    "Scale Mail",
-                    "Breastplate",
-                    "Half Plate",
-            },
-            heavyArmor = new List<string>()
-            {
-                    "Ring Mail",
-                    "Chain Mail",
-                    "Splint",
-                    "Plate"
-            },
-            armor,
-            languages = new List<String>()
-            {
-                "Common",
-                "Elvish",
-                "Dwarvish",
-                "Giant",
-                "Gnomish",
-                "Goblin",
-                "Halfling",
-                "Orc",
-                "Abyssal",
-                "Celestial",
-                "Draconic",
-                "Deep Speech",
-                "Infernal",
-                "Primordial",
-                "Sylvan",
-                "Undercommon"
-            };
+        String className, raceName, spellcastingStat, alignment;
+        List<Catalog.Armor> possibleArmors;
+        List<Catalog.Weapon> weapons;
+        List<String> proficiencies
+                           ,languages
+                           ,savingThrows
+                           ,traits
+                           ,immunities
+                           ,resistances
+                           ,vulnerabilities
+                           ,misc
+                           ,equipment;
+
+        List<Catalog.Weapon> primaryWeaponChoices, secondaryWeaponChoices;
         #endregion
 
         private void cbArmor1_Click(object sender, EventArgs e)
@@ -123,7 +47,7 @@ namespace AEtherSlay
             changedByClick = true;
         }
 
-        public String choosePack(List<String> packChoices)
+        public String chooseFromList(List<String> packChoices)
         {
             return packChoices[rand.Next(0, packChoices.Count)];
         }
@@ -136,19 +60,11 @@ namespace AEtherSlay
 
             coreStatBoxes     = new TextBox[] { txtStr, txtDex, txtCon, txtInt, txtWis, txtCha };
             statModifierBoxes = new TextBox[] { txtStrMod, txtDexMod, txtConMod, txtIntMod, txtWisMod, txtChaMod };
-            simple = simpleMelee;
-            martial = martialMelee;
-            armor = lightArmor;
 
             forcedCategory = optCategory;
             forcedClass = optClass;
             forcedRace = optRace;
 
-            armor.AddRange(mediumArmor);
-            armor.AddRange(heavyArmor);
-
-            simple.AddRange(simpleRanged);
-            martial.AddRange(martialRanged);
             generateCharacter();
         }
 
@@ -158,8 +74,8 @@ namespace AEtherSlay
             // STR DEX CON INT WIS CHA
             // 0   1   2   3   4   5
 
-            statRolls = catalog.rollStats();
-            ac = 10 + ((statRolls[1] - 10) / 2);
+            statRolls = Program.catalog.rollStats();
+            ac = Convert.ToInt16(10 + ((statRolls[1] - 10) / 2));
             #endregion
 
             #region Generate Class
@@ -196,48 +112,109 @@ namespace AEtherSlay
 
             #endregion
 
-            Catalog.PlayerCharacter player;
-
             switch (classNum)
             {
                 case 0:
-                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 12);
+                    className = "Barbarian";
+                    spellcastingStat = "NONE";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Strength", "Constitution" });
+                    hitDiceSides = 12;
                     break;
+
                 case 1:
-                    player = new Catalog.PlayerCharacter("Bard", "Charisma", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" },new List<String>() { "Dexterity", "Charisma" }, 8);
+                    className = "Bard";
+                    spellcastingStat = "Charisma";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
+                    savingThrows.AddRange(new List<string>() { "Dexterity", "Charisma" });
+                    hitDiceSides = 8;
                     break;
+
                 case 2:
-                    player = new Catalog.PlayerCharacter("Cleric", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" },new List<String>() { "Charisma", "Wisdom" }, 8);
+                    className = "Cleric";
+                    spellcastingStat = "Wisdom";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Charisma", "Wisdom" });
+                    hitDiceSides = 8;
                     break;
+
                 case 3:
-                    player = new Catalog.PlayerCharacter("Druid", "Wisdom", new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" },new List<String>() { "Intelligence", "Wisdom" }, 8);
+                    className = "Druid";
+                    spellcastingStat = "Wisdom";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" });
+                    savingThrows.AddRange(new List<string>() { "Intelligence", "Wisdom" });
+                    hitDiceSides = 8;
                     break;
+
                 case 4:
-                    player = new Catalog.PlayerCharacter("Fighter", "Intelligence", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 10);
+                    className = "Fighter";
+                    spellcastingStat = "Intelligence";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Strength", "Constitution" });
+                    hitDiceSides = 10;
                     break;
+
                 case 5:
-                    player = new Catalog.PlayerCharacter("Monk", "Wisdom", new List<string>() { "Simple Weapons", "Shortswords" },new List<String>() { "Dexterity", "Strength" }, 8);
+                    className = "Monk";
+                    spellcastingStat = "Wisdom";
+                    proficiencies.AddRange(new List<string>() { "Simple Weapons", "Shortswords" });
+                    savingThrows.AddRange(new List<string>() { "Dexterity", "Strength" });
+                    hitDiceSides = 8;
                     break;
+
                 case 6:
-                    player = new Catalog.PlayerCharacter("Paladin", "Charisma", new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Charisma", "Wisdom" }, 10);
+                    className = "Paladin";
+                    spellcastingStat = "Charisma";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Charisma", "Wisdom" });
+                    hitDiceSides = 10;
                     break;
+
                 case 7:
-                    player = new Catalog.PlayerCharacter("Ranger", "Wisdom", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Dexterity" }, 10);
+                    className = "Ranger";
+                    spellcastingStat = "Wisdom";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Strength", "Dexterity" });
+                    hitDiceSides = 10;
                     break;
+
                 case 8:
-                    player = new Catalog.PlayerCharacter("Rogue", "Intelligence", new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" },new List<String>() { "Dexterity", "Intelligence" }, 8);
+                    className = "Rogue";
+                    spellcastingStat = "Intelligence";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
+                    savingThrows.AddRange(new List<string>() { "Dexterity", "Intelligence" });
+                    hitDiceSides = 8;
                     break;
+
                 case 9:
-                    player = new Catalog.PlayerCharacter("Sorcerer", "Charisma", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" },new List<String>() { "Charisma", "Constitution" }, 6);
+                    className = "Sorcerer";
+                    spellcastingStat = "Charisma";
+                    proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
+                    savingThrows.AddRange(new List<string>() { "Charisma", "Constitution" });
+                    hitDiceSides = 6;
                     break;
+
                 case 10:
-                    player = new Catalog.PlayerCharacter("Warlock", "Charisma", new List<string>() { "Light Armor", "Simple Weapons" },new List<String>() { "Wisdom", "Charisma" }, 8);
+                    className = "Warlock";
+                    spellcastingStat = "Charisma";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Wisdom", "Charisma" });
+                    hitDiceSides = 8;
                     break;
+
                 case 11:
-                    player = new Catalog.PlayerCharacter("Wizard", "Intelligence", new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" },new List<String>() { "Wisdom", "Intelligence" }, 8);
+                    className = "Wizard";
+                    spellcastingStat = "Intelligence";
+                    proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
+                    savingThrows.AddRange(new List<string>() { "Wisdom", "Intelligence" });
+                    hitDiceSides = 8;
                     break;
                 default:
-                    player = new Catalog.PlayerCharacter("Barbarian", "NONE", new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" },new List<String>() { "Strength", "Constitution" }, 12);
+                    className = "Barbarian";
+                    spellcastingStat = "NONE";
+                    proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
+                    savingThrows.AddRange(new List<string>() { "Strength", "Constitution" });
+                    hitDiceSides = 12;
                     break;
             }
             #endregion
@@ -250,17 +227,15 @@ namespace AEtherSlay
                 raceNum = forcedRace;
             }
 
-            String raceName;
-
             switch (raceNum)
             {
                 case 0:
                     raceName = "High Elf";
                     statRolls[1] += 2;
                     statRolls[3] += 1;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Cantrip", "Additional Language" });
-                    player.proficiencies.AddRange( new List<String>{ "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
-                    player.languages.Add("Elvish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Cantrip", "Additional Language" });
+                    proficiencies.AddRange( new List<String>{ "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
+                    languages.Add("Elvish");
                     break;
 
                 case 1:
@@ -268,9 +243,9 @@ namespace AEtherSlay
                     statRolls[1] += 2;
                     statRolls[4] += 1;
                     speed = 35;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Mask Of The Wild" });
-                    player.proficiencies.AddRange(new List<String> { "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
-                    player.languages.Add("Elvish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Mask Of The Wild" });
+                    proficiencies.AddRange(new List<String> { "Perception", "Longsword", "Shortsword", "Shortbow", "Longbow" });
+                    languages.Add("Elvish");
                     break;
 
                 case 2:
@@ -279,9 +254,9 @@ namespace AEtherSlay
                     statRolls[4] += 1;
                     health += 1;
                     speed = 25;
-                    player.traits.AddRange( new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
-                    player.proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
-                    player.languages.Add("Dwarvish");
+                    traits.AddRange( new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
+                    proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
+                    languages.Add("Dwarvish");
                     break;
 
                 case 3:
@@ -289,20 +264,20 @@ namespace AEtherSlay
                     statRolls[2] += 2;
                     statRolls[0] += 2;
                     speed = 25;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
-                    player.proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
-                    if (!player.proficiencies.Contains("Light Armor")) { player.proficiencies.AddRange(new List<String>() { "Light Armor" }); }
-                    if (!player.proficiencies.Contains("Medium Armor")) { player.proficiencies.AddRange(new List<String>() { "Medium Armor" }); }
-                    player.languages.Add("Dwarvish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
+                    proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
+                    if (!proficiencies.Contains("Light Armor")) { proficiencies.AddRange(new List<String>() { "Light Armor" }); }
+                    if (!proficiencies.Contains("Medium Armor")) { proficiencies.AddRange(new List<String>() { "Medium Armor" }); }
+                    languages.Add("Dwarvish");
                     break;
 
                 case 4:
                     raceName = "Dark Elf";
                     statRolls[1] += 2;
                     statRolls[5] += 1;
-                    player.traits.AddRange(new List<String>() { "Superior Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Sunlight Sensitivity", "Drow Magic" });
-                    player.proficiencies.AddRange(new List<String> { "Perception", "Rapier", "Shortsword", "Hand Crossbow" });
-                    player.languages.Add("Elvish");
+                    traits.AddRange(new List<String>() { "Superior Darkvision", "Advantage on Saving Throws [Charm]", "No Magical Sleep", "Trance [4 hour long rest]", "Sunlight Sensitivity", "Drow Magic" });
+                    proficiencies.AddRange(new List<String> { "Perception", "Rapier", "Shortsword", "Hand Crossbow" });
+                    languages.Add("Elvish");
                     break;
 
                 case 5:
@@ -310,8 +285,8 @@ namespace AEtherSlay
                     statRolls[1] += 2;
                     statRolls[5] += 1;
                     speed = 25;
-                    player.traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Naturally Stealthy" });
-                    player.languages.Add("Halfling");
+                    traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Naturally Stealthy" });
+                    languages.Add("Halfling");
                     break;
 
                 case 6:
@@ -319,15 +294,15 @@ namespace AEtherSlay
                     statRolls[1] += 2;
                     statRolls[2] += 1;
                     speed = 25;
-                    player.traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Poison Resistance", "Advantage Saving Throws Poison" });
-                    player.languages.Add("Halfling");
+                    traits.AddRange(new List<String>() { "Lucky", "Brave", "Halfling Nimbleness", "Poison Resistance", "Advantage Saving Throws Poison" });
+                    languages.Add("Halfling");
                     break;
 
                 case 7:
                     raceName = "Human";
                     for (Int16 i = 0; i < 6; i++) { statRolls[i] += 1; }
                     Int32 langNum = rand.Next(languages.Count);
-                    player.languages.Add(languages[langNum]);
+                    languages.Add(languages[langNum]);
                     break;
 
                 case 8:
@@ -343,27 +318,27 @@ namespace AEtherSlay
                     if(new List<String>() { "Black", "Blue", "Brass", "Bronze", "Copper" }.Contains(ancestryType)) { breathWeapon = "5 by 30 ft. line (Dex. save)"; }
                     else if(new List<String>() { "Gold", "Red" }.Contains(ancestryType)) { breathWeapon = "15 ft. cone (Dex. save)"; }
                     else { breathWeapon = "15 ft. cone (Con. save)"; }
-                    player.traits.AddRange(new List<String>() { "Draconic Ancestry: " + ancestryType });
-                    player.traits.AddRange(new List<String>() { "Breath Weapon: " + breathWeapon });
-                    player.traits.AddRange(new List<String>() { "Elemental Resistance: " + ancestryElement[ancestryNum] });
+                    traits.AddRange(new List<String>() { "Draconic Ancestry: " + ancestryType });
+                    traits.AddRange(new List<String>() { "Breath Weapon: " + breathWeapon });
+                    traits.AddRange(new List<String>() { "Elemental Resistance: " + ancestryElement[ancestryNum] });
                     #endregion
-                    player.languages.Add("Draconic");
+                    languages.Add("Draconic");
                     break;
 
                 case 9:
                     raceName = "Forest Gnome";
                     statRolls[3] += 2;
                     statRolls[1] += 1;
-                    player.languages.Add("Gnomish");
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Natural Illusionist", "Speak w/Small Beasts" });
+                    languages.Add("Gnomish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Natural Illusionist", "Speak w/Small Beasts" });
                     break;
 
                 case 10:
                     raceName = "Rock Gnome";
                     statRolls[3] += 2;
                     statRolls[2] += 1;
-                    player.languages.Add("Gnomish");
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Artificer's Lore", "Tinker" });
+                    languages.Add("Gnomish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Gnome Cunning", "Artificer's Lore", "Tinker" });
                     break;
 
                 case 11:
@@ -376,25 +351,25 @@ namespace AEtherSlay
                     }
                     statRolls[a] += 1;
                     statRolls[b] += 1;
-                    player.languages.Add("Elvish");
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Fey Ancestry", "Skill Versatility" });
+                    languages.Add("Elvish");
+                    traits.AddRange(new List<String>() { "Darkvision", "Fey Ancestry", "Skill Versatility" });
                     break;
 
                 case 12:
                     raceName = "Half Orc";
                     statRolls[0] += 2;
                     statRolls[2] += 1;
-                    player.languages.Add("Orc");
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Relentless Endurance", "Savage Attacks" });
-                    player.proficiencies.Add("Intimidation");
+                    languages.Add("Orc");
+                    traits.AddRange(new List<String>() { "Darkvision", "Relentless Endurance", "Savage Attacks" });
+                    proficiencies.Add("Intimidation");
                     break;
 
                 case 13:
                     raceName = "Tiefling";
                     statRolls[3] += 1;
                     statRolls[5] += 2;
-                    player.traits.AddRange(new List<String>() { "Darkvision", "Hellish Resistance", "Infernal Legacy" });
-                    player.languages.Add("Infernal");
+                    traits.AddRange(new List<String>() { "Darkvision", "Hellish Resistance", "Infernal Legacy" });
+                    languages.Add("Infernal");
                     break;
 
                 default:
@@ -412,181 +387,176 @@ namespace AEtherSlay
             switch (classNum)
             {
                 case 0:
-                    player.equipment.Add("4x Javelin");
+                    equipment.Add("4x Javelin");
                     possiblePacks.Add("Explorer's Pack");
-                    weapons.AddRange(martialMelee);
-                    secondaryWeapons.Add("2 x Handaxe");
-                    secondaryWeapons.AddRange(simpleMelee);
+                    primaryWeaponChoices.AddRange(Program.catalog.martialMelee);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Handaxe"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     break;
                 case 1:
-                    player.equipment.Add("Lute");
+                    equipment.Add("Lute");
                     possiblePacks.Add("Diplomat's Pack");
                     possiblePacks.Add("Entertainer's Pack");
-                    weapons.AddRange(simpleMelee);
-                    weapons.Add("Longsword");
-                    weapons.Add("Rapier");
-                    secondaryWeapons.Add("Dagger");
-                    armors.Add("Leather Armor");
+                    primaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Longsword"));
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Rapier"));
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
                     break;
                 case 2:
-                    player.equipment.Add("Holy Symbol");
+                    equipment.Add("Holy Symbol");
                     possiblePacks.Add("Priest's Pack");
                     possiblePacks.Add("Explorer's Pack");
-                    weapons.Add("Mace");
-                    if(player.proficiencies.Contains("Warhammer"))
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Mace"));
+                    if(proficiencies.Contains("Warhammer"))
                     {
-                        weapons.Add("Warhammer");
+                        primaryWeaponChoices.Add(Program.catalog.findWeapon("Warhammer"));
                     }
-                    secondaryWeapons.Add("Light Crossbow + 20 Bolts");
-                    secondaryWeapons.AddRange(simple);
-                    armors.Add("Leather Armor");
-                    armors.Add("Scale Mail");
-                    if(player.proficiencies.Contains("Chain Mail"))
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.simple);
+                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
+                    if(proficiencies.Contains("Chain Mail"))
                     {
-                        armors.Add("Chain Mail");
+                        possibleArmors.Add(Program.catalog.findArmor("Chain Mail"));
                     }
                     hasShield = true;
                     break;
                 case 3:
-                    player.equipment.Add("Druidic Focus" );
+                    equipment.Add("Druidic Focus" );
                     possiblePacks.Add("Explorer's Pack");
-                    armors.Add("Leather Armor");
-                    weapons.Add("Shield");
-                    weapons.AddRange(simple);
-                    secondaryWeapons.Add("Scimitar");
-                    secondaryWeapons.AddRange(simpleMelee);
+                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    hasShield = true;
+                    primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Scimitar"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     break;
                 case 4:
-                    if (rand.Next(3) == 2) { armors.Add("Chain Mail"); }
+                    if (rand.Next(3) == 2) { possibleArmors.Add(Program.catalog.findArmor("Chain Mail")); }
                     else {
-                        armors.Add("Leather Armor");
-                        weapons.Add("Longbow + 20 Arrows");
+                        possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                        primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow + 20 Arrows"));
                     }
-                    weapons.AddRange(martial);
-                    weapons.Add("Shield");
-                    secondaryWeapons.AddRange(martial);
-                    if(rand.Next(3) == 2) { player.equipment.Add("Light Crossbow + 20 Bolts"); }
-                    else { player.equipment.Add("2 x Handaxe"); }
+                    primaryWeaponChoices.AddRange(Program.catalog.martial);
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Shield"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.martial);
+                    if(rand.Next(3) == 2) { equipment.Add("Light Crossbow + 20 Bolts"); }
+                    else { equipment.Add("2 x Handaxe"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 5:
-                    weapons.AddRange(simple);
-                    weapons.Add("Shortsword");
-                    secondaryWeapons.Add("10 Darts");
+                    primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
+                    Catalog.Weapon darts = Program.catalog.findWeapon("Darts");
+                    darts.quantity = 10;
+                    secondaryWeaponChoices.Add(darts);
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 6:
-                    weapons.AddRange(martial);
+                    primaryWeaponChoices.AddRange(Program.catalog.martial);
                     if (rand.Next(1, 3) == 2) { hasShield = true; }
-                    else { secondaryWeapons.AddRange(martial); }
-                    armors.Add("Chain Mail");
-                    player.equipment.Add("Holy Symbol");
-                    player.equipment.Add("5x Javelin");
+                    else { secondaryWeaponChoices.AddRange(Program.catalog.martial); }
+                    possibleArmors.Add(Program.catalog.findArmor("Chain Mail"));
+                    equipment.Add("Holy Symbol");
+                    equipment.Add("5x Javelin");
                     possiblePacks.Add("Priest's Pack");
                     possiblePacks.Add("Explorer's Pack");
                     break;
                 case 7:
-                    weapons.Add("Longbow");
-                    if (rand.Next(1, 3) == 2) { secondaryWeapons.Add("2x Shortswords"); }
-                    else
-                    {
-                        secondaryWeapons.AddRange(simpleMelee);
-                        Label dualWieldNotifier = new Label();
-                        dualWieldNotifier.Text = "2x ";
-                        dualWieldNotifier.Location = new Point(0, cbWeapon2.Location.Y);
-                        dualWieldNotifier.ForeColor = Color.White;
-                        dualWieldNotifier.Font = new Font(new FontFamily("Calibri"), 10, FontStyle.Bold);
-                        cbWeapon2.Size = new Size(cbWeapon2.Width - 20, cbWeapon2.Height);
-                        cbWeapon2.Location = new Point(cbWeapon2.Location.X + 20, cbWeapon2.Location.Y);
-                        pnlMisc.Controls.Add(dualWieldNotifier);
-                    }
-                    armors.Add("Scale Mail");
-                    armors.Add("Leather Armor");
-                    player.equipment.Add("20x Arrows");
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
+                    possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    equipment.Add("20x Arrows");
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 8:
-                    weapons.Add("Rapier");
-                    weapons.Add("Shortsword");
-                    secondaryWeapons.Add("Shortbow + 20 Arrows");
-                    secondaryWeapons.Add("Shortsword");
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Rapier"));
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortbow"));
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
                     int packNum = rand.Next(1, 4);
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     possiblePacks.Add("Burglar's Pack");
-                    armors.Add("Leather Armor");
-                    player.equipment.Add("Thieves' Tools");
+                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    equipment.Add("Thieves' Tools");
                     break;
                 case 9:
-                    weapons.Add("Light Crossbow + 20 Bolts");
-                    weapons.AddRange(simple);
-                    secondaryWeapons.Add("2x Daggers");
-                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
-                    else { player.equipment.Add("Arcane Focus"); }
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
+                    primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    Catalog.Weapon daggers = Program.catalog.findWeapon("Dagger");
+                    daggers.quantity = 2;
+                    secondaryWeaponChoices.Add(daggers);
+                    if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
+                    else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 10:
-                    weapons.Add("Light Crossbow + 20 Bolts");
-                    weapons.AddRange(simple);
-                    secondaryWeapons.Add("2x Daggers");
-                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
-                    else { player.equipment.Add("Arcane Focus"); }
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
+                    primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    Catalog.Weapon daggersAgain = Program.catalog.findWeapon("Dagger");
+                    daggersAgain.quantity = 2;
+                    secondaryWeaponChoices.Add(daggersAgain);
+                    if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
+                    else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 11:
-                    weapons.Add("Quarterstaff");
-                    weapons.Add("Dagger");
-                    if (rand.Next(1, 3) == 2) { player.equipment.Add("Component Pouch"); }
-                    else { player.equipment.Add("Arcane Focus"); }
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Quarterstaff"));
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
+                    if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
+                    else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Scholar's Pack");
-                    player.equipment.Add("Spellbook");
+                    equipment.Add("Spellbook");
                     break;
                 default:
-                    player.proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
+                    proficiencies.Add("CLASS NOT FULLY IMPLEMENTED YET");
                     break;
 
             }
-            player.equipment.Add(choosePack(possiblePacks));
+            equipment.Add(chooseFromList(possiblePacks));
             #endregion
 
             #region Generate Alignment
             switch (rand.Next(9))
             {
                 case 0:
-                    player.alignment = "Lawful Good";
+                    alignment = "Lawful Good";
                     break;
                 case 1:
-                    player.alignment = "Neutral Lawful";
+                    alignment = "Neutral Lawful";
                     break;
                 case 2:
-                    player.alignment = "Lawful Evil";
+                    alignment = "Lawful Evil";
                     break;
                 case 3:
-                    player.alignment = "Neutral Good";
+                    alignment = "Neutral Good";
                     break;
                 case 4:
-                    player.alignment = "True Neutral";
+                    alignment = "True Neutral";
                     break;
                 case 5:
-                    player.alignment = "Neutral Evil";
+                    alignment = "Neutral Evil";
                     break;
                 case 6:
-                    player.alignment = "Chaotic Good";
+                    alignment = "Chaotic Good";
                     break;
                 case 7:
-                    player.alignment = "Chaotic Neutral";
+                    alignment = "Chaotic Neutral";
                     break;
                 case 8:
-                    player.alignment = "Chaotic Evil";
+                    alignment = "Chaotic Evil";
                     break;
                 default:
-                    player.alignment = "True Neutral";
+                    alignment = "True Neutral";
                     break;
             }
             #endregion
@@ -620,21 +590,21 @@ namespace AEtherSlay
                 }
 
                 txtRace.Text = raceName;
-                txtClass.Text = player.name;
+                txtClass.Text = className;
                 txtProf.Text = "2";
                 txtSpeed.Text = speed.ToString();
                 txtAC.Text = ac.ToString();
-                lblAlignment.Text = player.alignment;
+                lblAlignment.Text = alignment;
                 txtInit.Text = txtDexMod.Text;
-                txtHP.Text = (player.hitDiceSides + ((statRolls[2] - 10) / 2)).ToString();
+                txtHP.Text = (hitDiceSides + ((statRolls[2] - 10) / 2)).ToString();
 
-                foreach (String weapon in weapons) { cbWeapon1.Items.Add(weapon); }
-                foreach (String secondaryWeapon in secondaryWeapons) { cbWeapon2.Items.Add(secondaryWeapon); }
+                foreach (Catalog.Weapon weap in weapons) { cbWeapon1.Items.Add(weap.name); }
+                foreach (Catalog.Weapon weap in secondaryWeaponChoices) { cbWeapon2.Items.Add(weap.name); }
                 if (weapons.Count == 1) { cbWeapon1.SelectedIndex = 0; }
-                if (secondaryWeapons.Count == 1) { cbWeapon2.SelectedIndex = 0; }
+                if (secondaryWeaponChoices.Count == 1) { cbWeapon2.SelectedIndex = 0; }
 
-                foreach (String armour in armors) { cbArmor1.Items.Add(armour); }
-                if (armors.Count == 1) { cbArmor1.SelectedIndex = 0; }
+                foreach (Catalog.Armor armour in possibleArmors) { cbArmor1.Items.Add(armour.name); }
+                if (possibleArmors.Count == 1) { cbArmor1.SelectedIndex = 0; }
                 if (hasShield)
                 {
                     cbArmor2.Items.Add("Shield");
@@ -642,16 +612,16 @@ namespace AEtherSlay
                 }
 
                 rtbProficiencies.Text = "PROFICIENCIES\n\n";
-                foreach (String prof in player.proficiencies) { rtbProficiencies.Text += prof + "\n"; }
+                foreach (String prof in proficiencies) { rtbProficiencies.Text += prof + "\n"; }
 
                 rtbTraits.Text = "TRAITS\n\n";
-                foreach (String trait in player.traits) { rtbTraits.Text += trait + "\n"; }
+                foreach (String trait in traits) { rtbTraits.Text += trait + "\n"; }
 
                 rtbLanguages.Text = "LANGUAGES\n\n";
-                foreach (String language in player.languages) { rtbLanguages.Text += language + "\n"; }
+                foreach (String language in languages) { rtbLanguages.Text += language + "\n"; }
 
                 rtbEquipment.Text = "EQUIPMENT\n\n";
-                foreach (String equip in player.equipment) { rtbEquipment.Text += equip + "\n"; }
+                foreach (String equip in equipment) { rtbEquipment.Text += equip + "\n"; }
 
             } catch(Exception ex)
             {
@@ -664,6 +634,7 @@ namespace AEtherSlay
         private void detailsChanged()
         {
             changedByClick = false;
+            int outAC;
             switch(cbArmor1.Text)
             {
                 case "Padded Armor":

@@ -54,9 +54,9 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.pbCoin = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnBattleTracker = new System.Windows.Forms.Button();
+            this.btnEnemySheets = new System.Windows.Forms.Button();
+            this.btnCharSheets = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCoin)).BeginInit();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.btnCharacter.BackColor = System.Drawing.Color.Black;
             this.btnCharacter.ForeColor = System.Drawing.Color.White;
             this.btnCharacter.Location = new System.Drawing.Point(19, 165);
-            this.btnCharacter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCharacter.Margin = new System.Windows.Forms.Padding(4);
             this.btnCharacter.Name = "btnCharacter";
             this.btnCharacter.Size = new System.Drawing.Size(169, 41);
             this.btnCharacter.TabIndex = 0;
@@ -79,7 +79,7 @@
             this.btnEncounter.BackColor = System.Drawing.Color.Black;
             this.btnEncounter.ForeColor = System.Drawing.Color.White;
             this.btnEncounter.Location = new System.Drawing.Point(19, 262);
-            this.btnEncounter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEncounter.Margin = new System.Windows.Forms.Padding(4);
             this.btnEncounter.Name = "btnEncounter";
             this.btnEncounter.Size = new System.Drawing.Size(169, 41);
             this.btnEncounter.TabIndex = 1;
@@ -91,7 +91,7 @@
             this.btnCreature.BackColor = System.Drawing.Color.Black;
             this.btnCreature.ForeColor = System.Drawing.Color.White;
             this.btnCreature.Location = new System.Drawing.Point(19, 214);
-            this.btnCreature.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCreature.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreature.Name = "btnCreature";
             this.btnCreature.Size = new System.Drawing.Size(169, 41);
             this.btnCreature.TabIndex = 2;
@@ -106,7 +106,7 @@
             this.rbOneByOne.Checked = true;
             this.rbOneByOne.ForeColor = System.Drawing.Color.Silver;
             this.rbOneByOne.Location = new System.Drawing.Point(8, 23);
-            this.rbOneByOne.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbOneByOne.Margin = new System.Windows.Forms.Padding(4);
             this.rbOneByOne.Name = "rbOneByOne";
             this.rbOneByOne.Size = new System.Drawing.Size(107, 21);
             this.rbOneByOne.TabIndex = 6;
@@ -121,7 +121,7 @@
             this.rbCumulative.BackColor = System.Drawing.Color.Black;
             this.rbCumulative.ForeColor = System.Drawing.Color.Silver;
             this.rbCumulative.Location = new System.Drawing.Point(8, 55);
-            this.rbCumulative.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCumulative.Margin = new System.Windows.Forms.Padding(4);
             this.rbCumulative.Name = "rbCumulative";
             this.rbCumulative.Size = new System.Drawing.Size(99, 21);
             this.rbCumulative.TabIndex = 7;
@@ -151,9 +151,9 @@
             this.groupBox1.Controls.Add(this.rbCumulative);
             this.groupBox1.ForeColor = System.Drawing.Color.Silver;
             this.groupBox1.Location = new System.Drawing.Point(196, 108);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(244, 433);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -165,7 +165,7 @@
             this.btnRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.btnRoll.ForeColor = System.Drawing.Color.White;
             this.btnRoll.Location = new System.Drawing.Point(119, 23);
-            this.btnRoll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRoll.Margin = new System.Windows.Forms.Padding(4);
             this.btnRoll.Name = "btnRoll";
             this.btnRoll.Size = new System.Drawing.Size(109, 53);
             this.btnRoll.TabIndex = 22;
@@ -178,7 +178,7 @@
             this.txtD100.Enabled = false;
             this.txtD100.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD100.Location = new System.Drawing.Point(129, 386);
-            this.txtD100.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD100.Margin = new System.Windows.Forms.Padding(4);
             this.txtD100.Name = "txtD100";
             this.txtD100.Size = new System.Drawing.Size(105, 39);
             this.txtD100.TabIndex = 21;
@@ -190,7 +190,7 @@
             this.btnD100.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD100.ForeColor = System.Drawing.Color.White;
             this.btnD100.Location = new System.Drawing.Point(4, 386);
-            this.btnD100.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD100.Margin = new System.Windows.Forms.Padding(4);
             this.btnD100.Name = "btnD100";
             this.btnD100.Size = new System.Drawing.Size(107, 39);
             this.btnD100.TabIndex = 14;
@@ -204,7 +204,7 @@
             this.txtD20.Enabled = false;
             this.txtD20.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD20.Location = new System.Drawing.Point(129, 321);
-            this.txtD20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD20.Margin = new System.Windows.Forms.Padding(4);
             this.txtD20.Name = "txtD20";
             this.txtD20.Size = new System.Drawing.Size(105, 39);
             this.txtD20.TabIndex = 20;
@@ -215,7 +215,7 @@
             this.txtD12.Enabled = false;
             this.txtD12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD12.Location = new System.Drawing.Point(129, 274);
-            this.txtD12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD12.Margin = new System.Windows.Forms.Padding(4);
             this.txtD12.Name = "txtD12";
             this.txtD12.Size = new System.Drawing.Size(105, 39);
             this.txtD12.TabIndex = 19;
@@ -226,7 +226,7 @@
             this.txtD10.Enabled = false;
             this.txtD10.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD10.Location = new System.Drawing.Point(129, 228);
-            this.txtD10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD10.Margin = new System.Windows.Forms.Padding(4);
             this.txtD10.Name = "txtD10";
             this.txtD10.Size = new System.Drawing.Size(105, 39);
             this.txtD10.TabIndex = 18;
@@ -237,7 +237,7 @@
             this.txtD8.Enabled = false;
             this.txtD8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD8.Location = new System.Drawing.Point(129, 181);
-            this.txtD8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD8.Margin = new System.Windows.Forms.Padding(4);
             this.txtD8.Name = "txtD8";
             this.txtD8.Size = new System.Drawing.Size(105, 39);
             this.txtD8.TabIndex = 17;
@@ -248,7 +248,7 @@
             this.txtD6.Enabled = false;
             this.txtD6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD6.Location = new System.Drawing.Point(129, 134);
-            this.txtD6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD6.Margin = new System.Windows.Forms.Padding(4);
             this.txtD6.Name = "txtD6";
             this.txtD6.Size = new System.Drawing.Size(105, 39);
             this.txtD6.TabIndex = 16;
@@ -260,7 +260,7 @@
             this.btnD20.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD20.ForeColor = System.Drawing.Color.White;
             this.btnD20.Location = new System.Drawing.Point(4, 321);
-            this.btnD20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD20.Margin = new System.Windows.Forms.Padding(4);
             this.btnD20.Name = "btnD20";
             this.btnD20.Size = new System.Drawing.Size(107, 39);
             this.btnD20.TabIndex = 13;
@@ -275,7 +275,7 @@
             this.btnD12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD12.ForeColor = System.Drawing.Color.White;
             this.btnD12.Location = new System.Drawing.Point(4, 274);
-            this.btnD12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD12.Margin = new System.Windows.Forms.Padding(4);
             this.btnD12.Name = "btnD12";
             this.btnD12.Size = new System.Drawing.Size(107, 39);
             this.btnD12.TabIndex = 12;
@@ -290,7 +290,7 @@
             this.btnD10.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD10.ForeColor = System.Drawing.Color.White;
             this.btnD10.Location = new System.Drawing.Point(4, 228);
-            this.btnD10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD10.Margin = new System.Windows.Forms.Padding(4);
             this.btnD10.Name = "btnD10";
             this.btnD10.Size = new System.Drawing.Size(107, 39);
             this.btnD10.TabIndex = 11;
@@ -305,7 +305,7 @@
             this.btnD8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD8.ForeColor = System.Drawing.Color.White;
             this.btnD8.Location = new System.Drawing.Point(4, 181);
-            this.btnD8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD8.Margin = new System.Windows.Forms.Padding(4);
             this.btnD8.Name = "btnD8";
             this.btnD8.Size = new System.Drawing.Size(107, 39);
             this.btnD8.TabIndex = 10;
@@ -320,7 +320,7 @@
             this.btnD6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD6.ForeColor = System.Drawing.Color.White;
             this.btnD6.Location = new System.Drawing.Point(4, 134);
-            this.btnD6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD6.Margin = new System.Windows.Forms.Padding(4);
             this.btnD6.Name = "btnD6";
             this.btnD6.Size = new System.Drawing.Size(107, 39);
             this.btnD6.TabIndex = 9;
@@ -334,7 +334,7 @@
             this.txtD4.Enabled = false;
             this.txtD4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.txtD4.Location = new System.Drawing.Point(129, 87);
-            this.txtD4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtD4.Margin = new System.Windows.Forms.Padding(4);
             this.txtD4.Name = "txtD4";
             this.txtD4.Size = new System.Drawing.Size(105, 39);
             this.txtD4.TabIndex = 15;
@@ -346,7 +346,7 @@
             this.btnD4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.btnD4.ForeColor = System.Drawing.Color.White;
             this.btnD4.Location = new System.Drawing.Point(4, 87);
-            this.btnD4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnD4.Margin = new System.Windows.Forms.Padding(4);
             this.btnD4.Name = "btnD4";
             this.btnD4.Size = new System.Drawing.Size(107, 39);
             this.btnD4.TabIndex = 8;
@@ -360,7 +360,7 @@
             this.btnMapGen.BackColor = System.Drawing.Color.Black;
             this.btnMapGen.ForeColor = System.Drawing.Color.White;
             this.btnMapGen.Location = new System.Drawing.Point(19, 309);
-            this.btnMapGen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMapGen.Margin = new System.Windows.Forms.Padding(4);
             this.btnMapGen.Name = "btnMapGen";
             this.btnMapGen.Size = new System.Drawing.Size(169, 41);
             this.btnMapGen.TabIndex = 3;
@@ -372,7 +372,7 @@
             this.btnItemGen.BackColor = System.Drawing.Color.Black;
             this.btnItemGen.ForeColor = System.Drawing.Color.White;
             this.btnItemGen.Location = new System.Drawing.Point(19, 357);
-            this.btnItemGen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnItemGen.Margin = new System.Windows.Forms.Padding(4);
             this.btnItemGen.Name = "btnItemGen";
             this.btnItemGen.Size = new System.Drawing.Size(169, 41);
             this.btnItemGen.TabIndex = 4;
@@ -407,7 +407,7 @@
             // pbCoin
             // 
             this.pbCoin.Location = new System.Drawing.Point(47, 59);
-            this.pbCoin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbCoin.Margin = new System.Windows.Forms.Padding(4);
             this.pbCoin.Name = "pbCoin";
             this.pbCoin.Size = new System.Drawing.Size(107, 98);
             this.pbCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -415,41 +415,41 @@
             this.pbCoin.TabStop = false;
             this.pbCoin.Click += new System.EventHandler(this.pbCoin_Click);
             // 
-            // button1
+            // btnBattleTracker
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(19, 453);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(169, 41);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Creature Creation";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnBattleTracker.BackColor = System.Drawing.Color.Black;
+            this.btnBattleTracker.ForeColor = System.Drawing.Color.White;
+            this.btnBattleTracker.Location = new System.Drawing.Point(19, 404);
+            this.btnBattleTracker.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBattleTracker.Name = "btnBattleTracker";
+            this.btnBattleTracker.Size = new System.Drawing.Size(169, 41);
+            this.btnBattleTracker.TabIndex = 13;
+            this.btnBattleTracker.Text = "Battle Tracker";
+            this.btnBattleTracker.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnEnemySheets
             // 
-            this.button2.BackColor = System.Drawing.Color.Black;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(19, 501);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 41);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Encounter Creation";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnEnemySheets.BackColor = System.Drawing.Color.Black;
+            this.btnEnemySheets.ForeColor = System.Drawing.Color.White;
+            this.btnEnemySheets.Location = new System.Drawing.Point(19, 500);
+            this.btnEnemySheets.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEnemySheets.Name = "btnEnemySheets";
+            this.btnEnemySheets.Size = new System.Drawing.Size(169, 41);
+            this.btnEnemySheets.TabIndex = 12;
+            this.btnEnemySheets.Text = "Enemy Sheets";
+            this.btnEnemySheets.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnCharSheets
             // 
-            this.button3.BackColor = System.Drawing.Color.Black;
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(19, 405);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(169, 41);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Character Creation";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnCharSheets.BackColor = System.Drawing.Color.Black;
+            this.btnCharSheets.ForeColor = System.Drawing.Color.White;
+            this.btnCharSheets.Location = new System.Drawing.Point(19, 452);
+            this.btnCharSheets.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCharSheets.Name = "btnCharSheets";
+            this.btnCharSheets.Size = new System.Drawing.Size(169, 41);
+            this.btnCharSheets.TabIndex = 11;
+            this.btnCharSheets.Text = "Character Sheets";
+            this.btnCharSheets.UseVisualStyleBackColor = false;
             // 
             // frmMain
             // 
@@ -457,9 +457,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(455, 567);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnBattleTracker);
+            this.Controls.Add(this.btnEnemySheets);
+            this.Controls.Add(this.btnCharSheets);
             this.Controls.Add(this.pbCoin);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblTitle);
@@ -469,7 +469,7 @@
             this.Controls.Add(this.btnCreature);
             this.Controls.Add(this.btnEncounter);
             this.Controls.Add(this.btnCharacter);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "ÆtherSlay: The DM\'s Best Friend";
             this.groupBox1.ResumeLayout(false);
@@ -508,9 +508,9 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.PictureBox pbCoin;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnBattleTracker;
+        private System.Windows.Forms.Button btnEnemySheets;
+        private System.Windows.Forms.Button btnCharSheets;
     }
 }
 

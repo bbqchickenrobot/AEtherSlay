@@ -8,6 +8,8 @@ namespace AEtherSlay
 {
     static class Program
     {
+        public static Catalog catalog = new Catalog();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
