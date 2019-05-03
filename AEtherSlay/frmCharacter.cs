@@ -27,19 +27,17 @@ namespace AEtherSlay
         Int16   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
         Boolean hasShield = false;
         String className, raceName, spellcastingStat, alignment;
-        List<Catalog.Armor> possibleArmors;
-        List<Catalog.Weapon> weapons;
-        List<String> proficiencies
-                           ,languages
-                           ,savingThrows
-                           ,traits
-                           ,immunities
-                           ,resistances
-                           ,vulnerabilities
-                           ,misc
-                           ,equipment;
+        List<Catalog.Armor> possibleArmors = new List<Catalog.Armor>();
 
-        List<Catalog.Weapon> primaryWeaponChoices, secondaryWeaponChoices;
+        List<String> proficiencies = new List<String>()
+                    ,languages = new List<String>()
+                    ,savingThrows = new List<String>()
+                    ,traits = new List<String>()
+                    ,resistances = new List<String>()
+                    ,equipment = new List<String>();
+
+        List<Catalog.Weapon> primaryWeaponChoices = new List<Catalog.Weapon>()
+                            ,secondaryWeaponChoices = new List<Catalog.Weapon>();
         #endregion
 
         private void cbArmor1_Click(object sender, EventArgs e)
@@ -109,7 +107,7 @@ namespace AEtherSlay
             {
                 classNum = forcedClass;
             }
-
+            classNum = 4;
             #endregion
 
             switch (classNum)
@@ -254,9 +252,10 @@ namespace AEtherSlay
                     statRolls[4] += 1;
                     health += 1;
                     speed = 25;
-                    traits.AddRange( new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
+                    traits.AddRange( new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
                     proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
                     languages.Add("Dwarvish");
+                    resistances.Add("Poison");
                     break;
 
                 case 3:
@@ -264,11 +263,12 @@ namespace AEtherSlay
                     statRolls[2] += 2;
                     statRolls[0] += 2;
                     speed = 25;
-                    traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Poison Resistance", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
+                    traits.AddRange(new List<String>() { "Darkvision", "Advantage on Saving Throws [Poison]", "Dwarven Toughness", "Tool Proficiency", "Stonecunning" });
                     proficiencies.AddRange(new List<String>() { "Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer" });
                     if (!proficiencies.Contains("Light Armor")) { proficiencies.AddRange(new List<String>() { "Light Armor" }); }
                     if (!proficiencies.Contains("Medium Armor")) { proficiencies.AddRange(new List<String>() { "Medium Armor" }); }
                     languages.Add("Dwarvish");
+                    resistances.Add("Poison");
                     break;
 
                 case 4:
@@ -301,8 +301,8 @@ namespace AEtherSlay
                 case 7:
                     raceName = "Human";
                     for (Int16 i = 0; i < 6; i++) { statRolls[i] += 1; }
-                    Int32 langNum = rand.Next(languages.Count);
-                    languages.Add(languages[langNum]);
+                    Int32 langNum = rand.Next(Catalog.languages.Count); // TODO: Change to Catalog.languages.Count
+                    languages.Add(Catalog.languages[langNum]);
                     break;
 
                 case 8:
@@ -318,9 +318,9 @@ namespace AEtherSlay
                     if(new List<String>() { "Black", "Blue", "Brass", "Bronze", "Copper" }.Contains(ancestryType)) { breathWeapon = "5 by 30 ft. line (Dex. save)"; }
                     else if(new List<String>() { "Gold", "Red" }.Contains(ancestryType)) { breathWeapon = "15 ft. cone (Dex. save)"; }
                     else { breathWeapon = "15 ft. cone (Con. save)"; }
-                    traits.AddRange(new List<String>() { "Draconic Ancestry: " + ancestryType });
-                    traits.AddRange(new List<String>() { "Breath Weapon: " + breathWeapon });
-                    traits.AddRange(new List<String>() { "Elemental Resistance: " + ancestryElement[ancestryNum] });
+                    traits.Add("Draconic Ancestry: " + ancestryType);
+                    traits.Add("Breath Weapon: " + breathWeapon + " dealing 2d6");
+                    resistances.Add(ancestryElement[ancestryNum]);
                     #endregion
                     languages.Add("Draconic");
                     break;
@@ -368,7 +368,8 @@ namespace AEtherSlay
                     raceName = "Tiefling";
                     statRolls[3] += 1;
                     statRolls[5] += 2;
-                    traits.AddRange(new List<String>() { "Darkvision", "Hellish Resistance", "Infernal Legacy" });
+                    traits.AddRange(new List<String>() { "Darkvision", "Infernal Legacy" });
+                    resistances.Add("Fire");
                     languages.Add("Infernal");
                     break;
 
@@ -380,15 +381,13 @@ namespace AEtherSlay
 
             #region Add Class Particulars
 
-            // classNum = 7;
-
             List<String> possiblePacks = new List<string>();
 
             switch (classNum)
             {
                 case 0:
                     equipment.Add("4x Javelin");
-                    possiblePacks.Add("Explorer's Pack");
+                     possiblePacks.Add("Explorer's Pack");
                     primaryWeaponChoices.AddRange(Program.catalog.martialMelee);
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Handaxe"));
                     secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
@@ -434,13 +433,14 @@ namespace AEtherSlay
                 case 4:
                     if (rand.Next(3) == 2) { possibleArmors.Add(Program.catalog.findArmor("Chain Mail")); }
                     else {
-                        possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
-                        primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow + 20 Arrows"));
+                        possibleArmors.Add(Program.catalog.findArmor("Leather"));
+                        // primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow"));
+                        equipment.Add("20 Arrows");
                     }
                     primaryWeaponChoices.AddRange(Program.catalog.martial);
-                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Shield"));
-                    secondaryWeaponChoices.AddRange(Program.catalog.martial);
-                    if(rand.Next(3) == 2) { equipment.Add("Light Crossbow + 20 Bolts"); }
+                    if(rand.Next(3) == 2) { secondaryWeaponChoices.AddRange(Program.catalog.martial); }
+                    else { hasShield = true;  }
+                    if (rand.Next(3) == 2) { equipment.Add("Light Crossbow + 20 Bolts"); }
                     else { equipment.Add("2 x Handaxe"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
@@ -448,7 +448,7 @@ namespace AEtherSlay
                 case 5:
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
-                    Catalog.Weapon darts = Program.catalog.findWeapon("Darts");
+                    Catalog.Weapon darts = Program.catalog.findWeapon("Dart");
                     darts.quantity = 10;
                     secondaryWeaponChoices.Add(darts);
                     possiblePacks.Add("Explorer's Pack");
@@ -456,8 +456,12 @@ namespace AEtherSlay
                     break;
                 case 6:
                     primaryWeaponChoices.AddRange(Program.catalog.martial);
+                    primaryWeaponChoices.AddRange(Program.catalog.simple);
                     if (rand.Next(1, 3) == 2) { hasShield = true; }
-                    else { secondaryWeaponChoices.AddRange(Program.catalog.martial); }
+                    else {
+                        secondaryWeaponChoices.AddRange(Program.catalog.martial);
+                        secondaryWeaponChoices.AddRange(Program.catalog.simple);
+                    }
                     possibleArmors.Add(Program.catalog.findArmor("Chain Mail"));
                     equipment.Add("Holy Symbol");
                     equipment.Add("5x Javelin");
@@ -598,12 +602,14 @@ namespace AEtherSlay
                 txtInit.Text = txtDexMod.Text;
                 txtHP.Text = (hitDiceSides + ((statRolls[2] - 10) / 2)).ToString();
 
-                foreach (Catalog.Weapon weap in weapons) { cbWeapon1.Items.Add(weap.name); }
-                foreach (Catalog.Weapon weap in secondaryWeaponChoices) { cbWeapon2.Items.Add(weap.name); }
-                if (weapons.Count == 1) { cbWeapon1.SelectedIndex = 0; }
+                bindWeaponComboBox(cbWeapon1, primaryWeaponChoices);
+                bindWeaponComboBox(cbWeapon2, secondaryWeaponChoices);
+
+                if (primaryWeaponChoices.Count == 1) { cbWeapon1.SelectedIndex = 0; }
                 if (secondaryWeaponChoices.Count == 1) { cbWeapon2.SelectedIndex = 0; }
 
-                foreach (Catalog.Armor armour in possibleArmors) { cbArmor1.Items.Add(armour.name); }
+                bindArmorComboBox(cbArmor1, possibleArmors);
+
                 if (possibleArmors.Count == 1) { cbArmor1.SelectedIndex = 0; }
                 if (hasShield)
                 {
@@ -629,6 +635,17 @@ namespace AEtherSlay
             }
             detailsChanged();
             #endregion
+        }
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
         }
 
         private void detailsChanged()
@@ -685,6 +702,49 @@ namespace AEtherSlay
         private void cbArmor1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (changedByClick) { detailsChanged(); }
+        }
+
+        private void BtnRegenerate_Click(object sender, EventArgs e)
+        {
+            frmCharacterDialog newFrm = new frmCharacterDialog();
+            newFrm.Show();
+            this.Close();
+        }
+
+        private void BtnAddCharbtnAddChar_Click(object sender, EventArgs e)
+        {
+            List<Catalog.Weapon> weapons = new List<Catalog.Weapon>();
+            if(cbWeapon1.SelectedIndex != -1)
+            {
+                // weapons.Add(cbWeapon1.SelectedValue);
+            }
+            // Catalog.Armor armor = cbArmor1.SelectedValue;
+
+            //player = new Catalog.PlayerCharacter(statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+        }
+
+        private void bindWeaponComboBox(ComboBox combobox, List<Catalog.Weapon> weapons )
+        {
+            foreach( Catalog.Weapon weap in weapons)
+            {
+                ComboboxItem cmbItem = new ComboboxItem();
+                cmbItem.Text = weap.name;
+                cmbItem.Value = weap;
+
+                combobox.Items.Add(cmbItem);
+            }
+        }
+
+        private void bindArmorComboBox(ComboBox combobox, List<Catalog.Armor> armors)
+        {
+            foreach (Catalog.Armor arm in armors)
+            {
+                ComboboxItem cmbItem = new ComboboxItem();
+                cmbItem.Text = arm.name;
+                cmbItem.Value = arm;
+
+                combobox.Items.Add(cmbItem);
+            }
         }
     }
 }

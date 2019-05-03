@@ -90,7 +90,7 @@ namespace AEtherSlay
                             new Armor("Plate", 0, 18, true)
                     },
                     armorList;
-        List<String> languages = new List<String>()
+        public static List<String> languages = new List<String>()
                     {
                             "Common",
                             "Elvish",
@@ -600,8 +600,8 @@ namespace AEtherSlay
             List<Spell> validSpells, knownSpells = new List<Spell>();
             String className, raceName;
 
-            public PlayerCharacter(String className, string spellcastingStat, List<String> proficiencies, List<String> savingThrows, short hitDiceSides)
-                             :base(spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+            public PlayerCharacter(Int16[] statRolls, String className, String raceName, Int16 speed, List<Weapon> weapons, Armor armor, String alignment, List<String> equipment, List<String> languages, List<String> resistances, String spellcastingStat, List<String> proficiencies, Int16 hitDiceSides, List<String> savingThrows)
+                             : base(spellcastingStat, proficiencies, savingThrows, hitDiceSides)
             {
                 this.className = className;
             }
@@ -634,6 +634,35 @@ namespace AEtherSlay
         //{
 
         //}
+
+        public Int16[] rollStats()
+        {
+            // STR DEX CON INT WIS CHA
+            // 0   1   2   3   4   5
+            Int16[] statRolls = new Int16[6];
+
+            for (short stat = 0; stat < 6; stat++)
+            {
+                Int32[] rolls = new Int32[3];
+                for (short roll = 0; roll < 4; roll++)
+                {
+                    Int32 rolled = rand.Next(1, 7);
+                    if ((roll == 3) && (rolled > rolls.Min()))
+                    {
+                        rolls[Array.IndexOf(rolls, rolls.Min())] = rolled;
+                    }
+                    else
+                    {
+                        if (roll != 3)
+                        {
+                            rolls[roll] = rolled;
+                        }
+                    }
+                }
+                statRolls[stat] = Convert.ToInt16(rolls.Sum());
+            }
+            return statRolls;
+        }
 
         public class Weapon
         {
@@ -708,35 +737,6 @@ namespace AEtherSlay
             {
                 return $"{damageDice}d{damageDiceSides} {atkType}";
             }
-        }
-    
-        public Int16[] rollStats()
-        {
-            // STR DEX CON INT WIS CHA
-            // 0   1   2   3   4   5
-            Int16[] statRolls = new Int16[6];
-
-            for (short stat = 0; stat < 6; stat++)
-            {
-                Int32[] rolls = new Int32[3];
-                for (short roll = 0; roll < 4; roll++)
-                {
-                    Int32 rolled = rand.Next(1, 7);
-                    if ((roll == 3) && (rolled > rolls.Min()))
-                    {
-                        rolls[Array.IndexOf(rolls, rolls.Min())] = rolled;
-                    }
-                    else
-                    {
-                        if (roll != 3)
-                        {
-                            rolls[roll] = rolled;
-                        }
-                    }
-                }
-                statRolls[stat] = Convert.ToInt16(rolls.Sum());
-            }
-            return statRolls;
         }
 
         public Weapon findWeapon(String name)
