@@ -448,7 +448,6 @@ namespace AEtherSlay
             new Spell(9, "Weird", new List<String>() { "wizard"}),
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
-        private object fred;
 
 
         public Catalog()
@@ -471,6 +470,9 @@ namespace AEtherSlay
 
             martial = martialMelee;
             martial.AddRange(martialRanged);
+
+            weapons.AddRange(simple);
+            weapons.AddRange(martial);
         }
 
         public abstract class Character
@@ -677,6 +679,7 @@ namespace AEtherSlay
                 this.numDamageDice = numDamageDice;
                 this.propertyList = propertyList;
                 this.damageType = damageType;
+                quantity = 1;
             }
         }
     

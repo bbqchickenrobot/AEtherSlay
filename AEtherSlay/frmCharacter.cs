@@ -25,7 +25,7 @@ namespace AEtherSlay
 
         Int16[] statRolls = new Int16[6];
         Int16   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
-        Boolean hasShield = false;
+        Boolean hasShield = false, useIRA;
         String className, raceName, spellcastingStat, alignment;
         List<Catalog.Armor> possibleArmors = new List<Catalog.Armor>();
 
@@ -107,7 +107,6 @@ namespace AEtherSlay
             {
                 classNum = forcedClass;
             }
-            classNum = 4;
             #endregion
 
             switch (classNum)
@@ -400,7 +399,7 @@ namespace AEtherSlay
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Longsword"));
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Rapier"));
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
-                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     break;
                 case 2:
                     equipment.Add("Holy Symbol");
@@ -413,7 +412,7 @@ namespace AEtherSlay
                     }
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
                     secondaryWeaponChoices.AddRange(Program.catalog.simple);
-                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
                     if(proficiencies.Contains("Chain Mail"))
                     {
@@ -424,7 +423,7 @@ namespace AEtherSlay
                 case 3:
                     equipment.Add("Druidic Focus" );
                     possiblePacks.Add("Explorer's Pack");
-                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     hasShield = true;
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Scimitar"));
@@ -473,7 +472,7 @@ namespace AEtherSlay
                     secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
                     possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
-                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     equipment.Add("20x Arrows");
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
@@ -487,12 +486,13 @@ namespace AEtherSlay
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     possiblePacks.Add("Burglar's Pack");
-                    possibleArmors.Add(Program.catalog.findArmor("Leather Armor"));
+                    possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     equipment.Add("Thieves' Tools");
                     break;
                 case 9:
-                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    equipment.Add("20 Bolts");
                     Catalog.Weapon daggers = Program.catalog.findWeapon("Dagger");
                     daggers.quantity = 2;
                     secondaryWeaponChoices.Add(daggers);
@@ -502,8 +502,9 @@ namespace AEtherSlay
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
                 case 10:
-                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Light Crossbow + 20 Bolts"));
+                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
+                    equipment.Add("20 Bolts");
                     Catalog.Weapon daggersAgain = Program.catalog.findWeapon("Dagger");
                     daggersAgain.quantity = 2;
                     secondaryWeaponChoices.Add(daggersAgain);
@@ -728,7 +729,14 @@ namespace AEtherSlay
             foreach( Catalog.Weapon weap in weapons)
             {
                 ComboboxItem cmbItem = new ComboboxItem();
-                cmbItem.Text = weap.name;
+                if(weap.quantity > 1)
+                {
+                    cmbItem.Text = $"{weap.quantity}x {weap.name}";
+                } else
+                {
+                    cmbItem.Text = weap.name;
+                }
+                
                 cmbItem.Value = weap;
 
                 combobox.Items.Add(cmbItem);
