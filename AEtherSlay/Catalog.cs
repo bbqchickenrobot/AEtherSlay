@@ -448,16 +448,12 @@ namespace AEtherSlay
             new Spell(9, "Weird", new List<String>() { "wizard"}),
             new Spell(9, "Wish", new List<String>() { "sorcerer", "wizard"})
         };
-
+        #endregion
 
         public Catalog()
         {
             catalogInit();
         }
-        #endregion
-
-        //INVOKE THIS METHOD BEFORE USING CATALOG
-
 
         private void catalogInit()
         {
