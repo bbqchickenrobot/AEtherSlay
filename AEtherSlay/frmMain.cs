@@ -214,5 +214,11 @@ namespace AEtherSlay
             Form creatureFrm = new frmCreatureCreation();
             creatureFrm.Show();
         }
+
+        private void BtnCharSheets_Click(object sender, EventArgs e)
+        {
+            Form charSheetsfrm = new frmCharacterSheets();
+            charSheetsfrm.Show();
+        }
     }
 }

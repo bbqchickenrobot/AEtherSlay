@@ -20,15 +20,15 @@ namespace AEtherSlay
         Random rand = new Random();
         TextBox[] coreStatBoxes;
         TextBox[] statModifierBoxes;
-        Boolean changedByClick = false, useIRA = false;
+        bool changedByClick = false, useIRA = true;
 
 
         int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
 
-        Int16[] statRolls = new Int16[6];
-        Int16   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
-        Boolean hasShield = false;
-        String className, raceName, spellcastingStat, alignment;
+        short[] statRolls = new Int16[6];
+        short   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
+        bool hasShield = false;
+        string className, raceName, spellcastingStat, alignment;
         List<Catalog.Armor> possibleArmors = new List<Catalog.Armor>();
 
         List<String> proficiencies = new List<String>()
@@ -40,7 +40,6 @@ namespace AEtherSlay
 
         List<Catalog.Weapon> primaryWeaponChoices = new List<Catalog.Weapon>()
                             ,secondaryWeaponChoices = new List<Catalog.Weapon>();
-
         List<String> preferredStatsIRA = new List<string>() { };
         #endregion
 
@@ -117,7 +116,6 @@ namespace AEtherSlay
             switch (classNum)
             {
                 case 0:
-
                     className = "Barbarian";
                     spellcastingStat = "NONE";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
@@ -126,7 +124,6 @@ namespace AEtherSlay
                     break;
 
                 case 1:
-
                     className = "Bard";
                     spellcastingStat = "Charisma";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
@@ -135,7 +132,6 @@ namespace AEtherSlay
                     break;
 
                 case 2:
-
                     className = "Cleric";
                     spellcastingStat = "Wisdom";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" });
@@ -144,7 +140,6 @@ namespace AEtherSlay
                     break;
 
                 case 3:
-
                     className = "Druid";
                     spellcastingStat = "Wisdom";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" });
@@ -153,7 +148,6 @@ namespace AEtherSlay
                     break;
 
                 case 4:
-
                     className = "Fighter";
                     spellcastingStat = "Intelligence";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
@@ -162,7 +156,6 @@ namespace AEtherSlay
                     break;
 
                 case 5:
-
                     className = "Monk";
                     spellcastingStat = "Wisdom";
                     proficiencies.AddRange(new List<string>() { "Simple Weapons", "Shortswords" });
@@ -171,7 +164,6 @@ namespace AEtherSlay
                     break;
 
                 case 6:
-
                     className = "Paladin";
                     spellcastingStat = "Charisma";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
@@ -180,7 +172,6 @@ namespace AEtherSlay
                     break;
 
                 case 7:
-
                     className = "Ranger";
                     spellcastingStat = "Wisdom";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
@@ -189,7 +180,6 @@ namespace AEtherSlay
                     break;
 
                 case 8:
-
                     className = "Rogue";
                     spellcastingStat = "Intelligence";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
@@ -198,7 +188,6 @@ namespace AEtherSlay
                     break;
 
                 case 9:
-
                     className = "Sorcerer";
                     spellcastingStat = "Charisma";
                     proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
@@ -207,7 +196,6 @@ namespace AEtherSlay
                     break;
 
                 case 10:
-
                     className = "Warlock";
                     spellcastingStat = "Charisma";
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons" });
@@ -216,7 +204,6 @@ namespace AEtherSlay
                     break;
 
                 case 11:
-
                     className = "Wizard";
                     spellcastingStat = "Intelligence";
                     proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
@@ -771,14 +758,27 @@ namespace AEtherSlay
 
         private void BtnAddCharbtnAddChar_Click(object sender, EventArgs e)
         {
-            List<Catalog.Weapon> weapons = new List<Catalog.Weapon>();
-            if(cbWeapon1.SelectedIndex != -1)
+            if (txtName.Text.Trim() != "")
             {
-                // weapons.Add(cbWeapon1.SelectedValue);
-            }
-            // Catalog.Armor armor = cbArmor1.SelectedValue;
+                Catalog.Armor armor;
+                List<Catalog.Weapon> weapons = new List<Catalog.Weapon>();
+                String name = txtName.Text;
+                if (cbWeapon1.SelectedIndex != -1)
+                {
+                    weapons.Add((Catalog.Weapon)cbWeapon1.SelectedValue);
+                }
+                if (cbWeapon2.SelectedIndex != -1)
+                {
+                    weapons.Add((Catalog.Weapon)cbWeapon2.SelectedValue);
+                }
+                armor = (Catalog.Armor)cbArmor1.SelectedValue;
 
-            //player = new Catalog.PlayerCharacter(statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+                player = new Catalog.PlayerCharacter(name, statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows);
+                Program.storage.addCharacterSheet(player);
+            } else
+            {
+                MessageBox.Show("Error: No Name", "Please input a name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void bindWeaponComboBox(ComboBox combobox, List<Catalog.Weapon> weapons )
@@ -788,7 +788,7 @@ namespace AEtherSlay
                 ComboboxItem cmbItem = new ComboboxItem();
                 if(weap.quantity > 1)
                 {
-                    cmbItem.Text = $"{weap.quantity}x {weap.name}";
+                    cmbItem.Text = $"{weap.quantity} x {weap.name}";
                 } else
                 {
                     cmbItem.Text = weap.name;

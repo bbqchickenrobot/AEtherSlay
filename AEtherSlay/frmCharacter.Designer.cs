@@ -77,6 +77,8 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.btnAddCharbtnAddChar = new System.Windows.Forms.Button();
             this.btnRegenerate = new System.Windows.Forms.Button();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpCoreStats.SuspendLayout();
             this.grpACetc.SuspendLayout();
             this.pnlMisc.SuspendLayout();
@@ -103,11 +105,11 @@
             this.grpCoreStats.Controls.Add(this.lblInt);
             this.grpCoreStats.Controls.Add(this.lblStr);
             this.grpCoreStats.ForeColor = System.Drawing.Color.White;
-            this.grpCoreStats.Location = new System.Drawing.Point(16, 15);
+            this.grpCoreStats.Location = new System.Drawing.Point(16, -2);
             this.grpCoreStats.Margin = new System.Windows.Forms.Padding(4);
             this.grpCoreStats.Name = "grpCoreStats";
             this.grpCoreStats.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCoreStats.Size = new System.Drawing.Size(211, 455);
+            this.grpCoreStats.Size = new System.Drawing.Size(211, 442);
             this.grpCoreStats.TabIndex = 1;
             this.grpCoreStats.TabStop = false;
             this.grpCoreStats.Text = "Core Stats";
@@ -117,7 +119,7 @@
             this.txtChaMod.Enabled = false;
             this.txtChaMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtChaMod.ForeColor = System.Drawing.Color.Black;
-            this.txtChaMod.Location = new System.Drawing.Point(139, 413);
+            this.txtChaMod.Location = new System.Drawing.Point(139, 400);
             this.txtChaMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtChaMod.Name = "txtChaMod";
             this.txtChaMod.Size = new System.Drawing.Size(48, 30);
@@ -129,7 +131,7 @@
             this.txtWisMod.Enabled = false;
             this.txtWisMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWisMod.ForeColor = System.Drawing.Color.Black;
-            this.txtWisMod.Location = new System.Drawing.Point(139, 339);
+            this.txtWisMod.Location = new System.Drawing.Point(139, 326);
             this.txtWisMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtWisMod.Name = "txtWisMod";
             this.txtWisMod.Size = new System.Drawing.Size(48, 30);
@@ -141,7 +143,7 @@
             this.txtIntMod.Enabled = false;
             this.txtIntMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIntMod.ForeColor = System.Drawing.Color.Black;
-            this.txtIntMod.Location = new System.Drawing.Point(139, 265);
+            this.txtIntMod.Location = new System.Drawing.Point(139, 252);
             this.txtIntMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtIntMod.Name = "txtIntMod";
             this.txtIntMod.Size = new System.Drawing.Size(48, 30);
@@ -153,7 +155,7 @@
             this.txtDexMod.Enabled = false;
             this.txtDexMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDexMod.ForeColor = System.Drawing.Color.Black;
-            this.txtDexMod.Location = new System.Drawing.Point(139, 191);
+            this.txtDexMod.Location = new System.Drawing.Point(139, 178);
             this.txtDexMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtDexMod.Name = "txtDexMod";
             this.txtDexMod.Size = new System.Drawing.Size(48, 30);
@@ -165,7 +167,7 @@
             this.txtConMod.Enabled = false;
             this.txtConMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConMod.ForeColor = System.Drawing.Color.Black;
-            this.txtConMod.Location = new System.Drawing.Point(139, 117);
+            this.txtConMod.Location = new System.Drawing.Point(139, 104);
             this.txtConMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtConMod.Name = "txtConMod";
             this.txtConMod.Size = new System.Drawing.Size(48, 30);
@@ -177,7 +179,7 @@
             this.txtStrMod.Enabled = false;
             this.txtStrMod.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStrMod.ForeColor = System.Drawing.Color.Black;
-            this.txtStrMod.Location = new System.Drawing.Point(139, 43);
+            this.txtStrMod.Location = new System.Drawing.Point(139, 30);
             this.txtStrMod.Margin = new System.Windows.Forms.Padding(4);
             this.txtStrMod.Name = "txtStrMod";
             this.txtStrMod.Size = new System.Drawing.Size(48, 30);
@@ -189,7 +191,7 @@
             this.txtCon.Enabled = false;
             this.txtCon.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCon.ForeColor = System.Drawing.Color.Black;
-            this.txtCon.Location = new System.Drawing.Point(8, 105);
+            this.txtCon.Location = new System.Drawing.Point(8, 92);
             this.txtCon.Margin = new System.Windows.Forms.Padding(4);
             this.txtCon.Name = "txtCon";
             this.txtCon.Size = new System.Drawing.Size(60, 46);
@@ -201,7 +203,7 @@
             this.txtDex.Enabled = false;
             this.txtDex.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDex.ForeColor = System.Drawing.Color.Black;
-            this.txtDex.Location = new System.Drawing.Point(8, 179);
+            this.txtDex.Location = new System.Drawing.Point(8, 166);
             this.txtDex.Margin = new System.Windows.Forms.Padding(4);
             this.txtDex.Name = "txtDex";
             this.txtDex.Size = new System.Drawing.Size(60, 46);
@@ -213,7 +215,7 @@
             this.txtInt.Enabled = false;
             this.txtInt.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInt.ForeColor = System.Drawing.Color.Black;
-            this.txtInt.Location = new System.Drawing.Point(8, 253);
+            this.txtInt.Location = new System.Drawing.Point(8, 240);
             this.txtInt.Margin = new System.Windows.Forms.Padding(4);
             this.txtInt.Name = "txtInt";
             this.txtInt.Size = new System.Drawing.Size(60, 46);
@@ -225,7 +227,7 @@
             this.txtWis.Enabled = false;
             this.txtWis.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWis.ForeColor = System.Drawing.Color.Black;
-            this.txtWis.Location = new System.Drawing.Point(8, 326);
+            this.txtWis.Location = new System.Drawing.Point(8, 313);
             this.txtWis.Margin = new System.Windows.Forms.Padding(4);
             this.txtWis.Name = "txtWis";
             this.txtWis.Size = new System.Drawing.Size(60, 46);
@@ -237,7 +239,7 @@
             this.txtCha.Enabled = false;
             this.txtCha.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCha.ForeColor = System.Drawing.Color.Black;
-            this.txtCha.Location = new System.Drawing.Point(8, 400);
+            this.txtCha.Location = new System.Drawing.Point(8, 387);
             this.txtCha.Margin = new System.Windows.Forms.Padding(4);
             this.txtCha.Name = "txtCha";
             this.txtCha.Size = new System.Drawing.Size(60, 46);
@@ -249,7 +251,7 @@
             this.txtStr.Enabled = false;
             this.txtStr.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStr.ForeColor = System.Drawing.Color.Black;
-            this.txtStr.Location = new System.Drawing.Point(8, 31);
+            this.txtStr.Location = new System.Drawing.Point(8, 18);
             this.txtStr.Margin = new System.Windows.Forms.Padding(4);
             this.txtStr.Name = "txtStr";
             this.txtStr.Size = new System.Drawing.Size(60, 46);
@@ -261,7 +263,7 @@
             this.lblCon.AutoSize = true;
             this.lblCon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCon.ForeColor = System.Drawing.Color.White;
-            this.lblCon.Location = new System.Drawing.Point(77, 121);
+            this.lblCon.Location = new System.Drawing.Point(77, 108);
             this.lblCon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCon.Name = "lblCon";
             this.lblCon.Size = new System.Drawing.Size(54, 23);
@@ -273,7 +275,7 @@
             this.lblDex.AutoSize = true;
             this.lblDex.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDex.ForeColor = System.Drawing.Color.White;
-            this.lblDex.Location = new System.Drawing.Point(77, 195);
+            this.lblDex.Location = new System.Drawing.Point(77, 182);
             this.lblDex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDex.Name = "lblDex";
             this.lblDex.Size = new System.Drawing.Size(50, 23);
@@ -285,7 +287,7 @@
             this.lblCha.AutoSize = true;
             this.lblCha.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCha.ForeColor = System.Drawing.Color.White;
-            this.lblCha.Location = new System.Drawing.Point(77, 416);
+            this.lblCha.Location = new System.Drawing.Point(77, 403);
             this.lblCha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCha.Name = "lblCha";
             this.lblCha.Size = new System.Drawing.Size(53, 23);
@@ -297,7 +299,7 @@
             this.lblWis.AutoSize = true;
             this.lblWis.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWis.ForeColor = System.Drawing.Color.White;
-            this.lblWis.Location = new System.Drawing.Point(77, 342);
+            this.lblWis.Location = new System.Drawing.Point(77, 329);
             this.lblWis.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWis.Name = "lblWis";
             this.lblWis.Size = new System.Drawing.Size(47, 23);
@@ -309,7 +311,7 @@
             this.lblInt.AutoSize = true;
             this.lblInt.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInt.ForeColor = System.Drawing.Color.White;
-            this.lblInt.Location = new System.Drawing.Point(77, 269);
+            this.lblInt.Location = new System.Drawing.Point(77, 256);
             this.lblInt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInt.Name = "lblInt";
             this.lblInt.Size = new System.Drawing.Size(44, 23);
@@ -321,7 +323,7 @@
             this.lblStr.AutoSize = true;
             this.lblStr.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStr.ForeColor = System.Drawing.Color.White;
-            this.lblStr.Location = new System.Drawing.Point(77, 47);
+            this.lblStr.Location = new System.Drawing.Point(77, 34);
             this.lblStr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStr.Name = "lblStr";
             this.lblStr.Size = new System.Drawing.Size(48, 23);
@@ -514,7 +516,7 @@
             // 
             this.cbWeapon1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWeapon1.FormattingEnabled = true;
-            this.cbWeapon1.Location = new System.Drawing.Point(1, 283);
+            this.cbWeapon1.Location = new System.Drawing.Point(1, 277);
             this.cbWeapon1.Margin = new System.Windows.Forms.Padding(4);
             this.cbWeapon1.Name = "cbWeapon1";
             this.cbWeapon1.Size = new System.Drawing.Size(160, 24);
@@ -525,7 +527,7 @@
             // 
             this.cbArmor1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbArmor1.FormattingEnabled = true;
-            this.cbArmor1.Location = new System.Drawing.Point(3, 462);
+            this.cbArmor1.Location = new System.Drawing.Point(3, 456);
             this.cbArmor1.Margin = new System.Windows.Forms.Padding(4);
             this.cbArmor1.Name = "cbArmor1";
             this.cbArmor1.Size = new System.Drawing.Size(160, 24);
@@ -539,7 +541,7 @@
             this.lblWeapon.AutoSize = true;
             this.lblWeapon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWeapon.ForeColor = System.Drawing.Color.White;
-            this.lblWeapon.Location = new System.Drawing.Point(0, 346);
+            this.lblWeapon.Location = new System.Drawing.Point(0, 340);
             this.lblWeapon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWeapon.Name = "lblWeapon";
             this.lblWeapon.Size = new System.Drawing.Size(86, 23);
@@ -551,7 +553,7 @@
             this.lblArmor.AutoSize = true;
             this.lblArmor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblArmor.ForeColor = System.Drawing.Color.White;
-            this.lblArmor.Location = new System.Drawing.Point(96, 432);
+            this.lblArmor.Location = new System.Drawing.Point(96, 426);
             this.lblArmor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblArmor.Name = "lblArmor";
             this.lblArmor.Size = new System.Drawing.Size(65, 23);
@@ -590,7 +592,7 @@
             // 
             this.cbWeapon2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWeapon2.FormattingEnabled = true;
-            this.cbWeapon2.Location = new System.Drawing.Point(1, 316);
+            this.cbWeapon2.Location = new System.Drawing.Point(1, 310);
             this.cbWeapon2.Margin = new System.Windows.Forms.Padding(4);
             this.cbWeapon2.Name = "cbWeapon2";
             this.cbWeapon2.Size = new System.Drawing.Size(160, 24);
@@ -602,7 +604,7 @@
             this.cbArmor2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbArmor2.Enabled = false;
             this.cbArmor2.FormattingEnabled = true;
-            this.cbArmor2.Location = new System.Drawing.Point(3, 495);
+            this.cbArmor2.Location = new System.Drawing.Point(3, 489);
             this.cbArmor2.Margin = new System.Windows.Forms.Padding(4);
             this.cbArmor2.Name = "cbArmor2";
             this.cbArmor2.Size = new System.Drawing.Size(160, 24);
@@ -614,7 +616,7 @@
             this.lblAlignmentTitle.AutoSize = true;
             this.lblAlignmentTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlignmentTitle.ForeColor = System.Drawing.Color.White;
-            this.lblAlignmentTitle.Location = new System.Drawing.Point(25, 377);
+            this.lblAlignmentTitle.Location = new System.Drawing.Point(25, 371);
             this.lblAlignmentTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlignmentTitle.Name = "lblAlignmentTitle";
             this.lblAlignmentTitle.Size = new System.Drawing.Size(103, 23);
@@ -625,7 +627,7 @@
             // 
             this.lblAlignment.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlignment.ForeColor = System.Drawing.Color.White;
-            this.lblAlignment.Location = new System.Drawing.Point(1, 400);
+            this.lblAlignment.Location = new System.Drawing.Point(1, 394);
             this.lblAlignment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlignment.Name = "lblAlignment";
             this.lblAlignment.Size = new System.Drawing.Size(161, 23);
@@ -661,7 +663,7 @@
             this.pnlMisc.Controls.Add(this.txtClass);
             this.pnlMisc.Controls.Add(this.txtRace);
             this.pnlMisc.Controls.Add(this.grpACetc);
-            this.pnlMisc.Location = new System.Drawing.Point(233, 15);
+            this.pnlMisc.Location = new System.Drawing.Point(233, 6);
             this.pnlMisc.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMisc.Name = "pnlMisc";
             this.pnlMisc.Size = new System.Drawing.Size(173, 530);
@@ -687,12 +689,32 @@
             this.btnRegenerate.UseVisualStyleBackColor = true;
             this.btnRegenerate.Click += new System.EventHandler(this.BtnRegenerate_Click);
             // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(80, 447);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(146, 22);
+            this.txtName.TabIndex = 44;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(16, 447);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 22);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "Name: ";
+            // 
             // frmCharacter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(936, 554);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.btnRegenerate);
             this.Controls.Add(this.btnAddCharbtnAddChar);
             this.Controls.Add(this.pnlMisc);
@@ -711,6 +733,7 @@
             this.pnlMisc.ResumeLayout(false);
             this.pnlMisc.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -765,5 +788,7 @@
         private System.Windows.Forms.Panel pnlMisc;
         private System.Windows.Forms.Button btnAddCharbtnAddChar;
         private System.Windows.Forms.Button btnRegenerate;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label1;
     }
 }

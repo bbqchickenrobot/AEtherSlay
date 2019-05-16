@@ -450,6 +450,7 @@
             this.btnCharSheets.TabIndex = 11;
             this.btnCharSheets.Text = "Character Sheets";
             this.btnCharSheets.UseVisualStyleBackColor = false;
+            this.btnCharSheets.Click += new System.EventHandler(this.BtnCharSheets_Click);
             // 
             // frmMain
             // 
