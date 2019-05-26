@@ -1,6 +1,6 @@
 ﻿namespace AEtherSlay
 {
-    partial class frmCharacter
+    partial class frmCharacterCreation
     {
         /// <summary>
         /// Required designer variable.

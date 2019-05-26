@@ -46,3 +46,5 @@ C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEt
 =======
 >>>>>>> dev
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterSheets.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterSheets.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterCreation.resources

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace AEtherSlay
 {
 
-    public partial class frmCharacter : Form
+    public partial class frmCharacterCreation : Form
     {
         #region Variable Declarations
 
@@ -53,14 +53,14 @@ namespace AEtherSlay
             return packChoices[rand.Next(0, packChoices.Count)];
         }
 
-        public frmCharacter(int optCategory = -1, int optClass = -1, int optRace = -1, bool optIRA = false)
+        public frmCharacterCreation(int optCategory = -1, int optClass = -1, int optRace = -1, bool optIRA = false)
         {
             InitializeComponent();
 
             // MessageBox.Show("This form was instantiated with the following parameters\nCategory: " + optCategory + "\nClass: " + optClass + "\nRace: " + optRace);
 
-            coreStatBoxes     = new TextBox[] { txtStr, txtDex, txtCon, txtInt, txtWis, txtCha };
-            statModifierBoxes = new TextBox[] { txtStrMod, txtDexMod, txtConMod, txtIntMod, txtWisMod, txtChaMod };
+            coreStatBoxes     = new TextBox[] { txtStr, txtCon, txtDex, txtInt, txtWis, txtCha };
+            statModifierBoxes = new TextBox[] { txtStrMod, txtConMod, txtDexMod, txtIntMod, txtWisMod, txtChaMod };
 
             forcedCategory = optCategory;
             forcedClass = optClass;
@@ -72,14 +72,6 @@ namespace AEtherSlay
 
         private void generateCharacter()
         {
-            #region Core Stats
-            // STR DEX CON INT WIS CHA
-            // 0   1   2   3   4   5
-
-            statRolls = Program.catalog.rollStats();
-            ac = Convert.ToInt16(10 + ((statRolls[1] - 10) / 2));
-            #endregion
-
             #region Generate Class
             int classNum = rand.Next(12);
 
@@ -121,6 +113,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
                     savingThrows.AddRange(new List<string>() { "Strength", "Constitution" });
                     hitDiceSides = 12;
+                    preferredStatsIRA = new List<string> { "STR", "DEX", "CON" };
                     break;
 
                 case 1:
@@ -129,6 +122,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
                     savingThrows.AddRange(new List<string>() { "Dexterity", "Charisma" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "CHA", "WIS" };
                     break;
 
                 case 2:
@@ -137,6 +131,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons" });
                     savingThrows.AddRange(new List<string>() { "Charisma", "Wisdom" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "WIS", "CHA" };
                     break;
 
                 case 3:
@@ -145,6 +140,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears" });
                     savingThrows.AddRange(new List<string>() { "Intelligence", "Wisdom" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "WIS", "INT" };
                     break;
 
                 case 4:
@@ -153,6 +149,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
                     savingThrows.AddRange(new List<string>() { "Strength", "Constitution" });
                     hitDiceSides = 10;
+                    preferredStatsIRA = new List<string> { "STR", "DEX" };
                     break;
 
                 case 5:
@@ -161,6 +158,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Simple Weapons", "Shortswords" });
                     savingThrows.AddRange(new List<string>() { "Dexterity", "Strength" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "DEX", "WIS" };
                     break;
 
                 case 6:
@@ -169,6 +167,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons" });
                     savingThrows.AddRange(new List<string>() { "Charisma", "Wisdom" });
                     hitDiceSides = 10;
+                    preferredStatsIRA = new List<string> { "STR", "CHA" };
                     break;
 
                 case 7:
@@ -177,6 +176,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons" });
                     savingThrows.AddRange(new List<string>() { "Strength", "Dexterity" });
                     hitDiceSides = 10;
+                    preferredStatsIRA = new List<string> { "DEX", "WIS" };
                     break;
 
                 case 8:
@@ -185,6 +185,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords" });
                     savingThrows.AddRange(new List<string>() { "Dexterity", "Intelligence" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "DEX" };
                     break;
 
                 case 9:
@@ -193,6 +194,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
                     savingThrows.AddRange(new List<string>() { "Charisma", "Constitution" });
                     hitDiceSides = 6;
+                    preferredStatsIRA = new List<string> { "CHA" };
                     break;
 
                 case 10:
@@ -201,6 +203,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Light Armor", "Simple Weapons" });
                     savingThrows.AddRange(new List<string>() { "Wisdom", "Charisma" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "CHA" };
                     break;
 
                 case 11:
@@ -209,6 +212,7 @@ namespace AEtherSlay
                     proficiencies.AddRange(new List<string>() { "Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows" });
                     savingThrows.AddRange(new List<string>() { "Wisdom", "Intelligence" });
                     hitDiceSides = 8;
+                    preferredStatsIRA = new List<string> { "INT" };
                     break;
 
                 default:
@@ -244,7 +248,7 @@ namespace AEtherSlay
                         case "INT": statRolls[3] = sortedRolls[i]; break;
                         case "WIS": statRolls[4] = sortedRolls[i]; break;
                         case "CHA": statRolls[5] = sortedRolls[i]; break;
-                        default: statRolls[i] = sortedRolls[i]; break;
+                        default:    statRolls[i] = sortedRolls[i]; break;
                     }
                     sortedRolls[i] = -1;
                 }

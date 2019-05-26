@@ -24,7 +24,7 @@ namespace AEtherSlay
         private void btnGo_Click(object sender, EventArgs e)
         {
             // MessageBox.Show("Cat: " + cmbCategory.SelectedIndex.ToString() + "Class: " + cmbClass.SelectedIndex.ToString() + "Race: " + cmbRace.SelectedIndex.ToString());
-            Form charCreation = new frmCharacter(cmbCategory.SelectedIndex, cmbClass.SelectedIndex, cmbRace.SelectedIndex, chkIRA.Checked);
+            Form charCreation = new frmCharacterCreation(cmbCategory.SelectedIndex, cmbClass.SelectedIndex, cmbRace.SelectedIndex, chkIRA.Checked);
             charCreation.Show();
             this.Dispose();
         }
