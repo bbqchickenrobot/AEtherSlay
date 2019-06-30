@@ -29,7 +29,6 @@ C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\bin\Debug\AEtherSlay.applica
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\bin\Debug\AEtherSlay.exe
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\bin\Debug\AEtherSlay.pdb
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.csprojAssemblyReference.cache
-C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacter.resources
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterDialog.resources
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmMain.resources
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.Properties.Resources.resources
@@ -41,10 +40,7 @@ C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.exe
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.pdb
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCreatureCreation.resources
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCreatureCreation.resources
-<<<<<<< HEAD
-C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.csprojAssemblyReference.cache
-=======
->>>>>>> dev
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterSheets.resources
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterSheets.resources
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterCreation.resources
+C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterCreation.resources

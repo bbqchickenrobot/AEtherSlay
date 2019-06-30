@@ -66,7 +66,7 @@ namespace AEtherSlay
                 {
                     box.Text = "+";
                 }
-                else if (selectedCharacter.stats[i] == 10 || selectedCharacter.stats[i] == 9 || selectedCharacter.stats[i] == 11)
+                else if (selectedCharacter.stats[i] >= 9 && selectedCharacter.stats[i] <= 11)
                 {
                     box.Text += "±";
                 }
@@ -92,17 +92,32 @@ namespace AEtherSlay
             txtHP.Text = (selectedCharacter.hitDiceSides + ((selectedCharacter.stats[2] - 10) / 2)).ToString();
 
             rtbProficiencies.Text = "PROFICIENCIES\n\n";
-            foreach (String prof in selectedCharacter.proficiencies) { rtbProficiencies.Text += prof + "\n"; }
+            try
+            {
+                foreach (String prof in selectedCharacter.proficiencies) { rtbProficiencies.Text += prof + "\n"; }
+            }
+            catch { }
 
             rtbTraits.Text = "TRAITS\n\n";
-            foreach (String trait in selectedCharacter.traits) { rtbTraits.Text += trait + "\n"; }
+            try
+            {
+                foreach (String trait in selectedCharacter.traits) { rtbTraits.Text += trait + "\n"; }
+            }
+            catch { }
 
             rtbLanguages.Text = "LANGUAGES\n\n";
-            foreach (String language in selectedCharacter.languages) { rtbLanguages.Text += language + "\n"; }
+            try
+            {
+                foreach (String language in selectedCharacter.languages) { rtbLanguages.Text += language + "\n"; }
+            }
+            catch { }
 
             rtbEquipment.Text = "EQUIPMENT\n\n";
-            foreach (String equip in selectedCharacter.equipment) { rtbEquipment.Text += equip + "\n"; }
-
+            try
+            {
+                foreach (String equip in selectedCharacter.equipment) { rtbEquipment.Text += equip + "\n"; }
+            }
+            catch { }
         }
     }
 }

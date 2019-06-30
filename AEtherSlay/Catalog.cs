@@ -514,50 +514,53 @@ namespace AEtherSlay
                 // DANGEROUS INSTANTIATION TRY AND AVOID
             }
 
-            protected Character(short speed, string alignment, string spellcastingStat, List<string> proficiencies, List<String> equipment, List<string> languages, List<string> savingThrows, List<string> traits, List<string> immunities, List<string> resistances, List<string> vulnerabilities, List<Weapon> weapons, Armor armor, short[] stats, short[] statMods, bool hasShield, short hitDiceSides)
+            protected Character(String name, Int16[] statRolls, Int16 speed, List<Weapon> weapons, Armor armor, String alignment, List<String> equipment, List<String> languages, List<String> resistances, String spellcastingStat, List<String> proficiencies, Int16 hitDiceSides, List<String> savingThrows, List<String> traits)
             {
-                this.alignment = alignment;
-                this.spellcastingStat = spellcastingStat;
-                this.proficiencies = proficiencies;
-                this.equipment = equipment;
-                this.languages = languages;
-                this.savingThrows = savingThrows;
-                this.traits = traits;
-                this.immunities = immunities;
-                this.resistances = resistances;
-                this.vulnerabilities = vulnerabilities;
+                this.name = name;
+                stats = statRolls;
+                this.speed = speed;
                 this.weapons = weapons;
                 this.armor = armor;
-                this.stats = stats;
-                this.hasShield = hasShield;
+                this.alignment = alignment;
+                this.equipment = equipment;
+                this.languages = languages;
+                this.resistances = resistances;
+                this.spellcastingStat = spellcastingStat;
+                this.proficiencies = proficiencies;
                 this.hitDiceSides = hitDiceSides;
                 hitDice = 1;
-                level = 1;
-                this.speed = speed;
+                this.savingThrows = savingThrows;
+                misc = traits;
 
                 calcModifiers();
-                calcHealth();
                 calcAC();
+                calcHealth();
             }
 
             private void calcAC()
             {
                 // Check this.armor exists
-                if (!(this.armor == null))
+                if (!(armor == null))
                 {
                     ac = armor.getAC(stats[1]);
                 } else
                 {
                     ac = Convert.ToInt16(10 + statMods[1]);
                 }
+                if(hasShield)
+                {
+                    ac += 2;
+                }
             }
 
             private void calcModifiers()
             {
+                short[] statModifiers = new short[6];
                 for(short i = 0; i < stats.Count(); i++)
                 {
-                    statMods[i] = Convert.ToInt16((stats[i] - 10) / 2);
+                    statModifiers[i] = Convert.ToInt16((stats[i] - 10) / 2);
                 }
+                this.statMods = statModifiers;
             }
 
             private void calcHealth()
@@ -570,14 +573,22 @@ namespace AEtherSlay
         {
             public List<Spell> validSpells, knownSpells = new List<Spell>();
             public string className, raceName;
-            public string name;
 
-            public PlayerCharacter(String name, Int16[] statRolls, String className, String raceName, Int16 speed, List<Weapon> weapons, Armor armor, String alignment, List<String> equipment, List<String> languages, List<String> resistances, String spellcastingStat, List<String> proficiencies, Int16 hitDiceSides, List<String> savingThrows)
-                             : base(speed, spellcastingStat, proficiencies, savingThrows, hitDiceSides)
+            public PlayerCharacter(String name, Int16[] statRolls, String className, String raceName, Int16 speed, List<Weapon> weapons, Armor armor, String alignment, List<String> equipment, List<String> languages, List<String> resistances, String spellcastingStat, List<String> proficiencies, Int16 hitDiceSides, List<String> savingThrows, List<String> traits)
+                             : base(name, statRolls, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows, traits)
             {
+                stats = statRolls;
                 this.className = className;
                 this.raceName = raceName;
+                this.speed = speed;
                 this.name = name;
+                this.weapons = weapons;
+                this.armor = armor;
+                this.alignment = alignment;
+                this.equipment = equipment;
+                this.languages = languages;
+                this.resistances = resistances;
+                this.traits = traits;
             }
 
             public List<Spell> getValidSpells()

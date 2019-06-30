@@ -45,9 +45,10 @@
             this.txtClass = new System.Windows.Forms.TextBox();
             this.txtRace = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRegenerate = new System.Windows.Forms.Button();
-            this.btnAddCharbtnAddChar = new System.Windows.Forms.Button();
             this.pnlMisc = new System.Windows.Forms.Panel();
+            this.txtArmor = new System.Windows.Forms.TextBox();
+            this.lbWeapons = new System.Windows.Forms.ListBox();
+            this.cbShield = new System.Windows.Forms.CheckBox();
             this.grpACetc = new System.Windows.Forms.GroupBox();
             this.lblProf = new System.Windows.Forms.Label();
             this.txtSpeed = new System.Windows.Forms.TextBox();
@@ -77,9 +78,6 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.cbCharName = new System.Windows.Forms.ComboBox();
             this.btnEnableEdit = new System.Windows.Forms.Button();
-            this.cbShield = new System.Windows.Forms.CheckBox();
-            this.lbWeapons = new System.Windows.Forms.ListBox();
-            this.txtArmor = new System.Windows.Forms.TextBox();
             this.pnlMisc.SuspendLayout();
             this.grpACetc.SuspendLayout();
             this.grpCoreStats.SuspendLayout();
@@ -129,7 +127,7 @@
             this.rtbTraits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbTraits.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtbTraits.Enabled = false;
-            this.rtbTraits.Location = new System.Drawing.Point(402, 57);
+            this.rtbTraits.Location = new System.Drawing.Point(400, 13);
             this.rtbTraits.Margin = new System.Windows.Forms.Padding(4);
             this.rtbTraits.Name = "rtbTraits";
             this.rtbTraits.ReadOnly = true;
@@ -202,7 +200,7 @@
             this.rtbEquipment.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbEquipment.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtbEquipment.Enabled = false;
-            this.rtbEquipment.Location = new System.Drawing.Point(695, 257);
+            this.rtbEquipment.Location = new System.Drawing.Point(693, 213);
             this.rtbEquipment.Margin = new System.Windows.Forms.Padding(4);
             this.rtbEquipment.Name = "rtbEquipment";
             this.rtbEquipment.ReadOnly = true;
@@ -216,7 +214,7 @@
             this.rtbProficiencies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbProficiencies.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtbProficiencies.Enabled = false;
-            this.rtbProficiencies.Location = new System.Drawing.Point(402, 257);
+            this.rtbProficiencies.Location = new System.Drawing.Point(400, 213);
             this.rtbProficiencies.Margin = new System.Windows.Forms.Padding(4);
             this.rtbProficiencies.Name = "rtbProficiencies";
             this.rtbProficiencies.ReadOnly = true;
@@ -272,29 +270,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(11, 498);
+            this.label1.Location = new System.Drawing.Point(10, 521);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 22);
             this.label1.TabIndex = 55;
             this.label1.Text = "Name: ";
-            // 
-            // btnRegenerate
-            // 
-            this.btnRegenerate.Location = new System.Drawing.Point(11, 566);
-            this.btnRegenerate.Name = "btnRegenerate";
-            this.btnRegenerate.Size = new System.Drawing.Size(210, 31);
-            this.btnRegenerate.TabIndex = 53;
-            this.btnRegenerate.Text = "Generate New Character";
-            this.btnRegenerate.UseVisualStyleBackColor = true;
-            // 
-            // btnAddCharbtnAddChar
-            // 
-            this.btnAddCharbtnAddChar.Location = new System.Drawing.Point(11, 529);
-            this.btnAddCharbtnAddChar.Name = "btnAddCharbtnAddChar";
-            this.btnAddCharbtnAddChar.Size = new System.Drawing.Size(210, 31);
-            this.btnAddCharbtnAddChar.TabIndex = 52;
-            this.btnAddCharbtnAddChar.Text = "Add To Character Sheets";
-            this.btnAddCharbtnAddChar.UseVisualStyleBackColor = true;
             // 
             // pnlMisc
             // 
@@ -310,11 +290,40 @@
             this.pnlMisc.Controls.Add(this.txtClass);
             this.pnlMisc.Controls.Add(this.txtRace);
             this.pnlMisc.Controls.Add(this.grpACetc);
-            this.pnlMisc.Location = new System.Drawing.Point(228, 57);
+            this.pnlMisc.Location = new System.Drawing.Point(226, 13);
             this.pnlMisc.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMisc.Name = "pnlMisc";
             this.pnlMisc.Size = new System.Drawing.Size(173, 530);
             this.pnlMisc.TabIndex = 51;
+            // 
+            // txtArmor
+            // 
+            this.txtArmor.Enabled = false;
+            this.txtArmor.Location = new System.Drawing.Point(4, 466);
+            this.txtArmor.Name = "txtArmor";
+            this.txtArmor.Size = new System.Drawing.Size(155, 22);
+            this.txtArmor.TabIndex = 42;
+            this.txtArmor.Text = "NONE";
+            // 
+            // lbWeapons
+            // 
+            this.lbWeapons.FormattingEnabled = true;
+            this.lbWeapons.ItemHeight = 16;
+            this.lbWeapons.Location = new System.Drawing.Point(2, 281);
+            this.lbWeapons.Name = "lbWeapons";
+            this.lbWeapons.Size = new System.Drawing.Size(160, 68);
+            this.lbWeapons.TabIndex = 41;
+            // 
+            // cbShield
+            // 
+            this.cbShield.AutoSize = true;
+            this.cbShield.Enabled = false;
+            this.cbShield.Location = new System.Drawing.Point(47, 497);
+            this.cbShield.Name = "cbShield";
+            this.cbShield.Size = new System.Drawing.Size(77, 21);
+            this.cbShield.TabIndex = 40;
+            this.cbShield.Text = "Shield?";
+            this.cbShield.UseVisualStyleBackColor = true;
             // 
             // grpACetc
             // 
@@ -396,7 +405,7 @@
             this.rtbLanguages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLanguages.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtbLanguages.Enabled = false;
-            this.rtbLanguages.Location = new System.Drawing.Point(695, 453);
+            this.rtbLanguages.Location = new System.Drawing.Point(693, 409);
             this.rtbLanguages.Margin = new System.Windows.Forms.Padding(4);
             this.rtbLanguages.Name = "rtbLanguages";
             this.rtbLanguages.ReadOnly = true;
@@ -426,7 +435,7 @@
             this.grpCoreStats.Controls.Add(this.lblInt);
             this.grpCoreStats.Controls.Add(this.lblStr);
             this.grpCoreStats.ForeColor = System.Drawing.Color.White;
-            this.grpCoreStats.Location = new System.Drawing.Point(11, 49);
+            this.grpCoreStats.Location = new System.Drawing.Point(10, 72);
             this.grpCoreStats.Margin = new System.Windows.Forms.Padding(4);
             this.grpCoreStats.Name = "grpCoreStats";
             this.grpCoreStats.Padding = new System.Windows.Forms.Padding(4);
@@ -653,15 +662,17 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(75, 498);
+            this.txtName.Enabled = false;
+            this.txtName.Location = new System.Drawing.Point(74, 521);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(146, 22);
             this.txtName.TabIndex = 54;
             // 
             // cbCharName
             // 
+            this.cbCharName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCharName.FormattingEnabled = true;
-            this.cbCharName.Location = new System.Drawing.Point(12, 13);
+            this.cbCharName.Location = new System.Drawing.Point(7, 13);
             this.cbCharName.Name = "cbCharName";
             this.cbCharName.Size = new System.Drawing.Size(209, 24);
             this.cbCharName.TabIndex = 56;
@@ -671,53 +682,25 @@
             // 
             this.btnEnableEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnableEdit.ForeColor = System.Drawing.Color.Black;
-            this.btnEnableEdit.Location = new System.Drawing.Point(234, 7);
+            this.btnEnableEdit.Location = new System.Drawing.Point(30, 44);
             this.btnEnableEdit.Name = "btnEnableEdit";
-            this.btnEnableEdit.Size = new System.Drawing.Size(152, 38);
+            this.btnEnableEdit.Size = new System.Drawing.Size(167, 30);
             this.btnEnableEdit.TabIndex = 57;
             this.btnEnableEdit.Text = "ENABLE EDITING";
             this.btnEnableEdit.UseVisualStyleBackColor = true;
-            // 
-            // cbShield
-            // 
-            this.cbShield.AutoSize = true;
-            this.cbShield.Location = new System.Drawing.Point(47, 497);
-            this.cbShield.Name = "cbShield";
-            this.cbShield.Size = new System.Drawing.Size(77, 21);
-            this.cbShield.TabIndex = 40;
-            this.cbShield.Text = "Shield?";
-            this.cbShield.UseVisualStyleBackColor = true;
-            // 
-            // lbWeapons
-            // 
-            this.lbWeapons.FormattingEnabled = true;
-            this.lbWeapons.ItemHeight = 16;
-            this.lbWeapons.Location = new System.Drawing.Point(2, 281);
-            this.lbWeapons.Name = "lbWeapons";
-            this.lbWeapons.Size = new System.Drawing.Size(160, 68);
-            this.lbWeapons.TabIndex = 41;
-            // 
-            // txtArmor
-            // 
-            this.txtArmor.Location = new System.Drawing.Point(4, 466);
-            this.txtArmor.Name = "txtArmor";
-            this.txtArmor.Size = new System.Drawing.Size(155, 22);
-            this.txtArmor.TabIndex = 42;
             // 
             // frmCharacterSheets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(936, 604);
+            this.ClientSize = new System.Drawing.Size(936, 563);
             this.Controls.Add(this.btnEnableEdit);
             this.Controls.Add(this.cbCharName);
             this.Controls.Add(this.rtbTraits);
             this.Controls.Add(this.rtbEquipment);
             this.Controls.Add(this.rtbProficiencies);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnRegenerate);
-            this.Controls.Add(this.btnAddCharbtnAddChar);
             this.Controls.Add(this.pnlMisc);
             this.Controls.Add(this.rtbLanguages);
             this.Controls.Add(this.grpCoreStats);
@@ -756,8 +739,6 @@
         private System.Windows.Forms.TextBox txtClass;
         private System.Windows.Forms.TextBox txtRace;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnRegenerate;
-        private System.Windows.Forms.Button btnAddCharbtnAddChar;
         private System.Windows.Forms.Panel pnlMisc;
         private System.Windows.Forms.GroupBox grpACetc;
         private System.Windows.Forms.Label lblProf;

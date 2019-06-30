@@ -40,9 +40,10 @@
             // 
             // cmbCategory
             // 
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(89, 15);
-            this.cmbCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(160, 24);
             this.cmbCategory.TabIndex = 0;
@@ -72,9 +73,10 @@
             // 
             // cmbClass
             // 
+            this.cmbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbClass.FormattingEnabled = true;
             this.cmbClass.Location = new System.Drawing.Point(89, 48);
-            this.cmbClass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbClass.Margin = new System.Windows.Forms.Padding(4);
             this.cmbClass.Name = "cmbClass";
             this.cmbClass.Size = new System.Drawing.Size(160, 24);
             this.cmbClass.TabIndex = 2;
@@ -93,9 +95,10 @@
             // 
             // cmbRace
             // 
+            this.cmbRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRace.FormattingEnabled = true;
             this.cmbRace.Location = new System.Drawing.Point(89, 81);
-            this.cmbRace.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbRace.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRace.Name = "cmbRace";
             this.cmbRace.Size = new System.Drawing.Size(160, 24);
             this.cmbRace.TabIndex = 4;
@@ -105,7 +108,7 @@
             this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
             this.btnGo.ForeColor = System.Drawing.Color.Black;
             this.btnGo.Location = new System.Drawing.Point(260, 16);
-            this.btnGo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGo.Margin = new System.Windows.Forms.Padding(4);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(115, 121);
             this.btnGo.TabIndex = 6;
@@ -119,7 +122,7 @@
             this.chkIRA.Checked = true;
             this.chkIRA.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIRA.Location = new System.Drawing.Point(27, 116);
-            this.chkIRA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIRA.Margin = new System.Windows.Forms.Padding(4);
             this.chkIRA.Name = "chkIRA";
             this.chkIRA.Size = new System.Drawing.Size(220, 21);
             this.chkIRA.TabIndex = 7;
@@ -141,7 +144,7 @@
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.cmbCategory);
             this.ForeColor = System.Drawing.Color.White;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCharacterDialog";
             this.Text = "frmCharacterDialog";
             this.Load += new System.EventHandler(this.FrmCharacterDialog_Load);
