@@ -234,30 +234,31 @@ namespace AEtherSlay
             #region IRA
             if (useIRA)
             {
-                short[] sortedRolls = statRolls;
+                List<short> sortedRolls = statRolls.ToList();
                 statRolls = new short[6] { -1, -1, -1, -1, -1, -1 };
-                Array.Sort(sortedRolls);
-                Array.Reverse(sortedRolls);
+                sortedRolls.Sort();
+                sortedRolls.Reverse();
                 for(int i = 0; i < preferredStatsIRA.Count; i++)
                 {
                     switch(preferredStatsIRA[i])
                     {
-                        case "STR": statRolls[0] = sortedRolls[i]; break;
-                        case "CON": statRolls[1] = sortedRolls[i]; break;
-                        case "DEX": statRolls[2] = sortedRolls[i]; break;
-                        case "INT": statRolls[3] = sortedRolls[i]; break;
-                        case "WIS": statRolls[4] = sortedRolls[i]; break;
-                        case "CHA": statRolls[5] = sortedRolls[i]; break;
-                        default:    statRolls[i] = sortedRolls[i]; break;
+                        case "STR": statRolls[0] = sortedRolls[0]; break;
+                        case "CON": statRolls[1] = sortedRolls[0]; break;
+                        case "DEX": statRolls[2] = sortedRolls[0]; break;
+                        case "INT": statRolls[3] = sortedRolls[0]; break;
+                        case "WIS": statRolls[4] = sortedRolls[0]; break;
+                        case "CHA": statRolls[5] = sortedRolls[0]; break;
+                        default:    statRolls[i] = sortedRolls[0]; break;
                     }
-                    sortedRolls[i] = -1;
+                    sortedRolls.RemoveAt(0);
                 }
                 for(int i = 0; i < 6; i++)
                 {
                     if(statRolls[i] < 0)
                     {
-                        statRolls[i] = sortedRolls.Max();
-                        sortedRolls[Array.IndexOf(sortedRolls, sortedRolls.Max())] = -1;
+                        short indexOfStatRollToAssign = (short)rand.Next(0, sortedRolls.Count);
+                        statRolls[i] = sortedRolls[indexOfStatRollToAssign];
+                        sortedRolls.RemoveAt(indexOfStatRollToAssign);
                     }
                 }
             }
@@ -701,49 +702,6 @@ namespace AEtherSlay
         private void detailsChanged()
         {
             changedByClick = false;
-            //int outAC;
-            //switch(cbArmor1.Text)
-            //{
-            //    case "Padded Armor":
-            //        outAC = 11 + (statRolls[1] - 10) / 2;
-            //        break;
-            //    case "Leather":
-            //        outAC = 11 + (statRolls[1] - 10) / 2;
-            //        break;
-            //    case "Studded Leather":
-            //        outAC = 12 + (statRolls[1] - 10) / 2;
-            //        break;
-            //    case "Hide Armor":
-            //        outAC = 12 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
-            //        break;
-            //    case "Chain Shirt":
-            //        outAC = 13 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
-            //        break;
-            //    case "Scale Mail":
-            //        outAC = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
-            //        break;
-            //    case "Breastplate":
-            //        outAC = 14 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
-            //        break;
-            //    case "Half Plate":
-            //        outAC = 15 + Math.Min(((statRolls[1] - 10) / 2), Convert.ToInt16(2));
-            //        break;
-            //    case "Ring Mail":
-            //        outAC = 14;
-            //        break;
-            //    case "Chain Mail":
-            //        outAC = 16;
-            //        break;
-            //    case "Splint":
-            //        outAC = 17;
-            //        break;
-            //    case "Plate":
-            //        outAC = 18;
-            //        break;
-            //    default:
-            //        outAC = 10 + (statRolls[1] - 10) / 2;
-            //        break;
-            //}
             Catalog.Armor ar = Program.catalog.findArmor(cbArmor1.Text);
             int outAC = 10 + ((statRolls[1] - 10) / 2);
             try
@@ -776,13 +734,13 @@ namespace AEtherSlay
                 String name = txtName.Text;
                 if (cbWeapon1.SelectedIndex != -1)
                 {
-                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon1.SelectedItem));
+                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon1.Text));
                 }
                 if (cbWeapon2.SelectedIndex != -1)
                 {
-                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon2.SelectedItem));
+                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon2.Text));
                 }
-                armor = Program.catalog.findArmor((String)cbArmor1.SelectedItem);
+                armor = Program.catalog.findArmor((String)cbArmor1.Text);
 
                 player = new Catalog.PlayerCharacter(name, statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows, traits);
                 Program.storage.addCharacterSheet(player);

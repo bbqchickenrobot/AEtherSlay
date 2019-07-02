@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /*
  * MAIN DnD CATALOG CLASS
  * 
- * STATS FOLLOW ORDER [STR, DEX, CON, INT, WIS, CHA]
+ * STATS FOLLOW ORDER [STR, CON, DEX, INT, WIS, CHA]
  * 
  */
 

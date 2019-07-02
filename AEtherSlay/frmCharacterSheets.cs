@@ -19,8 +19,8 @@ namespace AEtherSlay
         {
             InitializeComponent();
 
-            coreStatBoxes = new TextBox[] { txtStr, txtDex, txtCon, txtInt, txtWis, txtCha };
-            statModifierBoxes = new TextBox[] { txtStrMod, txtDexMod, txtConMod, txtIntMod, txtWisMod, txtChaMod };
+            coreStatBoxes = new TextBox[] { txtStr, txtCon, txtDex, txtInt, txtWis, txtCha };
+            statModifierBoxes = new TextBox[] { txtStrMod, txtConMod, txtDexMod, txtIntMod, txtWisMod, txtChaMod };
         }
 
         private void FrmCharacterSheets_Load(object sender, EventArgs e)

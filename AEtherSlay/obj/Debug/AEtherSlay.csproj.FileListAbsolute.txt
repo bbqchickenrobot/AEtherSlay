@@ -21,7 +21,6 @@ C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\AEt
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\AEtherSlay.application
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.exe.manifest
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.application
-C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacter.resources
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterDialog.resources
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\bin\Debug\AEtherSlay.exe.config
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\bin\Debug\AEtherSlay.exe.manifest
@@ -44,3 +43,7 @@ C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmChar
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterSheets.resources
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterCreation.resources
 C:\Users\glenn\Documents\Code\AetherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmCharacterCreation.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.csprojAssemblyReference.cache
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.csproj.CopyComplete
