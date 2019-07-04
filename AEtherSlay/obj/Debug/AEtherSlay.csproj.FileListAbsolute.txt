@@ -47,3 +47,4 @@ C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEt
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.csproj.CopyComplete
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Debug\AEtherSlay.frmNewArmor.resources

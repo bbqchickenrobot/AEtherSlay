@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AEtherSlay.exe" size="142392">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AEtherSlay.exe" size="145976">
       <assemblyIdentity name="AEtherSlay" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2Y9+MKWEMTsP9wYMusMHEtixNNs3wx+gL6twwzyIWJo=</dsig:DigestValue>
+        <dsig:DigestValue>ao/BSmF5s/33GUyfN6Ynoq+4IAjGhjsMR+dbv3FWvZM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

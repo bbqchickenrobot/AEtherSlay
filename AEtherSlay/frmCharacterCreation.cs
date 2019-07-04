@@ -25,7 +25,8 @@ namespace AEtherSlay
 
         int forcedClass = -1, forcedRace = -1, forcedCategory = -1;
 
-        short[] statRolls = new Int16[6];
+        short[] statRolls = new Int16[6],
+                statMods  = new Int16[6];
         short   speed = 30, ac = 0, health = 0, hitDiceSides = 0;
         bool hasShield = false;
         string className, raceName, spellcastingStat, alignment;
@@ -430,17 +431,19 @@ namespace AEtherSlay
             #region Add Class Particulars
 
             List<String> possiblePacks = new List<string>();
-
+            Catalog.Weapon weapToAdd;
             switch (classNum)
             {
-                case 0:
+                case 0: //BARBARIAN
                     equipment.Add("4x Javelin");
-                     possiblePacks.Add("Explorer's Pack");
+                    possiblePacks.Add("Explorer's Pack");
                     primaryWeaponChoices.AddRange(Program.catalog.martialMelee);
-                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Handaxe"));
+                    weapToAdd = Program.catalog.findWeapon("Handaxe");
+                    weapToAdd.quantity = 2;
+                    secondaryWeaponChoices.Add(weapToAdd);
                     secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     break;
-                case 1:
+                case 1: //BARD
                     equipment.Add("Lute");
                     possiblePacks.Add("Diplomat's Pack");
                     possiblePacks.Add("Entertainer's Pack");
@@ -450,7 +453,7 @@ namespace AEtherSlay
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
                     possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     break;
-                case 2:
+                case 2: //CLERIC
                     equipment.Add("Holy Symbol");
                     possiblePacks.Add("Priest's Pack");
                     possiblePacks.Add("Explorer's Pack");
@@ -470,7 +473,7 @@ namespace AEtherSlay
                     }
                     hasShield = true;
                     break;
-                case 3:
+                case 3: //DRUID
                     equipment.Add("Druidic Focus" );
                     possiblePacks.Add("Explorer's Pack");
                     possibleArmors.Add(Program.catalog.findArmor("Leather"));
@@ -479,7 +482,7 @@ namespace AEtherSlay
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Scimitar"));
                     secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     break;
-                case 4:
+                case 4: //FIGHTER
                     if (rand.Next(3) == 2) { possibleArmors.Add(Program.catalog.findArmor("Chain Mail")); }
                     else {
                         possibleArmors.Add(Program.catalog.findArmor("Leather"));
@@ -494,16 +497,16 @@ namespace AEtherSlay
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
-                case 5:
+                case 5: //MONK
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
-                    Catalog.Weapon darts = Program.catalog.findWeapon("Dart");
-                    darts.quantity = 10;
-                    secondaryWeaponChoices.Add(darts);
+                    weapToAdd = Program.catalog.findWeapon("Dart");
+                    weapToAdd.quantity = 10;
+                    secondaryWeaponChoices.Add(weapToAdd);
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
-                case 6:
+                case 6: //PALADIN
                     primaryWeaponChoices.AddRange(Program.catalog.martial);
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     if (rand.Next(1, 3) == 2) { hasShield = true; }
@@ -517,17 +520,26 @@ namespace AEtherSlay
                     possiblePacks.Add("Priest's Pack");
                     possiblePacks.Add("Explorer's Pack");
                     break;
-                case 7:
+                case 7: //RANGER
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow"));
-                    secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
-                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
+                    foreach(Catalog.Weapon weap in Program.catalog.simpleMelee)
+                    {
+                        weapToAdd = weap;
+                        weapToAdd.quantity = 2;
+                        secondaryWeaponChoices.Add(weapToAdd);
+                    }
+                    //secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
+                    weapToAdd = Program.catalog.findWeapon("Shortsword");
+                    weapToAdd.quantity = 2;
+                    secondaryWeaponChoices.Add(weapToAdd);
+                    //secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
                     possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
                     possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     equipment.Add("20x Arrows");
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
-                case 8:
+                case 8: //ROGUE
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Rapier"));
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
                     secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortbow"));
@@ -539,31 +551,31 @@ namespace AEtherSlay
                     possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     equipment.Add("Thieves' Tools");
                     break;
-                case 9:
+                case 9: //SORCERER
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     equipment.Add("20 Bolts");
-                    Catalog.Weapon daggers = Program.catalog.findWeapon("Dagger");
-                    daggers.quantity = 2;
-                    secondaryWeaponChoices.Add(daggers);
+                    weapToAdd = Program.catalog.findWeapon("Dagger");
+                    weapToAdd.quantity = 2;
+                    secondaryWeaponChoices.Add(weapToAdd);
                     if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
                     else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
-                case 10:
+                case 10: //WARLOCK
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     equipment.Add("20 Bolts");
-                    Catalog.Weapon daggersAgain = Program.catalog.findWeapon("Dagger");
-                    daggersAgain.quantity = 2;
-                    secondaryWeaponChoices.Add(daggersAgain);
+                    weapToAdd = Program.catalog.findWeapon("Dagger");
+                    weapToAdd.quantity = 2;
+                    secondaryWeaponChoices.Add(weapToAdd);
                     if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
                     else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
-                case 11:
+                case 11: //WIZARD
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Quarterstaff"));
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
                     if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
@@ -619,23 +631,23 @@ namespace AEtherSlay
             #region Display Character Info
             try
             {
-                Int16 i = 0;
+                statMods = Program.catalog.calcModifiers(statRolls);
 
-                #region Calculate Core Modifiers
+                Int16 i = 0;
                 foreach (TextBox box in statModifierBoxes)
                 {
-                    if (statRolls[i] > 11)
-                    {
-                        box.Text = "+";
-                    }
-                    else if (statRolls[i] == 10 || statRolls[i] == 9 || statRolls[i] == 11)
-                    {
-                        box.Text += "±";
-                    }
-                    box.Text += ((statRolls[i] - 10) / 2).ToString();
+                    //REMOVED BECAUSE MESSES WITH SAVING CHARACTERS
+                    //if (statRolls[i] > 11)
+                    //{
+                    //    box.Text = "+";
+                    //}
+                    //else if (statRolls[i] == 10 || statRolls[i] == 9 || statRolls[i] == 11)
+                    //{
+                    //    box.Text += "±";
+                    //}
+                    box.Text = statMods[i].ToString();
                     i++;
                 }
-                #endregion
 
                 i = 0;
                 foreach (TextBox box in coreStatBoxes)
@@ -729,21 +741,29 @@ namespace AEtherSlay
         {
             if (txtName.Text.Trim() != "")
             {
-                Catalog.Armor armor;
-                List<Catalog.Weapon> weapons = new List<Catalog.Weapon>();
-                String name = txtName.Text;
-                if (cbWeapon1.SelectedIndex != -1)
+                try
                 {
-                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon1.Text));
-                }
-                if (cbWeapon2.SelectedIndex != -1)
-                {
-                    weapons.Add(Program.catalog.findWeapon((String)cbWeapon2.Text));
-                }
-                armor = Program.catalog.findArmor((String)cbArmor1.Text);
+                    Catalog.Armor armor;
+                    List<Catalog.Weapon> weapons = new List<Catalog.Weapon>();
+                    String name = txtName.Text;
+                    if (cbWeapon1.SelectedIndex != -1)
+                    {
+                        weapons.Add((Catalog.Weapon)(((ComboboxItem)cbWeapon1.SelectedItem).Value));
+                    }
+                    if (cbWeapon2.SelectedIndex != -1)
+                    {
+                        //weapons.Add(Program.catalog.findWeapon((String)cbWeapon2.Text));
+                        weapons.Add((Catalog.Weapon)(((ComboboxItem)cbWeapon2.SelectedItem).Value));
+                    }
+                    armor = Program.catalog.findArmor((String)cbArmor1.Text);
 
-                player = new Catalog.PlayerCharacter(name, statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows, traits);
-                Program.storage.addCharacterSheet(player);
+                    player = new Catalog.PlayerCharacter(name, statRolls, className, raceName, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows, traits);
+                    Program.storage.addCharacterSheet(player);
+                    MessageBox.Show("Success!", "Character Created!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } catch
+                {
+                    MessageBox.Show("Error", "Error creating a character. Please try again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             } else
             {
                 MessageBox.Show("Error: No Name", "Please input a name", MessageBoxButtons.OK, MessageBoxIcon.Error);

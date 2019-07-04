@@ -518,6 +518,7 @@ namespace AEtherSlay
             {
                 this.name = name;
                 stats = statRolls;
+                statMods = Program.catalog.calcModifiers(stats);
                 this.speed = speed;
                 this.weapons = weapons;
                 this.armor = armor;
@@ -532,7 +533,6 @@ namespace AEtherSlay
                 this.savingThrows = savingThrows;
                 misc = traits;
 
-                calcModifiers();
                 calcAC();
                 calcHealth();
             }
@@ -553,16 +553,6 @@ namespace AEtherSlay
                 }
             }
 
-            private void calcModifiers()
-            {
-                short[] statModifiers = new short[6];
-                for(short i = 0; i < stats.Count(); i++)
-                {
-                    statModifiers[i] = Convert.ToInt16((stats[i] - 10) / 2);
-                }
-                this.statMods = statModifiers;
-            }
-
             private void calcHealth()
             {
                 health = Convert.ToInt16(hitDiceSides + (((hitDiceSides / 2) + 1) * (level - 1)) + statMods[2]);
@@ -572,7 +562,7 @@ namespace AEtherSlay
         public class PlayerCharacter : Character
         {
             public List<Spell> validSpells, knownSpells = new List<Spell>();
-            public string className, raceName;
+            public string className, raceName, notes = "None Set";
 
             public PlayerCharacter(String name, Int16[] statRolls, String className, String raceName, Int16 speed, List<Weapon> weapons, Armor armor, String alignment, List<String> equipment, List<String> languages, List<String> resistances, String spellcastingStat, List<String> proficiencies, Int16 hitDiceSides, List<String> savingThrows, List<String> traits)
                              : base(name, statRolls, speed, weapons, armor, alignment, equipment, languages, resistances, spellcastingStat, proficiencies, hitDiceSides, savingThrows, traits)
@@ -620,9 +610,9 @@ namespace AEtherSlay
 
         //}
 
-        public Int16[] rollStats()
+        public short[] rollStats()
         {
-            // STR DEX CON INT WIS CHA
+            // STR CON DEX INT WIS CHA
             // 0   1   2   3   4   5
             Int16[] statRolls = new Int16[6];
 
@@ -649,6 +639,23 @@ namespace AEtherSlay
             return statRolls;
         }
 
+        public short[] calcModifiers(short[] stats)
+        {
+            short[] statModifiers = new short[6];
+            for (short i = 0; i < stats.Count(); i++)
+            {
+                if(stats[i] < 10 && (stats[i] % 2) == 1)
+                {
+                    statModifiers[i] = Convert.ToInt16((double)((stats[i] - 10) / 2) - 1);
+                } else
+                {
+                    statModifiers[i] = Convert.ToInt16((double)((stats[i] - 10) / 2));
+                }
+                
+            }
+            return statModifiers;
+        }
+
         public class Weapon
         {
             public short damageDiceSides, numDamageDice, quantity;
@@ -663,6 +670,11 @@ namespace AEtherSlay
                 this.propertyList = propertyList;
                 this.damageType = damageType;
                 quantity = 1;
+            }
+
+            public String getDmgString()
+            {
+                return $"{numDamageDice}d{damageDiceSides} {damageType}";
             }
         }
     
@@ -697,31 +709,6 @@ namespace AEtherSlay
                 this.level = level;
                 this.name = name;
                 this.canUse = canUse;
-            }
-        }
-    
-        public class Attack
-        {
-            public int damageDiceSides, damageDice, atkModifier;
-            public String atkType;
-
-            public Attack(int damageDiceSides, int damageDice, int atkModifier, string atkType)
-            {
-                this.damageDiceSides = damageDiceSides;
-                this.damageDice = damageDice;
-                this.atkModifier = atkModifier;
-                this.atkType = atkType;
-            }
-
-            public int avgDamage()
-            {
-                int avgRoll = Convert.ToInt32(Math.Floor(Convert.ToDouble(this.damageDiceSides / 2)) + 1);
-                return Convert.ToInt32(avgRoll * this.damageDice + (Math.Floor(Convert.ToDouble(this.damageDice / 2) + 1)));
-            }
-
-            public String getDmgString()
-            {
-                return $"{damageDice}d{damageDiceSides} {atkType}";
             }
         }
 
