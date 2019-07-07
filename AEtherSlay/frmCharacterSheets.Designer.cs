@@ -46,8 +46,6 @@
             this.txtRace = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMisc = new System.Windows.Forms.Panel();
-            this.btnAddWeapon = new System.Windows.Forms.Button();
-            this.btnAddArmor = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtArmor = new System.Windows.Forms.TextBox();
             this.lbWeapons = new System.Windows.Forms.ListBox();
@@ -82,6 +80,8 @@
             this.cbCharName = new System.Windows.Forms.ComboBox();
             this.btnEnableEdit = new System.Windows.Forms.Button();
             this.rtbNotes = new System.Windows.Forms.RichTextBox();
+            this.btnAddWeapon = new System.Windows.Forms.Button();
+            this.btnAddArmor = new System.Windows.Forms.Button();
             this.pnlMisc.SuspendLayout();
             this.grpACetc.SuspendLayout();
             this.grpCoreStats.SuspendLayout();
@@ -284,31 +284,6 @@
             this.pnlMisc.Name = "pnlMisc";
             this.pnlMisc.Size = new System.Drawing.Size(130, 438);
             this.pnlMisc.TabIndex = 51;
-            // 
-            // btnAddWeapon
-            // 
-            this.btnAddWeapon.Enabled = false;
-            this.btnAddWeapon.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddWeapon.ForeColor = System.Drawing.Color.Black;
-            this.btnAddWeapon.Location = new System.Drawing.Point(98, 302);
-            this.btnAddWeapon.Name = "btnAddWeapon";
-            this.btnAddWeapon.Size = new System.Drawing.Size(25, 23);
-            this.btnAddWeapon.TabIndex = 45;
-            this.btnAddWeapon.Text = "+";
-            this.btnAddWeapon.UseVisualStyleBackColor = true;
-            // 
-            // btnAddArmor
-            // 
-            this.btnAddArmor.Enabled = false;
-            this.btnAddArmor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddArmor.ForeColor = System.Drawing.Color.Black;
-            this.btnAddArmor.Location = new System.Drawing.Point(2, 365);
-            this.btnAddArmor.Name = "btnAddArmor";
-            this.btnAddArmor.Size = new System.Drawing.Size(25, 23);
-            this.btnAddArmor.TabIndex = 44;
-            this.btnAddArmor.Text = "+";
-            this.btnAddArmor.UseVisualStyleBackColor = true;
-            this.btnAddArmor.Click += new System.EventHandler(this.btnAddArmor_Click);
             // 
             // label2
             // 
@@ -688,6 +663,7 @@
             this.btnEnableEdit.TabIndex = 57;
             this.btnEnableEdit.Text = "Enable Editing";
             this.btnEnableEdit.UseVisualStyleBackColor = true;
+            this.btnEnableEdit.Visible = false;
             this.btnEnableEdit.Click += new System.EventHandler(this.btnEnableEdit_Click);
             // 
             // rtbNotes
@@ -701,6 +677,33 @@
             this.rtbNotes.TabIndex = 58;
             this.rtbNotes.Text = "";
             this.rtbNotes.WordWrap = false;
+            // 
+            // btnAddWeapon
+            // 
+            this.btnAddWeapon.Enabled = false;
+            this.btnAddWeapon.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddWeapon.ForeColor = System.Drawing.Color.Black;
+            this.btnAddWeapon.Location = new System.Drawing.Point(98, 302);
+            this.btnAddWeapon.Name = "btnAddWeapon";
+            this.btnAddWeapon.Size = new System.Drawing.Size(25, 23);
+            this.btnAddWeapon.TabIndex = 45;
+            this.btnAddWeapon.Text = "+";
+            this.btnAddWeapon.UseVisualStyleBackColor = true;
+            this.btnAddWeapon.Visible = false;
+            // 
+            // btnAddArmor
+            // 
+            this.btnAddArmor.Enabled = false;
+            this.btnAddArmor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddArmor.ForeColor = System.Drawing.Color.Black;
+            this.btnAddArmor.Location = new System.Drawing.Point(2, 365);
+            this.btnAddArmor.Name = "btnAddArmor";
+            this.btnAddArmor.Size = new System.Drawing.Size(25, 23);
+            this.btnAddArmor.TabIndex = 44;
+            this.btnAddArmor.Text = "+";
+            this.btnAddArmor.UseVisualStyleBackColor = true;
+            this.btnAddArmor.Visible = false;
+            this.btnAddArmor.Click += new System.EventHandler(this.btnAddArmor_Click);
             // 
             // frmCharacterSheets
             // 

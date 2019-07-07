@@ -438,9 +438,7 @@ namespace AEtherSlay
                     equipment.Add("4x Javelin");
                     possiblePacks.Add("Explorer's Pack");
                     primaryWeaponChoices.AddRange(Program.catalog.martialMelee);
-                    weapToAdd = Program.catalog.findWeapon("Handaxe");
-                    weapToAdd.quantity = 2;
-                    secondaryWeaponChoices.Add(weapToAdd);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Handaxe"));
                     secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
                     break;
                 case 1: //BARD
@@ -500,9 +498,7 @@ namespace AEtherSlay
                 case 5: //MONK
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
-                    weapToAdd = Program.catalog.findWeapon("Dart");
-                    weapToAdd.quantity = 10;
-                    secondaryWeaponChoices.Add(weapToAdd);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dart"));
                     possiblePacks.Add("Explorer's Pack");
                     possiblePacks.Add("Dungeoneer's Pack");
                     break;
@@ -522,17 +518,8 @@ namespace AEtherSlay
                     break;
                 case 7: //RANGER
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Longbow"));
-                    foreach(Catalog.Weapon weap in Program.catalog.simpleMelee)
-                    {
-                        weapToAdd = weap;
-                        weapToAdd.quantity = 2;
-                        secondaryWeaponChoices.Add(weapToAdd);
-                    }
-                    //secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
-                    weapToAdd = Program.catalog.findWeapon("Shortsword");
-                    weapToAdd.quantity = 2;
-                    secondaryWeaponChoices.Add(weapToAdd);
-                    //secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
+                    secondaryWeaponChoices.AddRange(Program.catalog.simpleMelee);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Shortsword"));
                     possibleArmors.Add(Program.catalog.findArmor("Scale Mail"));
                     possibleArmors.Add(Program.catalog.findArmor("Leather"));
                     equipment.Add("20x Arrows");
@@ -554,9 +541,7 @@ namespace AEtherSlay
                 case 9: //SORCERER
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     equipment.Add("20 Bolts");
-                    weapToAdd = Program.catalog.findWeapon("Dagger");
-                    weapToAdd.quantity = 2;
-                    secondaryWeaponChoices.Add(weapToAdd);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
                     if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
                     else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
@@ -566,9 +551,7 @@ namespace AEtherSlay
                     primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     equipment.Add("20 Bolts");
-                    weapToAdd = Program.catalog.findWeapon("Dagger");
-                    weapToAdd.quantity = 2;
-                    secondaryWeaponChoices.Add(weapToAdd);
+                    secondaryWeaponChoices.Add(Program.catalog.findWeapon("Dagger"));
                     if (rand.Next(1, 3) == 2) { equipment.Add("Component Pouch"); }
                     else { equipment.Add("Arcane Focus"); }
                     possiblePacks.Add("Explorer's Pack");
