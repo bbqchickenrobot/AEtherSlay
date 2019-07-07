@@ -552,7 +552,6 @@ namespace AEtherSlay
                     equipment.Add("Thieves' Tools");
                     break;
                 case 9: //SORCERER
-                    primaryWeaponChoices.Add(Program.catalog.findWeapon("Crossbow [Light]"));
                     primaryWeaponChoices.AddRange(Program.catalog.simple);
                     equipment.Add("20 Bolts");
                     weapToAdd = Program.catalog.findWeapon("Dagger");

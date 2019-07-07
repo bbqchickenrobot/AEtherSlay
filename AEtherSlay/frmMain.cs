@@ -13,10 +13,10 @@ namespace AEtherSlay
     public partial class frmMain : Form
     {
         Random   rand = new Random();
-        Boolean  allAtOnceRollStyle = false;
-        Int16[]  diceQuantityArray = new short[7];
+        bool  allAtOnceRollStyle = false;
+        short[]  diceQuantityArray = new short[7];
         Object[] btnOuts = new TextBox[7];
-        Boolean  coinInUse = false;
+        bool  coinInUse = false;
         Image    imgHeads = Image.FromFile("../Images/DnDCoinH.png");
         Image    imgTails = Image.FromFile("../Images/DnDCoinT.png");
 

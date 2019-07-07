@@ -11,3 +11,12 @@ C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\A
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.application
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.exe
 C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.pdb
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\Newtonsoft.Json.dll
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\bin\Release\Newtonsoft.Json.xml
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.csprojAssemblyReference.cache
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmCharacterCreation.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmCharacterDialog.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmCharacterSheets.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmCreatureCreation.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.frmNewArmor.resources
+C:\Users\Glenn Hamilton-Smith\Documents\Code\AEtherSlay\AEtherSlay\obj\Release\AEtherSlay.csproj.CopyComplete

@@ -16,7 +16,7 @@ namespace AEtherSlay
     public class Catalog
     {
         #region Variables
-        Random rand = new Random();
+         public Random rand = new Random();
 
         public List<Weapon> simpleMelee = new List<Weapon>() {
                             new Weapon("Club", 4, 1, new List<string>() { "Light" }, "Bludgeoning"),
@@ -654,6 +654,18 @@ namespace AEtherSlay
                 
             }
             return statModifiers;
+        }
+
+        public short calcModifier(short? stat)
+        {
+            if (stat < 10 && (stat % 2) == 1)
+            {
+                return Convert.ToInt16((double)((stat - 10) / 2) - 1);
+            }
+            else
+            {
+                return Convert.ToInt16((double)((stat - 10) / 2));
+            }
         }
 
         public class Weapon
