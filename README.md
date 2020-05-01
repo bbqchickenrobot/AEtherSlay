@@ -1,4 +1,4 @@
-# AEtherSlay
+# AEtherSlay [ON HOLD until 02/06/2020]
 ### *A Lightweight Dungeon Master's Toolkit for Dungeons &amp; Dragons 5th Edition*
 ---
 
