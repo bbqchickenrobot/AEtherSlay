@@ -88,7 +88,7 @@ namespace AEtherSlay
             txtAC.Text = selectedCharacter.ac.ToString();
             lblAlignment.Text = selectedCharacter.alignment;
             txtInit.Text = txtDexMod.Text;
-            txtHP.Text = (selectedCharacter.hitDiceSides + ((selectedCharacter.stats[2] - 10) / 2)).ToString();
+            txtHP.Text = (selectedCharacter.hitDiceSides + selectedCharacter.statMods[1]).ToString();
             if(selectedCharacter.armor != null)
             {
                 storedArmor = selectedCharacter.armor;
