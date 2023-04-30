@@ -645,7 +645,7 @@ namespace AEtherSlay
                 txtAC.Text = ac.ToString();
                 lblAlignment.Text = alignment;
                 txtInit.Text = txtDexMod.Text;
-                txtHP.Text = (hitDiceSides + ((statRolls[2] - 10) / 2)).ToString();
+                txtHP.Text = (hitDiceSides + statMods[1]).ToString();
 
                 bindWeaponComboBox(cbWeapon1, primaryWeaponChoices);
                 bindWeaponComboBox(cbWeapon2, secondaryWeaponChoices);
